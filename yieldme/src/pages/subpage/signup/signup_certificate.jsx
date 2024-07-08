@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
+import CustomFont from '../../../Components/Container/CustomFont';
 
 const Container = styled.div`
   display: flex;
@@ -10,20 +11,6 @@ const Container = styled.div`
   justify-content: center;
   height: 100vh;
   background-color: white;
-`;
-
-const Title = styled.h2`
-  font-size: 1.2rem;
-  color: black;
-  margin-bottom: 1rem;
-  text-align: center;
-`;
-
-const Instructions = styled.p`
-  font-size: 1rem;
-  color: black;
-  margin-bottom: 1rem;
-  text-align: center;
 `;
 
 const CameraContainer = styled.div`
@@ -72,8 +59,8 @@ const SignupCertificate = () => {
         <Container>
             {!isAnalyzing && !isFinalStep && (
                 <>
-                    <Title>임산부님의 주민등록증을 촬영해주세요.</Title>
-                    <Instructions>주민등록증을 잘보이게끔 촬영하시고, 성함과 발급 날짜를 확인해주세요.</Instructions>
+                    <CustomFont color='black' font='1.2rem'>임산부님의 주민등록증을 촬영해주세요.</CustomFont>
+                    <CustomFont color='black' font='1rem'>주민등록증을 잘보이게끔 촬영하시고, 성함과 발급 날짜를 확인해주세요.</CustomFont>
                     <CameraContainer>
                         {imageSrc ? (
                             <img src={imageSrc} alt="captured" />
@@ -91,15 +78,15 @@ const SignupCertificate = () => {
                     )}
                 </>
             )}
-            {isAnalyzing && <Title>이미지를 분석 중입니다...</Title>}
+            {isAnalyzing && <CustomFont color='black' font='1.2rem'>이미지를 분석 중입니다...</CustomFont>}
             {isFinalStep && (
                 <>
-                    <Title>인식된 정보를 확인해주세요.</Title>
-                    <Instructions>
+                    <CustomFont color='black' font='1.2rem'>인식된 정보를 확인해주세요.</CustomFont>
+                    <CustomFont color='black' font='1rem'>
                         성함: <input type="text" defaultValue="000님" />
                         <br />
                         주민등록증 발급 일자: <input type="text" defaultValue="0000년 00월 00일" />
-                    </Instructions>
+                    </CustomFont>
                     <Button onClick={() => navigate('/finalsignup')}>정보 수정하기</Button>
                 </>
             )}

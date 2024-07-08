@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import QrScanner from 'qr-scanner';
+import CustomFont from '../../../Components/Container/CustomFont';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -21,26 +22,6 @@ const PageContainer = styled(ContainerCenter)`
   gap: 2rem;
   position: relative;
   background-color: white;
-`;
-
-const Title = styled.h1`
-  color: #0000FF;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-align: center;
-`;
-
-const SubTitle = styled.h2`
-  color: black;
-  font-size: 1.2rem;
-  text-align: center;
-`;
-
-const Description = styled.p`
-  color: black;
-  font-size: 1rem;
-  text-align: center;
-  margin: 0.5rem 0;
 `;
 
 const CameraContainer = styled.div`
@@ -93,9 +74,9 @@ const CameraPage = () => {
     return (
         <ContainerCenter>
             <PageContainer>
-                <Title>일반인의</Title>
-                <SubTitle>카메라입니다.</SubTitle>
-                <Description>소중한 자리양보 감사드립니다.</Description>
+                <CustomFont color='#0000FF' font='1.5rem' fontWeight='bold'>일반인의</CustomFont>
+                <CustomFont color='black' font='1.2rem'>카메라입니다.</CustomFont>
+                <CustomFont color='black' font='1.2rem'>소중한 자리 양보 감사드립니다.</CustomFont>
                 <CameraContainer>
                     {showScanner ? (
                         <video ref={videoRef} style={{ width: '100%' }} />
@@ -103,9 +84,9 @@ const CameraPage = () => {
                         <span>카메라 화면</span>
                     )}
                 </CameraContainer>
-                <Description>
+                <CustomFont color='black' font='1.2rem'>
                     자리를 양보해주신 분의 QR코드를 카메라로 인식해 주세요.
-                </Description>
+                </CustomFont>
                 <Button onClick={() => setShowScanner(!showScanner)}>
                     {showScanner ? 'QR 코드 스캐너 닫기' : 'QR 코드 스캐너 열기'}
                 </Button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import CustomFont from '../../../Components/Container/CustomFont';
 
 const Container = styled.div`
   display: flex;
@@ -9,13 +10,6 @@ const Container = styled.div`
   justify-content: center;
   height: 100vh;
   background-color: white;
-`;
-
-const Title = styled.h2`
-  font-size: 1.5rem;
-  color: black;
-  margin-bottom: 2rem;
-  text-align: center;
 `;
 
 const Button = styled.button`
@@ -31,15 +25,16 @@ const Button = styled.button`
 `;
 
 const SignupStep1 = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <Container>
-            <Title>회원 유형을 선택해주세요. 현재를 기준으로 선택해주세요.</Title>
-            <Button onClick={() => navigate('/certificate')}>임산부</Button>
-            <Button onClick={() => navigate('/finalsignup')}>일반인</Button>
-        </Container>
-    );
+  return (
+    <Container>
+      <CustomFont color='black' font='1.2rem'>회원 유형을 선택해주세요.</CustomFont>
+      <CustomFont color='black' font='1.2rem'>현재를 기준으로 선택해주세요.</CustomFont>
+      <Button onClick={() => navigate('/certificate')}>임산부</Button>
+      <Button onClick={() => navigate('/finalsignup')}>일반인</Button>
+    </Container>
+  );
 };
 
 export default SignupStep1;

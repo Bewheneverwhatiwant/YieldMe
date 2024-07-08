@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import CustomFont from '../../../Components/Container/CustomFont';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -25,12 +27,6 @@ const Section = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-`;
-
-const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: black;
 `;
 
 const InfoText = styled.p`
@@ -83,38 +79,46 @@ const PointsButton = styled.button`
 `;
 
 const MyPage = () => {
-    const [status, setStatus] = useState('임산부');
+  const [status, setStatus] = useState('임산부');
+  const navigate = useNavigate();
 
-    return (
-        <ContainerCenter>
-            <PageContainer>
-                <Section>
-                    <Title>내 정보</Title>
-                    <InfoText>이름: 000</InfoText>
-                    <InfoText>아이디: lny021102</InfoText>
-                </Section>
-                <Section>
-                    <Title>내 상태</Title>
-                    <InfoText>임산부의 경우, 10개월 뒤 자동으로 일반인으로 변경됩니다.</InfoText>
-                    <StatusContainer>
-                        <StatusButton active={status === '임산부'} onClick={() => setStatus('임산부')}>임산부</StatusButton>
-                        <StatusButton active={status === '일반인'} onClick={() => setStatus('일반인')}>일반인</StatusButton>
-                    </StatusContainer>
-                </Section>
-                <Section>
-                    <Title>내 자리양보 점수</Title>
-                    <PointsContainer>
-                        <PointsText>지금까지 00점</PointsText>
-                        <PointsButton>내역 확인</PointsButton>
-                    </PointsContainer>
-                </Section>
-                <Section>
-                    <Title>보상받기</Title>
-                    <InfoText>뱃지 부여, 점수로 뭔가를 구매하기 등...</InfoText>
-                </Section>
-            </PageContainer>
-        </ContainerCenter>
-    );
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus);
+    if (newStatus === '임산부') {
+      navigate('/certificate');
+    }
+  };
+
+  return (
+    <ContainerCenter>
+      <PageContainer>
+        <Section>
+          <CustomFont color='black' font='1.5rem' fontWeight='bold'>내 정보</CustomFont>
+          <CustomFont font='1rem' color='black'>이름: 000</CustomFont>
+          <CustomFont font='1rem' color='black'>아이디: lny021102</CustomFont>
+        </Section>
+        <Section>
+          <CustomFont color='black' font='1.5rem' fontWeight='bold'>내 상태</CustomFont>
+          <CustomFont font='1rem' color='black'>임산부의 경우, 10개월 뒤 자동으로 일반인 모드로 전환됩니다.</CustomFont>
+          <StatusContainer>
+            <StatusButton active={status === '임산부'} onClick={() => handleStatusChange('임산부')}>임산부</StatusButton>
+            <StatusButton active={status === '일반인'} onClick={() => handleStatusChange('일반인')}>일반인</StatusButton>
+          </StatusContainer>
+        </Section>
+        <Section>
+          <CustomFont color='black' font='1.5rem' fontWeight='bold'>내 자리양보 점수</CustomFont>
+          <PointsContainer>
+            <PointsText>지금까지 00점</PointsText>
+            <PointsButton>내역 확인</PointsButton>
+          </PointsContainer>
+        </Section>
+        <Section>
+          <CustomFont color='black' font='1.5rem' fontWeight='bold'>보상받기</CustomFont>
+          <CustomFont font='1rem' color='black'>뱃지 부여, 포인트 구매, '자리 양보받아요/자리 양보할게요 조회 등...</CustomFont>
+        </Section>
+      </PageContainer>
+    </ContainerCenter>
+  );
 };
 
 export default MyPage;

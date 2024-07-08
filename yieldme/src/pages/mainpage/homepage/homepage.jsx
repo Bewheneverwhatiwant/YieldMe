@@ -3,6 +3,9 @@ import { QRCodeCanvas } from 'qrcode.react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+import CustomFont from '../../../Components/Container/CustomFont';
+import CustomRow from '../../../Components/Container/CustomRow';
+
 const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,26 +27,6 @@ const PageContainer = styled(ContainerCenter)`
   background-color: white;
 `;
 
-const Title = styled.h1`
-  color: #FF00FF;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-align: center;
-`;
-
-const SubTitle = styled.h2`
-  color: black;
-  font-size: 1.2rem;
-  text-align: center;
-`;
-
-const Description = styled.p`
-  color: black;
-  font-size: 1rem;
-  text-align: center;
-  margin: 0.5rem 0;
-`;
-
 const Button = styled.button`
   background-color: #E0E0E0;
   color: black;
@@ -56,24 +39,25 @@ const Button = styled.button`
 
 const HomePage = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <ContainerCenter>
-            <PageContainer>
-                <Title>임산부의</Title>
-                <SubTitle>QR코드입니다.</SubTitle>
-                <Description>편안한 하루 되세요 :)</Description>
-                <QRCodeCanvas value="lny021102" size={150} />
-                <Description>
-                    자리를 양보해주셔서 감사합니다.
-                    <br />
-                    양보해드린 분께 QR코드를 보여주세요.
-                </Description>
-                <Button onClick={() => navigate('/ranking')}>자리양보 점수 랭킹 보기</Button>
-            </PageContainer>
-        </ContainerCenter>
-    );
+  return (
+    <ContainerCenter>
+      <PageContainer>
+        <CustomFont color='#FF00FF' font='1.5rem' fontWeight='bold'>임산부의</CustomFont>
+        <CustomFont color='black' font='1.2rem' fontWeight='bold'>QR코드입니다.</CustomFont>
+        <CustomFont color='black' font='1rem'>편안한 하루 되세요 :)</CustomFont>
+        <QRCodeCanvas value="lny021102" size={150} />
+        <CustomFont color='black' font='1rem'>
+          자리를 양보해주셔서 감사합니다.
+        </CustomFont>
+        <CustomFont color='black' font='1rem'>
+          양보해드린 분께 QR코드를 보여주세요.
+        </CustomFont>
+        <Button onClick={() => navigate('/ranking')}>자리양보 점수 랭킹 보기</Button>
+      </PageContainer>
+    </ContainerCenter>
+  );
 };
 
 export default HomePage;

@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import CustomFont from '../../../Components/Container/CustomFont';
+import CustomRow from '../../../Components/Container/CustomRow';
+
 const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,13 +13,6 @@ const ContainerCenter = styled.div`
   background-color: white;
   padding-top: 8vh;
   padding-bottom: 5vh;
-`;
-
-const Title = styled.h2`
-  color: black;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-bottom: 1rem;
 `;
 
 const RankingContainer = styled.div`
@@ -34,29 +30,25 @@ const RankItem = styled.div`
   color: ${props => (props.rank <= 3 ? 'red' : 'black')};
 `;
 
-const RankText = styled.span`
-  font-weight: bold;
-`;
-
 const RankingPage = () => {
-    const rankings = [
-        { rank: 1, name: '000님', id: 'lny021102', points: 999 },
-        { rank: 2, name: '000님', id: 'hihi0818', points: 888 },
-        // 랭킹 추가 가능
-    ];
+  const rankings = [
+    { rank: 1, name: '000님', id: 'lny021102', points: 999 },
+    { rank: 2, name: '000님', id: 'hihi0818', points: 888 },
+    // 랭킹 추가 가능
+  ];
 
-    return (
-        <ContainerCenter>
-            <Title>소중한 자리양보, 진심으로 감사드립니다.</Title>
-            <RankingContainer>
-                {rankings.map(r => (
-                    <RankItem key={r.rank} rank={r.rank}>
-                        <RankText>{r.rank}위</RankText> | {r.name} | {r.id} | {r.points}점
-                    </RankItem>
-                ))}
-            </RankingContainer>
-        </ContainerCenter>
-    );
+  return (
+    <ContainerCenter>
+      <CustomFont color='black' font='1.2rem'>소중한 자리양보, 진심으로 감사드립니다.</CustomFont>
+      <RankingContainer>
+        {rankings.map(r => (
+          <RankItem key={r.rank} rank={r.rank}>
+            <CustomFont color='black' font='1.2rem' fontWeight='bold'>{r.rank}위</CustomFont> | {r.name} | {r.id} | {r.points}점
+          </RankItem>
+        ))}
+      </RankingContainer>
+    </ContainerCenter>
+  );
 };
 
 export default RankingPage;
