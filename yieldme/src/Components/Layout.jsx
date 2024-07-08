@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../Components/header/header';
-import Footer from '../Components/footer/footer';
-
-// 어떤 페이지를 로드하든 무조건 <Header />, <화면내용 />, <Footer /> 구조로 렌더링되도록 하기 위한 파일
+import Navi from '../Components/footer/Navi';
+import HomePage from '../pages/mainpage/homepage/homepage';
+import CameraPage from '../pages/mainpage/camerapage/camerapage';
+import MyPage from '../pages/subpage/mypage/mypage';
 
 const Container = styled.div`
   display: flex;
@@ -13,16 +14,32 @@ const Container = styled.div`
 
 const Main = styled.main`
   flex: 1;
+  overflow-y: auto;
 `;
 
-const Layout = ({ children }) => {
-    return (
-        <Container>
-            <Header />
-            <Main>{children}</Main>
-            <Footer />
-        </Container>
-    );
+const Layout = () => {
+  const [currentPage, setCurrentPage] = useState('홈');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case '홈':
+        return <HomePage />;
+      case '카메라':
+        return <CameraPage />;
+      case '마이':
+        return <MyPage />;
+      default:
+        return <HomePage />;
+    }
+  };
+
+  return (
+    <Container>
+      <Header />
+      <Main>{renderPage()}</Main>
+      <Navi setCurrentPage={setCurrentPage} />
+    </Container>
+  );
 };
 
 export default Layout;
