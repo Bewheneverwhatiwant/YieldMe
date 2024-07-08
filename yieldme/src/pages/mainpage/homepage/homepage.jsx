@@ -35,7 +35,7 @@ const Button = styled.button`
   color: black;
   border: none;
   padding: 1rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   cursor: pointer;
   border-radius: 8px;
 `;
@@ -69,9 +69,24 @@ const RankItem = styled.div`
   color: ${props => (props.rank <= 3 ? 'red' : 'black')};
 `;
 
+const Toast = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  opacity: 0.9;
+  z-index: 1000;
+  width: 80%;
+`;
+
 const HomePage = () => {
 
   const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
 
   const rankings = [
     { rank: 1, name: '이나영', id: 'lny021102', points: 999 },
@@ -80,6 +95,17 @@ const HomePage = () => {
     { rank: 4, name: '000', id: 'bbbb', points: 666 },
     { rank: 5, name: '000', id: 'cccc', points: 555 },
   ];
+
+  const handleButtonClick = () => {
+    const confirm = window.confirm('50p를 사용하여 현재 양보된 자리 목록을 보시겠습니까?');
+    if (confirm) {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        navigate('/iwanttoyield');
+      }, 1000);
+    }
+  };
 
   return (
     <ContainerCenter>
@@ -120,8 +146,9 @@ const HomePage = () => {
 
               <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
                 <CustomRow width='50%' alignItems='center' justifyContent='center'>
-                  <Button onClick={() => navigate('/iwanttoyield')}>현재 양보된 자리</Button>
+                  <Button onClick={handleButtonClick}>현재 양보된 자리 보기</Button>
                 </CustomRow>
+                {showToast && <Toast>포인트가 사용되었습니다!</Toast>}
 
                 <CustomRow width='50%' alignItems='center' justifyContent='center'>
                   <Button onClick={() => navigate('/writeyield')}>자리 양보할래요</Button>

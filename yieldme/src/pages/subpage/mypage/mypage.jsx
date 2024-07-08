@@ -63,6 +63,16 @@ const PointsButton = styled.button`
   border-radius: 4px;
 `;
 
+const PointsButton2 = styled.button`
+  background-color: ${props => (props.disabled ? '#E0E0E0' : '#777777')};
+  color: ${props => (props.disabled ? 'black' : 'white')};
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  border-radius: 4px;
+`;
+
 const Divider = styled.div`
   width: 100%;
   height: 0.01rem;
@@ -78,6 +88,21 @@ const MyPage = () => {
     if (newStatus === '임산부') {
       navigate('/certificate');
     }
+  };
+
+  const yieldHistory = () => {
+    navigate('/yieldhistory');
+  }
+
+  const pointCharge = () => {
+    navigate('/pointcharge');
+  }
+
+  const [rewarded, setRewarded] = useState(false);
+
+  const rewards = () => {
+    alert('300p가 적립되었습니다!');
+    setRewarded(true);
   };
 
   return (
@@ -135,7 +160,7 @@ const MyPage = () => {
               <CustomFont font='1rem' color='black' fontWeight='bold'>00점</CustomFont>
             </CustomRow>
 
-            <PointsButton>
+            <PointsButton onClick={yieldHistory}>
               <CustomFont color='white' font='0.9rem' fontWeight='bold'>내역확인</CustomFont>
             </PointsButton>
           </PointsContainer>
@@ -149,21 +174,8 @@ const MyPage = () => {
               <CustomFont font='1rem' color='black' fontWeight='bold'>00원</CustomFont>
             </CustomRow>
 
-            <PointsButton>
+            <PointsButton onClick={pointCharge}>
               <CustomFont color='white' font='0.9rem' fontWeight='bold'>충전하기</CustomFont>
-            </PointsButton>
-          </PointsContainer>
-        </CustomColumn>
-
-        <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
-          <CustomFont color='black' font='1.5rem' fontWeight='bold'>결제수단</CustomFont>
-          <PointsContainer>
-            <CustomRow wisth='20%' alignItems='center' justifyContent='space-between'>
-              <CustomFont color='black' fomt='0.9rem'>아직 등록된 결제수단이 없어요.</CustomFont>
-            </CustomRow>
-
-            <PointsButton>
-              <CustomFont color='white' font='0.9rem' fontWeight='bold'>등록하기</CustomFont>
             </PointsButton>
           </PointsContainer>
         </CustomColumn>
@@ -184,9 +196,11 @@ const MyPage = () => {
               </CustomRow>
             </CustomRow>
 
-            <PointsButton>
-              <CustomFont color='white' font='0.9rem' fontWeight='bold'>보상받기</CustomFont>
-            </PointsButton>
+            <PointsButton2 onClick={rewards} disabled={rewarded}>
+              <CustomFont color='white' font='0.9rem' fontWeight='bold'>
+                {rewarded ? '보상받음' : '보상받기'}
+              </CustomFont>
+            </PointsButton2>
 
           </PointsContainer>
         </CustomColumn>

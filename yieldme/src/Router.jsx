@@ -11,6 +11,8 @@ import FinalSignup from './pages/subpage/signup/FinalSignup';
 import IWantToYield from './pages/mainpage/homepage/yield/iwanttoyield';
 import WriteYield from './pages/mainpage/homepage/yield/writeyield';
 import MyYield from './pages/mainpage/homepage/yield/myyield';
+import YieldHistory from './pages/subpage/mypage/yieldhistory';
+import PointCharge from './pages/subpage/mypage/pointcharge';
 
 const AppRouter = () => {
     return (
@@ -27,6 +29,8 @@ const AppRouter = () => {
                     <Route path="/iwanttoyield" element={<IWantToYield />} />
                     <Route path="/writeyield" element={<WriteYield />} />
                     <Route path="/myyield" element={<MyYield />} />
+                    <Route path="/yieldhistory" element={<YieldHistory />} />
+                    <Route path="/pointcharge" element={<PointCharge />} />
                 </Route>
             </Routes>
         </Router>
