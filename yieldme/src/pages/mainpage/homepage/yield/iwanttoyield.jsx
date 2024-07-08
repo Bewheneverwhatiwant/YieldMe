@@ -1,9 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import CustomColumn from '../../../../Components/Container/CustomColumn';
 import CustomRow from '../../../../Components/Container/CustomRow';
+import StyledImg from '../../../../Components/Container/StyledImg';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const PageContainer = styled(ContainerCenter)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 2vh;
+  padding-top: 13vh;
   padding-bottom: 5vh;
   gap: 6rem;
   position: relative;
@@ -72,8 +73,32 @@ position: fixed;
   z-index: 1000;
 `;
 
+const FixedRow = styled.div`
+width: 90%;
+align-items: center;
+justify-content: center;
+top: 6vh;
+position: fixed;
+background-color: white;
+border: none;
+z-index: 1000;
+padding-bottom: 2vh;
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #777777;
+  border-radius: 1rem;
+  font-size: 1rem;
+`;
+
 const IWantToYield = () => {
     const navigate = useNavigate();
+    const [search, setSearch] = useState('');
 
     const statusData = [
         {
@@ -118,10 +143,25 @@ const IWantToYield = () => {
         <ContainerCenter>
             <PageContainer>
                 <CustomColumn width='90%' alignItems='center' justifyContent='center'>
-                    <CustomRow width='100%' alignItems='center' justifyContent='flex-start'>
-                        <CustomFont color='black' font='1.5rem' >현재 양보된 자리</CustomFont>
-                    </CustomRow>
 
+                    <FixedRow>
+                        <CustomRow width='100%' alignItems='center' justifyContent='flex-start'>
+                            <CustomFont color='black' font='1.5rem' >현재 양보된 자리</CustomFont>
+                        </CustomRow>
+                        <CustomRow width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+                            <CustomRow width='10%' alignItems='center' justifyContent='center'>
+                                <StyledImg src={'icon_glass.png'} width='2rem' height='2rem' />
+                            </CustomRow>
+                            <CustomRow width='90%' alignItems='center' justifyContent='center'>
+                                <Input
+                                    type="text"
+                                    placeholder="서울 3호선 빈자리 나와라 뚝딱!"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </CustomRow>
+                        </CustomRow>
+                    </FixedRow>
                     <StatusContainer>
                         {statusData.map((status, index) => (
                             <StatusItem key={index}>

@@ -15,7 +15,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: transparent;
+  background-color: white;
 `;
 
 const HeaderButton = styled.button`
