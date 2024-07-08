@@ -59,8 +59,8 @@ const SignupCertificate = () => {
         <Container>
             {!isAnalyzing && !isFinalStep && (
                 <>
-                    <CustomFont color='black' font='1.2rem'>임산부님의 주민등록증을 촬영해주세요.</CustomFont>
-                    <CustomFont color='black' font='1rem'>주민등록증을 잘보이게끔 촬영하시고, 성함과 발급 날짜를 확인해주세요.</CustomFont>
+                    <CustomFont color='black' font='1.2rem'>임신확인서와 주민등록증을 촬영해주세요.</CustomFont>
+                    <CustomFont color='black' font='1rem'>주민번호 뒷자리는 가려주세요.</CustomFont>
                     <CameraContainer>
                         {imageSrc ? (
                             <img src={imageSrc} alt="captured" />
