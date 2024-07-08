@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
 import CustomFont from '../../../Components/Container/CustomFont';
+import CustomColumn from '../../../Components/Container/CustomColumn';
+import CustomRow from '../../../Components/Container/CustomRow';
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +36,14 @@ const Button = styled.button`
   margin-bottom: 1rem;
 `;
 
+const Input = styled.input`
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #777777;
+  border-radius: 1rem;
+  font-size: 1rem;
+`;
+
 const SignupCertificate = () => {
     const [imageSrc, setImageSrc] = useState(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -59,8 +69,11 @@ const SignupCertificate = () => {
         <Container>
             {!isAnalyzing && !isFinalStep && (
                 <>
-                    <CustomFont color='black' font='1.2rem'>임신확인서와 주민등록증을 촬영해주세요.</CustomFont>
-                    <CustomFont color='black' font='1rem'>주민번호 뒷자리는 가려주세요.</CustomFont>
+                    <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.3rem'>
+                        <CustomFont color='black' font='1rem' fontWeight='bold'>임신확인서와 주민등록증을 촬영해주세요.</CustomFont>
+                        <CustomFont color='red' font='0.9rem'>* 주민번호 뒷자리는 가려주세요.</CustomFont>
+                        <CustomFont color='red' font='0.9rem'>* 10개월 이내에 진단받은 확인서만 유효합니다.</CustomFont>
+                    </CustomColumn>
                     <CameraContainer>
                         {imageSrc ? (
                             <img src={imageSrc} alt="captured" />
@@ -80,15 +93,32 @@ const SignupCertificate = () => {
             )}
             {isAnalyzing && <CustomFont color='black' font='1.2rem'>이미지를 분석 중입니다...</CustomFont>}
             {isFinalStep && (
-                <>
-                    <CustomFont color='black' font='1.2rem'>인식된 정보를 확인해주세요.</CustomFont>
-                    <CustomFont color='black' font='1rem'>
-                        성함: <input type="text" defaultValue="000님" />
-                        <br />
-                        주민등록증 발급 일자: <input type="text" defaultValue="0000년 00월 00일" />
-                    </CustomFont>
-                    <Button onClick={() => navigate('/finalsignup')}>정보 수정하기</Button>
-                </>
+                <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='4rem'>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                        <CustomFont color='black' font='1.2rem' fontWeight='bold'>인식된 정보를 확인해주세요.</CustomFont>
+                        <CustomFont color='black' font='0.9rem'>잘못 인식된 경우 직접 수정하실 수 있습니다.</CustomFont>
+                    </CustomColumn>
+
+                    <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.7rem'>
+                        <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <CustomRow width='40%' alignItems='center' justifyContent='center'>
+                                <CustomFont color='black' font='1rem'>임산부 성함</CustomFont>
+                            </CustomRow>
+                            <CustomRow width='70%' alignItems='center' justifyContent='center'>
+                                <Input type="text" defaultValue="000님" />
+                            </CustomRow>
+                        </CustomRow>
+                        <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <CustomRow width='40%' alignItems='center' justifyContent='center'>
+                                <CustomFont color='black' font='1rem'>신분증 발급일자</CustomFont>
+                            </CustomRow>
+                            <CustomRow width='70%' alignItems='center' justifyContent='center'>
+                                <Input type="text" defaultValue="0000년 00월 00일" />
+                            </CustomRow>
+                        </CustomRow>
+                    </CustomColumn>
+                    <Button onClick={() => navigate('/finalsignup')}>확인 완료</Button>
+                </CustomColumn>
             )}
         </Container>
     );
