@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CustomRow from '../Container/CustomRow';
 import StyledImg from '../Container/StyledImg';
 
@@ -13,7 +13,7 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 10px;
   background-color: transparent;
 `;
@@ -31,34 +31,41 @@ const HeaderButton = styled.button`
   cursor: pointer;
 `;
 
-const LogoButton = styled.button`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('icon_nest.png');
+const BackButton = styled.button`
   background-color: transparent;
-  background-size: 100% 100%;
+  font-size: 24px;
+  color: #979797;
+  text-align: center;
+  justify-content: center;
   border: none;
-  width: 50px;
-  height: 50px;
+  padding: 10px;
+  cursor: pointer;
 `;
 
 export default function Header() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    return (
-        <HeaderContainer>
-            <CustomRow width='97%' justifyContent='center'>
-                <CustomRow width='100%' justifyContent='flex-end'>
+  const handleBack = () => {
+    navigate(-1);
+  };
 
-                    <HeaderButton>
-                        로그인
-                    </HeaderButton>
+  const isRootPath = location.pathname === '/' || location.pathname === '/camera' || location.pathname === '/mypage';
 
-                </CustomRow>
-            </CustomRow>
-
-        </HeaderContainer>
-    );
+  return (
+    <HeaderContainer>
+      <CustomRow width='97%' justifyContent='space-between'>
+        {!isRootPath && (
+          <BackButton onClick={handleBack}>
+            {'<'}
+          </BackButton>
+        )}
+        <CustomRow width='100%' justifyContent='flex-end'>
+          <HeaderButton onClick={() => navigate('/login')}>
+            로그인
+          </HeaderButton>
+        </CustomRow>
+      </CustomRow>
+    </HeaderContainer>
+  );
 }

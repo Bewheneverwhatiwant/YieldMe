@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Header from '../Components/header/header';
 import Navi from '../Components/footer/Navi';
-import HomePage from '../pages/mainpage/homepage/homepage';
-import CameraPage from '../pages/mainpage/camerapage/camerapage';
-import MyPage from '../pages/subpage/mypage/mypage';
+import { Outlet } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -17,27 +15,22 @@ const Main = styled.main`
   overflow-y: auto;
 `;
 
+const FixedNavi = styled(Navi)`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+`;
+
 const Layout = () => {
-  const [currentPage, setCurrentPage] = useState('홈');
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case '홈':
-        return <HomePage />;
-      case '카메라':
-        return <CameraPage />;
-      case '마이':
-        return <MyPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
   return (
     <Container>
       <Header />
-      <Main>{renderPage()}</Main>
-      <Navi setCurrentPage={setCurrentPage} />
+      <Main>
+        <Outlet />
+      </Main>
+      <FixedNavi />
     </Container>
   );
 };
