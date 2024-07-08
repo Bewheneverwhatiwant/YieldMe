@@ -28,15 +28,6 @@ const PageContainer = styled(ContainerCenter)`
   padding-bottom: 10vh;
 `;
 
-const Section = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-`;
-
 const StatusContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -95,6 +86,18 @@ const MyYield = () => {
         },
     ];
 
+    const yieldsuccess = () => {
+        alert('양보 완료 처리되었습니다.');
+    }
+
+    const yieldcancle = () => {
+        alert('양보가 취소되었습니다.');
+    }
+
+    const cantyield = () => {
+        alert('자동 양보 완료 처리되었습니다.');
+    }
+
     return (
         <ContainerCenter>
             <PageContainer>
@@ -136,13 +139,13 @@ const MyYield = () => {
                                     </CustomColumn>
                                 </StatusDetail>
                                 <ButtonContainer>
-                                    <ActionButton>
+                                    <ActionButton onClick={yieldsuccess}>
                                         <CustomFont font='0.7rem' color='white' fontWeight='bold'>양보 완료</CustomFont>
                                     </ActionButton>
-                                    <ActionButton>
+                                    <ActionButton onClick={yieldcancle}>
                                         <CustomFont font='0.7rem' color='white' fontWeight='bold'>양보 취소</CustomFont>
                                     </ActionButton>
-                                    <ActionButton>
+                                    <ActionButton onClick={cantyield}>
                                         <CustomFont font='0.7rem' color='white' fontWeight='bold'>양보되기 전 하차했어요</CustomFont>
                                     </ActionButton>
                                 </ButtonContainer>
