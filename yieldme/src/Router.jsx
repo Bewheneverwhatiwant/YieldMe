@@ -17,6 +17,7 @@ import FindNearYield from './pages/mainpage/homepage/findnearyield/findnearyield
 import IWantoYield from './pages/mainpage/homepage/yield/wanttoyield/iwantto_yield';
 import IWantoBeYielded from './pages/mainpage/homepage/yield/beyielded/iwantto_beyielded';
 import WaitingBeYielded from './pages/mainpage/homepage/yield/beyielded/waiting_beyielded';
+import WaitingYield from './pages/mainpage/homepage/yield/wanttoyield/waiting_yield';
 
 const AppRouter = () => {
     return (
@@ -38,6 +39,7 @@ const AppRouter = () => {
                     <Route path="/cashback" element={<Cashback />} />
                     <Route path="/findnearyield" element={<FindNearYield />} />
                     <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
+                    <Route path="/waitingyield" element={<WaitingYield />} />
                 </Route>
             </Routes>
         </Router>

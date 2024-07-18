@@ -195,7 +195,7 @@ const WaitingBeYielded = () => {
     }, [step]);
 
     const handleYieldButtonClick = () => {
-        const circleData = [50, 50, '#8e44ad', '양보원해요', 50, '임산부'];
+        const circleData = [50, 50, '#8e44ad', '양보할래요', 50, '일반인'];
         setRenderComponent(
             <YieldedModalWarning
                 onClose={handleCloseModal}
@@ -231,9 +231,9 @@ const WaitingBeYielded = () => {
                                     <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
                                         <CustomColumn width='30%' alignItems='center' justifyContent='center' gap='0.2rem'>
                                             <Circle width='50' height='50' color='#8e44ad' />
-                                            <CustomFont color='#8e44ad' font='0.8rem' fontWeight='bold'>양보원해요</CustomFont>
+                                            <CustomFont color='#8e44ad' font='0.8rem' fontWeight='bold'>양보할래요</CustomFont>
                                         </CustomColumn>
-                                        <CustomFont font='0.8rem' fontWeight='bold' color='black'>임산부, 내 근처 약 50m</CustomFont>
+                                        <CustomFont font='0.8rem' fontWeight='bold' color='black'>일반인, 내 근처 약 50m</CustomFont>
                                     </CustomRow>
                                     <Button onClick={handleYieldButtonClick}><CustomFont color='black' font='0.8rem' fontWeight='bold'>양보받기</CustomFont></Button>
                                 </CustomColumn>

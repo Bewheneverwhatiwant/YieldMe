@@ -72,7 +72,7 @@ const IWantoYield = () => {
       return;
     }
     alert('양보 요청이 생성되었습니다.\n이제 이동하는 화면에서 5분간 이동하지 마세요.');
-    navigate('/yieldalarm');
+    navigate('/waitingyield');
   };
 
   return (
