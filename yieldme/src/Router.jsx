@@ -14,8 +14,9 @@ import PointCharge from './pages/mainpage/mypage/pointcharge';
 import Favor from './pages/mainpage/favor/favor';
 import Cashback from './pages/mainpage/homepage/cashback';
 import FindNearYield from './pages/mainpage/homepage/findnearyield/findnearyield';
-import IWantoBeYielded from './pages/mainpage/homepage/yield/iwantto_beyielded';
-import IWantoYield from './pages/mainpage/homepage/yield/iwantto_yield';
+import IWantoYield from './pages/mainpage/homepage/yield/wanttoyield/iwantto_yield';
+import IWantoBeYielded from './pages/mainpage/homepage/yield/beyielded/iwantto_beyielded';
+import WaitingBeYielded from './pages/mainpage/homepage/yield/beyielded/waiting_beyielded';
 
 const AppRouter = () => {
     return (
@@ -36,6 +37,7 @@ const AppRouter = () => {
                     <Route path="/pointcharge" element={<PointCharge />} />
                     <Route path="/cashback" element={<Cashback />} />
                     <Route path="/findnearyield" element={<FindNearYield />} />
+                    <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
                 </Route>
             </Routes>
         </Router>

@@ -140,18 +140,6 @@ const YieldModalWarning = ({ onClose, circleData }) => {
         setStep(2);
     };
 
-    const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
-    };
-
-    const handleSendInfo = () => {
-        if (description === "") {
-            alert("인상착의를 입력하세요.");
-        } else {
-            setStep(4);
-        }
-    };
-
     return (
         <>
             <Backdrop onClick={onClose} />
