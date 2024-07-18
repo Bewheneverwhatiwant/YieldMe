@@ -14,6 +14,7 @@ import MyYield from './pages/mainpage/homepage/yield/myyield';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
 import PointCharge from './pages/mainpage/mypage/pointcharge';
 import Favor from './pages/mainpage/favor/favor';
+import Cashback from './pages/mainpage/homepage/cashback';
 
 const AppRouter = () => {
     return (
@@ -33,6 +34,7 @@ const AppRouter = () => {
                     <Route path="/myyield" element={<MyYield />} />
                     <Route path="/yieldhistory" element={<YieldHistory />} />
                     <Route path="/pointcharge" element={<PointCharge />} />
+                    <Route path="/cashback" element={<Cashback />} />
                 </Route>
             </Routes>
         </Router>
