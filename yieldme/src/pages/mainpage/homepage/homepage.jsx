@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomColumn from '../../../Components/Container/CustomColumn';
+import './review_carousel';
+import ReviewCarousel from './review_carousel';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -31,187 +33,179 @@ const PageContainer = styled(ContainerCenter)`
 
 const Button = styled.button`
   width: 100%;
-  background-color: #E0E0E0;
+  background-color: #FEE187;
   color: black;
   border: none;
-  padding: 1rem;
+  padding: 0.8rem;
   font-size: 0.8rem;
   cursor: pointer;
   border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const RankingContainer = styled.div`
-  width: 90%;
-  background-color: #E0E0E0;
-  padding: 0.3rem;
+const CashBackButton = styled.button`
+  width: 20%;
+  background-color: #FEE187;
+  color: black;
+  border: none;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  cursor: pointer;
   border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const YieldContainer = styled.div`
-  width: 90%;
-  background-color: #FEC7FF;
-  padding: 1rem;
-  border-radius: 8px;
+const ScannerButton = styled.button`
+width: 80%;
+background-color: #FFCD38;
+color: black;
+border: none;
+padding: 0.5rem;
+font-size: 0.8rem;
+cursor: pointer;
+border-radius: 8px;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const Yield2Container = styled.div`
-  width: 90%;
-  background-color: #A4CEFF;
-  padding: 1rem;
-  border-radius: 8px;
+const NearButton = styled.button`
+width: 100%;
+height: 12rem;
+color: black;
+border: none;
+padding: 0.5rem;
+font-size: 0.8rem;
+cursor: pointer;
+border-radius: 20px;
+background-image: url('home_img_nearme.png');
+background-size: cover;
+background-position: center;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const RankItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  color: ${props => (props.rank <= 3 ? 'red' : 'black')};
+const QRcircle = styled.div`
+width: 60%;
+height: 15rem;
+padding: 1rem;
+border-radius: 50%;
+box-shadow: 0px 4px 6px rgba(0, 0.1, 0.1, 0.2);
+display: flex;
+align-items: center;
+justify-content: center;
 `;
 
-const Toast = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: green;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  opacity: 0.9;
-  z-index: 1000;
-  width: 80%;
+const scrollAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const AniRow = styled.div`
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+animation: ${scrollAnimation} 3s infinite;
 `;
 
 const HomePage = () => {
 
   const navigate = useNavigate();
-  const [showToast, setShowToast] = useState(false);
-
-  const rankings = [
-    { rank: 1, name: '이나영', id: 'lny021102', points: 999 },
-    { rank: 2, name: '000', id: 'hihi0818', points: 888 },
-    { rank: 3, name: '000', id: 'aaaa', points: 777 },
-    { rank: 4, name: '000', id: 'bbbb', points: 666 },
-    { rank: 5, name: '000', id: 'cccc', points: 555 },
-  ];
-
-  const handleButtonClick = () => {
-    const confirm = window.confirm('50p를 사용하여 현재 양보된 자리 목록을 보시겠습니까?');
-    if (confirm) {
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-        navigate('/iwanttoyield');
-      }, 1000);
-    }
-  };
 
   return (
     <ContainerCenter>
       <PageContainer>
-        <CustomColumn width='100%' alignItems='center' justifyContent='center'>
-          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>지금 자리를 양보해드리는 저는</CustomFont>
+        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='5.5rem'>
+
+          <CustomColumn width='100%' alignItems='center' justifyContent='center'>
             <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-              <CustomFont color='#FF00FF' font='1.5rem' fontWeight='bold'>임산부</CustomFont>
-              <CustomFont color='black' font='1.2rem' fontWeight='bold'>입니다.</CustomFont>
+              <CustomFont color='black' font='0.9rem' fontWeight='bold'>내 자리를 양보받는 분께 QR코드를 보여드리세요.</CustomFont>
             </CustomRow>
-          </CustomColumn>
 
-          <CustomFont color='black' font='1rem'>편안한 하루 되세요 :)</CustomFont>
+            <QRcircle>
+              <QRCodeCanvas value="lny021102" size={150} />
+            </QRcircle>
 
-          <QRCodeCanvas value="lny021102" size={150} />
-
-          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-            <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-              <CustomFont color='#FF00FF' font='1rem' fontWeight='bold'>
-                lny021102
-              </CustomFont>
-              <CustomFont color='black' font='1rem'>
-                님,
-              </CustomFont>
-            </CustomRow>
-            <CustomFont color='black' font='1rem'>
-              자리를 양보해주셔서 감사합니다.
-            </CustomFont>
-            <CustomFont color='black' font='1rem'>
-              자리를 양보받을 분께 QR코드를 보여주세요.
-            </CustomFont>
-          </CustomColumn>
-
-          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-
-            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.5rem'>
-
-              <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
-                <CustomRow width='50%' alignItems='center' justifyContent='center'>
-                  <Button onClick={handleButtonClick}>현재 양보된 자리 보기</Button>
+            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.5rem'>
+              <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
+                  <CustomFont color='black' font='1rem' fontWeight='bold'>
+                    lny021102
+                  </CustomFont>
+                  <CustomFont color='black' font='1rem'>
+                    님
+                  </CustomFont>
                 </CustomRow>
-                {showToast && <Toast>포인트가 사용되었습니다!</Toast>}
 
-                <CustomRow width='50%' alignItems='center' justifyContent='center'>
-                  <Button onClick={() => navigate('/writeyield')}>자리 양보할래요</Button>
+                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
+                  <CustomFont color='black' font='1rem'>
+                    양보 누적 금액:
+                  </CustomFont>
+                  <CustomFont color='black' font='1rem'>
+                    2500원
+                  </CustomFont>
+
+                  <CashBackButton onClick={() => navigate('/cashback')}>
+                    <CustomFont fontWeight='bold' color='black'>캐시백</CustomFont>
+                  </CashBackButton>
                 </CustomRow>
-              </CustomRow>
+              </CustomColumn>
+
+              <AniRow>
+                <ScannerButton onClick={() => navigate('/camera')}>
+                  <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
+                    <CustomFont fontWeight='bold' font='1rem' color='black'>QR스캐너 열기</CustomFont>
+                    <CustomFont color='#434343' fontWeight='bold' font='0.7rem'>나에게 자리를 양보해주신 분의 QR코드를 스캔해주세요.</CustomFont>
+                  </CustomColumn>
+                </ScannerButton>
+              </AniRow>
             </CustomColumn>
           </CustomColumn>
-        </CustomColumn>
 
-        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='2rem'>
-          <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.2rem'>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>소중한 자리양보,</CustomFont>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>진심으로 감사드립니다.</CustomFont>
-          </CustomColumn>
+          <CustomColumn width='100%' alignItems='center' justifyContent='center'>
+            <CustomColumn width='80%' alignItems='flex-start' justifyContent='center' gap='0.2rem'>
+              <CustomFont color='black' font='1.1rem' fontWeight='bold'>lny021102님,</CustomFont>
+              <CustomFont color='black' font='0.9rem' fontWeight='bold'>오늘도 따뜻한 사회를 만들어주셔서 감사합니다.</CustomFont>
+            </CustomColumn>
 
-          <RankingContainer>
-            {rankings.map(r => (
-              <RankItem key={r.rank} rank={r.rank}>
-                <CustomRow width='100%' alignItems='center' justifyContent='space-between'>
-                  <CustomRow width='25%' alignItems='center' justifyContent='center'>
-                    <CustomFont color='black' font='1.2rem' fontWeight='bold'>{r.rank}위</CustomFont>
-                  </CustomRow>
-                  <CustomRow width='25%' alignItems='center' justifyContent='center'>
-                    <CustomFont color='black' font='1rem'>{r.name}님</CustomFont>
-                  </CustomRow>
-                  <CustomRow width='25%' alignItems='center' justifyContent='center'>
-                    <CustomFont color='black' font='1rem'>{r.id}</CustomFont>
-                  </CustomRow>
-                  <CustomRow width='25%' alignItems='center' justifyContent='center'>
-                    <CustomFont color='black' font='1rem'>총 {r.points}점</CustomFont>
-                  </CustomRow>
+            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='1.8rem'>
+
+              <CustomRow width='90%' alignItems='center' justifyContent='center' gap='0.3rem'>
+                <CustomRow width='50%' alignItems='center' justifyContent='center'>
+                  <Button onClick={() => navigate('/iwanttoyield')}>
+                    <CustomFont font='0.8rem' color='black' fontWeight='bold'>양보할래요</CustomFont>
+                  </Button>
                 </CustomRow>
-              </RankItem>
-            ))}
-          </RankingContainer>
 
-          <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.2rem'>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>오늘 하루,</CustomFont>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>임산부와 소중한 생명이 양보받은 횟수</CustomFont>
+                <CustomRow width='50%' alignItems='center' justifyContent='center'>
+                  <Button onClick={() => navigate('/iwanttobeyielded')}>
+                    <CustomFont font='0.8rem' color='black' fontWeight='bold'>양보원해요</CustomFont>
+                  </Button>
+                </CustomRow>
+              </CustomRow>
+
+              <AniRow>
+                <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                  <NearButton onClick={() => navigate('/findnearyield')} />
+                  <CustomRow width='95%' alignItems='center' justifyContent='flex-start' gap='2rem'>
+                    <CustomFont color='black' fontWeight='bold'>내 근처 양보 찾기</CustomFont>
+                  </CustomRow>
+                </CustomColumn>
+              </AniRow>
+            </CustomColumn>
           </CustomColumn>
 
-          <YieldContainer>
-            <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-              <CustomFont color='#8E428F' font='2rem' fontWeight='bold'>34,568</CustomFont>
-              <CustomFont color='#8E428F' font='1.5rem'>번</CustomFont>
-            </CustomRow>
-          </YieldContainer>
+          <ReviewCarousel />
 
-          <CustomColumn width='90%' alignItems='flex-start' justifyContent='center' gap='0.2rem'>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>오늘 하루,</CustomFont>
-            <CustomFont color='black' font='1.2rem' fontWeight='bold'>자리를 기꺼이 양보한 사람들의 수</CustomFont>
-          </CustomColumn>
-
-          <Yield2Container>
-            <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-              <CustomFont color='#224A79' font='2rem' fontWeight='bold'>647</CustomFont>
-              <CustomFont color='#224A79' font='1.5rem'>명</CustomFont>
-            </CustomRow>
-          </Yield2Container>
         </CustomColumn>
 
       </PageContainer>
-    </ContainerCenter>
+    </ContainerCenter >
   );
 };
 

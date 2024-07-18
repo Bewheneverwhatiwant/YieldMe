@@ -20,8 +20,8 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
-                    <Route path="camera" element={<CameraPage />} />
-                    <Route path="mypage" element={<MyPage />} />
+                    <Route path="/camera" element={<CameraPage />} />
+                    <Route path="/mypage" element={<MyPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupStep1 />} />
                     <Route path="/certificate" element={<SignupCertificate />} />

@@ -11,11 +11,14 @@ const NaviContainer = styled.footer`
   align-items: center;
   width: 100%;
   height: 60px;
-  background: white;
+  background-color: #FEE187;
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 1000;
+  border-top: 2px solid #FFCD38;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 `;
 
 const NaviButton = styled.button`
@@ -40,8 +43,8 @@ const Navi = () => {
       </NaviButton>
       <NaviButton onClick={() => navigate('/camera')}>
         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
-          <StyledImg src={'icon_scanner.png'} width='2rem' height='2rem' />
-          <CustomFont color='black' font='0.7rem' fontWeight='bold'>스캐너</CustomFont>
+          <StyledImg src={'icon_joystick.png'} width='2rem' height='2rem' />
+          <CustomFont color='black' font='0.7rem' fontWeight='bold'>인기</CustomFont>
         </CustomColumn>
       </NaviButton>
       <NaviButton onClick={() => navigate('/mypage')}>
