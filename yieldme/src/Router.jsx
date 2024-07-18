@@ -8,14 +8,14 @@ import LoginPage from './Components/header/login/login';
 import SignupStep1 from './Components/header/signup/signup_step1';
 import SignupCertificate from './Components/header/signup/signup_certificate';
 import FinalSignup from './Components/header/signup/FinalSignup';
-import WriteYield from './pages/mainpage/homepage/yield/writeyield';
-import MyYield from './pages/mainpage/homepage/yield/myyield';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
 import PointCharge from './pages/mainpage/mypage/pointcharge';
+
 import Favor from './pages/mainpage/favor/favor';
 import Cashback from './pages/mainpage/homepage/cashback';
 import FindNearYield from './pages/mainpage/homepage/findnearyield/findnearyield';
 import IWantoBeYielded from './pages/mainpage/homepage/yield/iwantto_beyielded';
+import IWantoYield from './pages/mainpage/homepage/yield/iwantto_yield';
 
 const AppRouter = () => {
     return (
@@ -31,8 +31,7 @@ const AppRouter = () => {
                     <Route path="/certificate" element={<SignupCertificate />} />
                     <Route path="/finalsignup" element={<FinalSignup />} />
                     <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
-                    <Route path="/writeyield" element={<WriteYield />} />
-                    <Route path="/myyield" element={<MyYield />} />
+                    <Route path="/iwanttoyield" element={<IWantoYield />} />
                     <Route path="/yieldhistory" element={<YieldHistory />} />
                     <Route path="/pointcharge" element={<PointCharge />} />
                     <Route path="/cashback" element={<Cashback />} />
