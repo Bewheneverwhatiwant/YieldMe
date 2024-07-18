@@ -141,14 +141,14 @@ const FindNearYield = () => {
     const handleYieldButtonClick = () => {
         if (modalData[3] === '양보할게요') {
             setRenderComponent(
-                <YieldModalWarning
+                <YieldedModalWarning
                     onClose={handleCloseModal}
                     circleData={modalData}
                 />
             );
         } else if (modalData[3] === '양보원해요') {
             setRenderComponent(
-                <YieldedModalWarning
+                <YieldModalWarning
                     onClose={handleCloseModal}
                     circleData={modalData}
                 />
@@ -179,6 +179,11 @@ const FindNearYield = () => {
                                         <option value="양보할게요">양보할게요</option>
                                     </Dropdown>
                                 </CustomRow>
+
+                                <CustomColumn width='100%' alignItems='flex-start' justifyContent='center' gap='0.2rem'>
+                                    <CustomFont color='black' font='0.7rem'>양보를 받고싶으신 분은 '양보할게요' 요청을 클릭하시고,</CustomFont>
+                                    <CustomFont color='black' font='0.7rem'>양보를 하고싶으신 분은 '양보원해요' 요청을 클릭해주십시오.</CustomFont>
+                                </CustomColumn>
 
                                 <TargetContainer>
                                     {filteredCircles.map((circle, index) => {
