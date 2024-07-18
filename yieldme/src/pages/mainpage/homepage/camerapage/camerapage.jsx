@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import QrScanner from 'qr-scanner';
-import CustomFont from '../../../Components/Container/CustomFont';
-import CustomRow from '../../../Components/Container/CustomRow';
-import CustomColumn from '../../../Components/Container/CustomColumn';
+import CustomFont from '../../../../Components/Container/CustomFont';
+import CustomRow from '../../../../Components/Container/CustomRow';
+import CustomColumn from '../../../../Components/Container/CustomColumn';
 
 const ContainerCenter = styled.div`
   display: flex;

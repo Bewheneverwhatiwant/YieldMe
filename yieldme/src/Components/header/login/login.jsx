@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import CustomFont from '../../Components/Container/CustomFont';
-import CustomColumn from '../../Components/Container/CustomColumn';
-import CustomRow from '../../Components/Container/CustomRow';
+import CustomFont from '../../Container/CustomFont';
+import CustomColumn from '../../Container/CustomColumn';
+import CustomRow from '../../Container/CustomRow';
 
 const ContainerCenter = styled.div`
   display: flex;

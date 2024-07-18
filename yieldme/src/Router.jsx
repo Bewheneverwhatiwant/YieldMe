@@ -2,17 +2,17 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout';
 import HomePage from './pages/mainpage/homepage/homepage';
-import CameraPage from './pages/mainpage/camerapage/camerapage';
-import MyPage from './pages/subpage/mypage/mypage';
-import LoginPage from './pages/subpage/login';
-import SignupStep1 from './pages/subpage/signup/signup_step1';
-import SignupCertificate from './pages/subpage/signup/signup_certificate';
-import FinalSignup from './pages/subpage/signup/FinalSignup';
+import CameraPage from './pages/mainpage/homepage/camerapage/camerapage';
+import MyPage from './pages/mainpage/mypage/mypage';
+import LoginPage from './Components/header/login/login';
+import SignupStep1 from './Components/header/signup/signup_step1';
+import SignupCertificate from './Components/header/signup/signup_certificate';
+import FinalSignup from './Components/header/signup/FinalSignup';
 import IWantToYield from './pages/mainpage/homepage/yield/iwanttoyield';
 import WriteYield from './pages/mainpage/homepage/yield/writeyield';
 import MyYield from './pages/mainpage/homepage/yield/myyield';
-import YieldHistory from './pages/subpage/mypage/yieldhistory';
-import PointCharge from './pages/subpage/mypage/pointcharge';
+import YieldHistory from './pages/mainpage/mypage/yieldhistory';
+import PointCharge from './pages/mainpage/mypage/pointcharge';
 
 const AppRouter = () => {
     return (
