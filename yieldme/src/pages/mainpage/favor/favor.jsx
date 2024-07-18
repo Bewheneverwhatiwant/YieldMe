@@ -7,6 +7,10 @@ import CustomFont from '../../../Components/Container/CustomFont';
 import CustomRow from '../../../Components/Container/CustomRow';
 import './favorComponent/favor_component_1';
 import FavorComponent1 from './favorComponent/favor_component_1';
+import FavorComponent2 from './favorComponent/favor_component_2';
+import FavorComponent3 from './favorComponent/favor_component_3';
+import FavorComponent4 from './favorComponent/favor_component_4';
+import FavorComponent5 from './favorComponent/favor_component_5';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -40,6 +44,10 @@ const Favor = () => {
                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='5.5rem'>
 
                     <FavorComponent1 />
+                    <FavorComponent2 />
+                    <FavorComponent3 />
+                    <FavorComponent4 />
+                    <FavorComponent5 />
 
                 </CustomColumn>
             </PageContainer>
