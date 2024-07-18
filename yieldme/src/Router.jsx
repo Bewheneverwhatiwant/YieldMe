@@ -15,6 +15,7 @@ import YieldHistory from './pages/mainpage/mypage/yieldhistory';
 import PointCharge from './pages/mainpage/mypage/pointcharge';
 import Favor from './pages/mainpage/favor/favor';
 import Cashback from './pages/mainpage/homepage/cashback';
+import FindNearYield from './pages/mainpage/homepage/findnearyield/findnearyield';
 
 const AppRouter = () => {
     return (
@@ -35,6 +36,7 @@ const AppRouter = () => {
                     <Route path="/yieldhistory" element={<YieldHistory />} />
                     <Route path="/pointcharge" element={<PointCharge />} />
                     <Route path="/cashback" element={<Cashback />} />
+                    <Route path="/findnearyield" element={<FindNearYield />} />
                 </Route>
             </Routes>
         </Router>

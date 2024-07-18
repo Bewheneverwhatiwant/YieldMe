@@ -15,7 +15,6 @@ const NaviContainer = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1000;
   border-top: 2px solid #FFCD38;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
