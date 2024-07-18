@@ -9,7 +9,6 @@ import SignupStep1 from './Components/header/signup/signup_step1';
 import SignupCertificate from './Components/header/signup/signup_certificate';
 import FinalSignup from './Components/header/signup/FinalSignup';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
-import PointCharge from './pages/mainpage/mypage/pointcharge';
 
 import Favor from './pages/mainpage/favor/favor';
 import Cashback from './pages/mainpage/homepage/cashback';
@@ -37,7 +36,7 @@ const AppRouter = () => {
                     <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
                     <Route path="/iwanttoyield" element={<IWantoYield />} />
                     <Route path="/yieldhistory" element={<YieldHistory />} />
-                    <Route path="/pointcharge" element={<PointCharge />} />
+
                     <Route path="/cashback" element={<Cashback />} />
                     <Route path="/findnearyield" element={<FindNearYield />} />
                     <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
