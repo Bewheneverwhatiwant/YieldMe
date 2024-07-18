@@ -19,6 +19,8 @@ import IWantoBeYielded from './pages/mainpage/homepage/yield/beyielded/iwantto_b
 import WaitingBeYielded from './pages/mainpage/homepage/yield/beyielded/waiting_beyielded';
 import WaitingYield from './pages/mainpage/homepage/yield/wanttoyield/waiting_yield';
 
+import AllReview from './pages/mainpage/homepage/allreview';
+
 const AppRouter = () => {
     return (
         <Router>
@@ -40,6 +42,7 @@ const AppRouter = () => {
                     <Route path="/findnearyield" element={<FindNearYield />} />
                     <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
                     <Route path="/waitingyield" element={<WaitingYield />} />
+                    <Route path="/allreview" element={<AllReview />} />
                 </Route>
             </Routes>
         </Router>

@@ -4,6 +4,7 @@ import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomRow from '../../../Components/Container/CustomRow';
 import { useNavigate } from 'react-router-dom';
+import AllReview from './allreview';
 
 const reviews = [
     {
@@ -75,7 +76,7 @@ text-align: center;
 margin: 10px 0 0 0;
 `;
 
-const AllReview = styled.button`
+const AllReview2 = styled.button`
 background-color: transparent;
 border: none;
 width: 20%;
@@ -95,9 +96,9 @@ const ReviewCarousel = () => {
                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
                     <CustomRow width='80%' alignItems='center' justifyContent='space-between' gap='2rem'>
                         <CustomFont color='black' fontWeight='bold' font='0.9rem'>따뜻한 양보 후기가 도착했어요.</CustomFont>
-                        <AllReview onClick={() => navigate('/allreview')}>
+                        <AllReview2 onClick={() => navigate('/allreview')}>
                             <CustomFont color='black'>전체보기{'>'}</CustomFont>
-                        </AllReview>
+                        </AllReview2>
                     </CustomRow>
 
                 </CustomColumn>
