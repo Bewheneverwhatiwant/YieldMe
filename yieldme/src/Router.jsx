@@ -13,6 +13,7 @@ import WriteYield from './pages/mainpage/homepage/yield/writeyield';
 import MyYield from './pages/mainpage/homepage/yield/myyield';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
 import PointCharge from './pages/mainpage/mypage/pointcharge';
+import Favor from './pages/mainpage/favor/favor';
 
 const AppRouter = () => {
     return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
                     <Route path="/camera" element={<CameraPage />} />
+                    <Route path="/favor" element={<Favor />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupStep1 />} />

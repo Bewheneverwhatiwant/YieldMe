@@ -58,7 +58,7 @@ export default function Header() {
     }
   };
 
-  const isRootPath = location.pathname === '/' || location.pathname === '/mypage';
+  const isRootPath = location.pathname === '/' || location.pathname === '/mypage' || location.pathname === '/favor';
 
   return (
     <HeaderContainer>

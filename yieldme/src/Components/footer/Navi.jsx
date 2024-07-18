@@ -41,7 +41,7 @@ const Navi = () => {
           <CustomFont color='black' font='0.7rem' fontWeight='bold'>홈</CustomFont>
         </CustomColumn>
       </NaviButton>
-      <NaviButton onClick={() => navigate('/camera')}>
+      <NaviButton onClick={() => navigate('/favor')}>
         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
           <StyledImg src={'icon_joystick.png'} width='2rem' height='2rem' />
           <CustomFont color='black' font='0.7rem' fontWeight='bold'>인기</CustomFont>
