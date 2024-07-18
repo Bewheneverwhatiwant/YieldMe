@@ -50,6 +50,10 @@ const CameraPage = () => {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         let qrScanner;
         if (videoRef.current) {
             qrScanner = new QrScanner(

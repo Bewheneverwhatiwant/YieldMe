@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomRow from '../../../Components/Container/CustomRow';
@@ -84,6 +84,10 @@ const Cashback = () => {
     const [points, setPoints] = useState(2500);
     const [amount, setAmount] = useState('');
     const [useAllPoints, setUseAllPoints] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleCheckboxChange = () => {
         setUseAllPoints(!useAllPoints);

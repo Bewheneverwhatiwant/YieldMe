@@ -143,6 +143,10 @@ const WaitingYield = () => {
     const [description, setDescription] = useState("");
     const [timeLeft, setTimeLeft] = useState(300);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const navigate = useNavigate();
 
     const handleCloseModal = () => {

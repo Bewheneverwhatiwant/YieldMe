@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import { useNavigate } from 'react-router-dom';
@@ -118,6 +118,10 @@ const FindNearYield = () => {
     const [filter, setFilter] = useState('전체');
     const [modalData, setModalData] = useState(null);
     const [renderComponent, setRenderComponent] = useState(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const navigate = useNavigate();
 

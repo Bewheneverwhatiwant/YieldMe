@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,6 +95,10 @@ const PointCharge = () => {
     const [paymentMethod, setPaymentMethod] = useState('credit');
     const [termsChecked, setTermsChecked] = useState(false);
     const [privacyChecked, setPrivacyChecked] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleIncrement = () => setPoints(points + 100);
     const handleDecrement = () => {

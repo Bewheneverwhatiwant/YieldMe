@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CustomRow from '../../../../../Components/Container/CustomRow';
@@ -72,6 +72,10 @@ const Button2 = styled.button`
 const IWantoBeYielded = () => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
