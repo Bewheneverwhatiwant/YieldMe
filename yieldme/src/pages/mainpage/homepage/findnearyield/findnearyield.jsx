@@ -140,9 +140,19 @@ const FindNearYield = () => {
 
     const handleYieldButtonClick = () => {
         if (modalData[3] === '양보할게요') {
-            setRenderComponent(<YieldModalWarning onClose={handleCloseModal} />);
+            setRenderComponent(
+                <YieldModalWarning
+                    onClose={handleCloseModal}
+                    circleData={modalData}
+                />
+            );
         } else if (modalData[3] === '양보원해요') {
-            setRenderComponent(<YieldedModalWarning onClose={handleCloseModal} />);
+            setRenderComponent(
+                <YieldedModalWarning
+                    onClose={handleCloseModal}
+                    circleData={modalData}
+                />
+            );
         }
         setModalData(null);
     };
