@@ -6,6 +6,7 @@ import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomRow from '../../../Components/Container/CustomRow';
 import Changemode from './changemode';
 import MyPay from './mypay';
+import YieldCoupon from './yieldcoupon';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -33,23 +34,14 @@ const PointsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #E0E0E0;
-  padding: 0.5rem;
-  border-radius: 4px;
-`;
-
-const PointsButton = styled.button`
-  background-color: #777777;
-  color: black;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
+  background-color: #FFF9C4;
+  border: 1px solid #FFC107;
+  padding: 10px;
   border-radius: 4px;
 `;
 
 const PointsButton2 = styled.button`
-  background-color: ${props => (props.disabled ? '#E0E0E0' : '#777777')};
+  background-color: #FFC107;
   color: ${props => (props.disabled ? 'black' : 'white')};
   border: none;
   padding: 0.5rem 1rem;
@@ -58,8 +50,21 @@ const PointsButton2 = styled.button`
   border-radius: 4px;
 `;
 
+const YellowButton = styled.button`
+background-color:#FFF9C4;
+border: 1px solid #FFC107;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+padding: 20px;
+gap: 0.6rem;
+`;
+
 const MyPage = () => {
-  const [status, setStatus] = useState('임산부');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,11 +72,19 @@ const MyPage = () => {
   }, []);
 
   const yieldHistory = () => {
-    navigate('/yieldhistory');
+    navigate('/yieldhistory'); // 양보내역 보기
   }
 
-  const pointCharge = () => {
-    navigate('/pointcharge');
+  const shopping = () => {
+    navigate('/shopping'); // 양보금액으로 쇼핑하기 
+  }
+
+  const changeAccount = () => {
+    navigate('/changeaccount'); // 계좌 등록/변경하기
+  }
+
+  const changeCard = () => {
+    navigate('/changecard'); // 결제수단 등록/변경하기
   }
 
   const [rewarded, setRewarded] = useState(false);
@@ -88,24 +101,9 @@ const MyPage = () => {
 
         <CustomColumn width='80%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
           <CustomRow width='100%' alignItems='center' justifyContent='flex-start' gap='1rem'>
-            <CustomFont color='black' font='1.3rem' fontWeight='bold'>내 양보점수</CustomFont>
-          </CustomRow>
-          <PointsContainer>
-            <CustomRow wisth='20%' alignItems='center' justifyContent='space-between'>
-              <CustomFont font='1rem' color='black'>지금까지</CustomFont>
-              <CustomFont font='1rem' color='black' fontWeight='bold'>00점</CustomFont>
-            </CustomRow>
-
-            <PointsButton onClick={yieldHistory}>
-              <CustomFont color='white' font='0.9rem' fontWeight='bold'>내역확인</CustomFont>
-            </PointsButton>
-          </PointsContainer>
-        </CustomColumn>
-
-        <CustomColumn width='80%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
-          <CustomRow width='100%' alignItems='center' justifyContent='flex-start' gap='1rem'>
             <CustomFont color='black' font='1.3rem' fontWeight='bold'>보상받기</CustomFont>
           </CustomRow>
+
           <PointsContainer>
             <CustomRow width='70%' alignItems='center' justifyContent='center'>
               <CustomRow width='30%' alignItems='center' justifyContent='space-between'>
@@ -120,7 +118,7 @@ const MyPage = () => {
               </CustomRow>
             </CustomRow>
 
-            <PointsButton2 onClick={rewards} disabled={rewarded}>
+            <PointsButton2 onClick={rewards}>
               <CustomFont color='white' font='0.8rem' fontWeight='bold'>
                 {rewarded ? '보상받음' : '보상받기'}
               </CustomFont>
@@ -129,6 +127,35 @@ const MyPage = () => {
           </PointsContainer>
         </CustomColumn>
 
+        <CustomColumn width='80%' alignItems='center' justifyContent='center' gap='0.6rem'>
+          <YellowButton onClick={yieldHistory}>
+            <CustomRow width='100%' alignItems='center' justifyContent='flex-start'>
+              <CustomFont color='black' font='0.9rem' fontWeight='bold'>
+                나의 양보 내역 확인하기
+              </CustomFont>
+            </CustomRow>
+            <CustomRow width='100%' alignItems='center' justifyContent='flex-start'>
+              <CustomFont color='#FFC107' font='0.6rem' fontWeight='bold'>
+                나의 모든 양보 내역과 점수 내역을 볼 수 있어요.
+              </CustomFont>
+            </CustomRow>
+          </YellowButton>
+
+          <YellowButton onClick={shopping}>
+            <CustomRow width='100%' alignItems='center' justifyContent='flex-end'>
+              <CustomFont color='black' font='0.9rem' fontWeight='bold'>
+                내 양보 점수로 쇼핑하기
+              </CustomFont>
+            </CustomRow>
+            <CustomRow width='100%' alignItems='center' justifyContent='flex-end'>
+              <CustomFont color='#FFC107' font='0.6rem' fontWeight='bold'>
+                대중교통에서 유용한 물품을 구매하실 수 있어요.
+              </CustomFont>
+            </CustomRow>
+          </YellowButton>
+        </CustomColumn>
+
+        <YieldCoupon />
         <MyPay />
 
       </PageContainer>

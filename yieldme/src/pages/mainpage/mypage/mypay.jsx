@@ -10,7 +10,6 @@ const ContainerCenter = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
   background-color: white;
   padding: 20px;
   gap: 20px;
