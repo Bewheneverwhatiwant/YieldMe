@@ -5,9 +5,7 @@ import HomePage from './pages/mainpage/homepage/homepage';
 import CameraPage from './pages/mainpage/homepage/camerapage/camerapage';
 import MyPage from './pages/mainpage/mypage/mypage';
 import LoginPage from './Components/header/login/login';
-import SignupStep1 from './Components/header/signup/signup_step1';
-import SignupCertificate from './Components/header/signup/signup_certificate';
-import FinalSignup from './Components/header/signup/FinalSignup';
+import SignUpPage from './Components/header/signup/signup';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
 
 import Favor from './pages/mainpage/favor/favor';
@@ -30,9 +28,8 @@ const AppRouter = () => {
                     <Route path="/favor" element={<Favor />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupStep1 />} />
-                    <Route path="/certificate" element={<SignupCertificate />} />
-                    <Route path="/finalsignup" element={<FinalSignup />} />
+                    <Route path="/signup" element={<SignUpPage />} />
+
                     <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
                     <Route path="/iwanttoyield" element={<IWantoYield />} />
                     <Route path="/yieldhistory" element={<YieldHistory />} />
