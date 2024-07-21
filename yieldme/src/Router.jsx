@@ -7,6 +7,7 @@ import MyPage from './pages/mainpage/mypage/mypage';
 import LoginPage from './Components/header/login/login';
 import SignUpPage from './Components/header/signup/signup';
 import YieldHistory from './pages/mainpage/mypage/yieldhistory';
+import WriteReview from './pages/mainpage/mypage/writereview';
 
 import Favor from './pages/mainpage/favor/favor';
 import Cashback from './pages/mainpage/homepage/cashback';
@@ -33,6 +34,7 @@ const AppRouter = () => {
                     <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
                     <Route path="/iwanttoyield" element={<IWantoYield />} />
                     <Route path="/yieldhistory" element={<YieldHistory />} />
+                    <Route path="/writereview" element={<WriteReview />} />
 
                     <Route path="/cashback" element={<Cashback />} />
                     <Route path="/findnearyield" element={<FindNearYield />} />
