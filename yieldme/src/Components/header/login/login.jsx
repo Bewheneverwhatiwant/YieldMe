@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomFont from '../../Container/CustomFont';
 import CustomColumn from '../../Container/CustomColumn';
 import CustomRow from '../../Container/CustomRow';
+import StyledImg from '../../Container/StyledImg';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -45,20 +46,19 @@ const Button = styled.button`
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
-  background-color: ${props => (props.disabled ? '#E0E0E0' : '#979797')};
+  background-color: ${props => (props.disabled ? '#E0E0E0' : '#FEE187')};
   color: black;
   border: none;
   border-radius: 1rem;
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
-const SignupLink = styled.p`
-  font-size: 0.9rem;
-  color: black;
-  & > span {
-    font-weight: bold;
-    cursor: pointer;
-  }
+const GoSignup = styled.button`
+background-color: transparent;
+border: none;
+display: flex;
+align-items: center;
+justofy-content: center;
 `;
 
 const LoginPage = () => {
@@ -69,40 +69,49 @@ const LoginPage = () => {
   const isFormValid = username !== '' && password !== '';
 
   const handleLogin = (e) => {
-    e.preventDefault();
-    if (isFormValid) {
-      alert('로그인되었습니다!');
-      navigate('/');
-    }
+    alert('로그인되었습니다!');
+    navigate('/');
   };
 
   return (
     <ContainerCenter>
       <PageContainer>
-        <Form onSubmit={handleLogin}>
-          <CustomFont color='black' font='1.5rem'>로그인</CustomFont>
+        <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='5rem'>
 
           <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
-            <Input
-              type="text"
-              placeholder="아이디"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <SignupLink>
-              아직 계정이 없다면 <span onClick={() => navigate('/signup')}>회원가입</span>
-            </SignupLink>
+            <StyledImg src={'logo.png'} width='130px' height='130px' />
+            <CustomFont color='#FFD15B' font='1rem' fontWeight='bold'>Yello : Yield 路</CustomFont>
+            <CustomFont color='#FFD15B' font='1.5rem' fontWeight='bold'>LOG IN</CustomFont>
           </CustomColumn>
-          <Button type="submit" disabled={!isFormValid}>
-            로그인 하기
-          </Button>
-        </Form>
+
+          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='3rem'>
+            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+              <Input
+                type="text"
+                placeholder="아이디"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <Input
+                type="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>아직 계정이 없다면</CustomFont>
+                <GoSignup onClick={() => navigate('/signup')}>
+                  <CustomFont color='black' font='1rem' fontWeight='bold'>회원가입하기</CustomFont>
+                </GoSignup>
+              </CustomRow>
+            </CustomColumn>
+
+            <Button type="submit" disabled={!isFormValid} onClick={handleLogin}>
+              <CustomFont color='white' font='1.1rem' fontWeight='bold'>로그인 하기</CustomFont>
+            </Button>
+          </CustomColumn>
+
+        </CustomColumn>
       </PageContainer>
     </ContainerCenter>
   );
