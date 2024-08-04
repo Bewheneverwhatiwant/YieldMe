@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomColumn from '../../../Components/Container/CustomColumn';
+import StyledImg from '../../../Components/Container/StyledImg';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -110,7 +111,10 @@ const Changemode = () => {
             <CertificationContainer>
                 <CertificationCard color="#BA68C8" onClick={handleCertificationClick('pregnant')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='1rem' fontWeight='bold'>임산부 인증</CustomFont>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <StyledImg src={'icon_preg.png'} width='60px' height='60px' />
+                            <CustomFont color='white' font='1rem' fontWeight='bold'>임산부 인증</CustomFont>
+                        </CustomColumn>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
                             <WhiteBox>
                                 <CustomFont color='black' font='0.8rem'>
@@ -132,7 +136,10 @@ const Changemode = () => {
 
                 <CertificationCard color="#A1887F" onClick={handleCertificationClick('oldest')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='1rem' fontWeight='bold'>노약자 인증</CustomFont>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <StyledImg src={'icon_oldest.png'} width='60px' height='60px' />
+                            <CustomFont color='white' font='1rem' fontWeight='bold'>노약자 인증</CustomFont>
+                        </CustomColumn>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
                             <WhiteBox>
                                 <CustomFont color='black' font='0.8rem'>
@@ -154,7 +161,10 @@ const Changemode = () => {
 
                 <CertificationCard color="#4DB6AC" onClick={handleCertificationClick('wounded')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='1rem' fontWeight='bold'>부상자 인증</CustomFont>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <StyledImg src={'icon_wound.png'} width='60px' height='60px' />
+                            <CustomFont color='white' font='1rem' fontWeight='bold'>부상자 인증</CustomFont>
+                        </CustomColumn>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
                             <WhiteBox>
                                 <CustomFont color='black' font='0.8rem'>
@@ -176,7 +186,10 @@ const Changemode = () => {
 
                 <CertificationCard color="#4FC3F7" onClick={handleCertificationClick()}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='1rem' fontWeight='bold'>일반인</CustomFont>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                            <StyledImg src={'icon_normal.png'} width='60px' height='60px' />
+                            <CustomFont color='white' font='1rem' fontWeight='bold'>일반인</CustomFont>
+                        </CustomColumn>
 
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
                             <WhiteBox>
