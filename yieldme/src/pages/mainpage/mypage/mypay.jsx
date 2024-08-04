@@ -66,6 +66,7 @@ const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
+  max-width: 500px;
   padding: 20px;
   background: white;
   border-radius: 10px;
@@ -102,9 +103,28 @@ const ModalButton = styled.button`
   margin: 5px;
 `;
 
+const CardModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CardLogo = styled.img`
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  cursor: pointer;
+`;
+
 const MyPay = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
     const [accountInput, setAccountInput] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
+    const [expiryMonth, setExpiryMonth] = useState('');
+    const [expiryYear, setExpiryYear] = useState('');
+    const [cvc, setCvc] = useState('');
     const navigate = useNavigate();
 
     const handleOpenModal = () => {
@@ -119,6 +139,22 @@ const MyPay = () => {
         setAccountInput(e.target.value);
     };
 
+    const handleCardNumberChange = (e) => {
+        setCardNumber(e.target.value);
+    };
+
+    const handleExpiryMonthChange = (e) => {
+        setExpiryMonth(e.target.value);
+    };
+
+    const handleExpiryYearChange = (e) => {
+        setExpiryYear(e.target.value);
+    };
+
+    const handleCvcChange = (e) => {
+        setCvc(e.target.value);
+    };
+
     const handleConfirmChange = () => {
         if (accountInput === '') {
             alert('변경할 계좌를 입력해주세요.');
@@ -129,7 +165,25 @@ const MyPay = () => {
     };
 
     const handleChangePayMethod = () => {
-        navigate('/changepaymethod');
+        setIsCardModalOpen(true);
+    };
+
+    const handleCardClick = () => {
+        setIsCardModalOpen(false);
+        setIsSuccessModalOpen(true);
+    };
+
+    const handleSuccessModalClose = () => {
+        setIsSuccessModalOpen(false);
+    };
+
+    const handleRegisterCard = () => {
+        if (cardNumber === '' || expiryMonth === '' || expiryYear === '' || cvc === '') {
+            alert('모든 필드를 입력해주세요.');
+        } else {
+            setIsCardModalOpen(false);
+            setIsSuccessModalOpen(true);
+        }
     };
 
     return (
@@ -163,16 +217,88 @@ const MyPay = () => {
                 <>
                     <Backdrop onClick={handleCloseModal} />
                     <Modal>
-                        <Input
-                            type="text"
-                            placeholder="새 계좌 번호를 입력하세요"
-                            value={accountInput}
-                            onChange={handleInputChange}
-                        />
-                        <div>
-                            <ModalButton onClick={handleConfirmChange}>확인</ModalButton>
-                            <ModalButton onClick={handleCloseModal}>취소</ModalButton>
-                        </div>
+                        <CardModal>
+                            <CustomFont color='black' font='1.2rem' fontWeight='bold'>은행사를 선택해주세요.</CustomFont>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                {Array.from({ length: 11 }, (_, index) => (
+                                    <CardLogo
+                                        key={index}
+                                        src={`card${index + 1}.png`}
+                                        alt={`카드사 로고 ${index + 1}`}
+                                        onClick={() => { }}
+                                    />
+                                ))}
+                            </div>
+                            <Input
+                                type="text"
+                                placeholder="계좌번호를 입력해주세요."
+                                value={cardNumber}
+                                onChange={handleCardNumberChange}
+                            />
+
+                            <ModalButton onClick={handleRegisterCard}>등록하기</ModalButton>
+                        </CardModal>
+                    </Modal>
+                </>
+            )}
+
+            {isCardModalOpen && (
+                <>
+                    <Backdrop onClick={() => setIsCardModalOpen(false)} />
+                    <Modal>
+                        <CardModal>
+                            <CustomFont color='black' font='1.2rem' fontWeight='bold'>카드사를 선택해주세요.</CustomFont>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                {Array.from({ length: 11 }, (_, index) => (
+                                    <CardLogo
+                                        key={index}
+                                        src={`card${index + 1}.png`}
+                                        alt={`카드사 로고 ${index + 1}`}
+                                        onClick={() => { }}
+                                    />
+                                ))}
+                            </div>
+                            <Input
+                                type="text"
+                                placeholder="카드 번호를 입력해주세요."
+                                value={cardNumber}
+                                onChange={handleCardNumberChange}
+                            />
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Input
+                                    type="text"
+                                    placeholder="MM"
+                                    value={expiryMonth}
+                                    onChange={handleExpiryMonthChange}
+                                    style={{ width: '30%' }}
+                                />
+                                <Input
+                                    type="text"
+                                    placeholder="YY"
+                                    value={expiryYear}
+                                    onChange={handleExpiryYearChange}
+                                    style={{ width: '30%' }}
+                                />
+                                <Input
+                                    type="text"
+                                    placeholder="CVC"
+                                    value={cvc}
+                                    onChange={handleCvcChange}
+                                    style={{ width: '30%' }}
+                                />
+                            </div>
+                            <ModalButton onClick={handleRegisterCard}>등록하기</ModalButton>
+                        </CardModal>
+                    </Modal>
+                </>
+            )}
+
+            {isSuccessModalOpen && (
+                <>
+                    <Backdrop onClick={handleSuccessModalClose} />
+                    <Modal>
+                        <CustomFont color='black' font='1.2rem' fontWeight='bold'>성공적으로 결제수단이 등록/변경되었습니다!</CustomFont>
+                        <ModalButton onClick={handleSuccessModalClose}>확인</ModalButton>
                     </Modal>
                 </>
             )}
