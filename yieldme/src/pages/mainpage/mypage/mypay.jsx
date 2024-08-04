@@ -198,7 +198,7 @@ const MyPay = () => {
 
     const handleRegisterCard = () => {
         if (cardNumber === '' || expiryMonth === '' || expiryYear === '' || cvc === '') {
-            alert('모든 필드를 입력해주세요.');
+            alert('모든 정보를 입력해주세요.');
         } else {
             setIsCardModalOpen(false);
             setIsSuccessModalOpen(true);
@@ -276,9 +276,11 @@ const MyPay = () => {
                     <Backdrop onClick={() => setIsCardModalOpen(false)} />
                     <Modal>
                         <CardModal>
-                            <CustomFont color='black' font='1.2rem' fontWeight='bold'>카드사를 선택해주세요.</CustomFont>
+                            <CustomRow width='100%' alignItems='center' justifyContent='start'>
+                                <CustomFont color='black' font='1rem'>카드사를 선택해주세요.</CustomFont>
+                            </CustomRow>
                             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                {Array.from({ length: 11 }, (_, index) => (
+                                {Array.from({ length: 10 }, (_, index) => (
                                     <CardLogo
                                         key={index}
                                         src={`card${index + 1}.png`}
