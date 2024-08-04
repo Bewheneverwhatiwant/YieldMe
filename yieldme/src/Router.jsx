@@ -22,6 +22,7 @@ import Certificate from './pages/mainpage/mypage/certificate';
 import PregnantCert from './pages/mainpage/mypage/all_cettificate/pregnant_cert';
 import OldestCert from './pages/mainpage/mypage/all_cettificate/oldest_cert';
 import WoundedCert from './pages/mainpage/mypage/all_cettificate/wounded_cert';
+import GiftShop from './pages/mainpage/mypage/giftshop';
 
 const AppRouter = () => {
     return (
@@ -49,6 +50,7 @@ const AppRouter = () => {
                     <Route path="/pregnantcert" element={<PregnantCert />} />
                     <Route path="/oldestcert" element={<OldestCert />} />
                     <Route path="/woundedcert" element={<WoundedCert />} />
+                    <Route path="/giftshop" element={<GiftShop />} />
                 </Route>
             </Routes>
         </Router>

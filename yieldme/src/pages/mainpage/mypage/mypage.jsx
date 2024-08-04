@@ -76,7 +76,7 @@ const MyPage = () => {
   }
 
   const shopping = () => {
-    navigate('/shopping'); // 양보금액으로 쇼핑하기 
+    navigate('/giftshop'); // 양보금액으로 쇼핑하기 
   }
 
   const changeAccount = () => {
