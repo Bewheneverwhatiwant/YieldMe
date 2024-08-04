@@ -49,6 +49,19 @@ const CertificationCard = styled.div`
   cursor: pointer;
 `;
 
+const WhiteBox = styled.div`
+background-color: white;
+padding: 10px;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+width: 95%;
+height: 6rem;
+`;
+
 const Changemode = () => {
     const navigate = useNavigate();
 
@@ -97,71 +110,80 @@ const Changemode = () => {
             <CertificationContainer>
                 <CertificationCard color="#BA68C8" onClick={handleCertificationClick('pregnant')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='0.9rem' fontWeight='bold'>임산부 인증하기</CustomFont>
+                        <CustomFont color='white' font='1rem' fontWeight='bold'>임산부 인증</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                            <CustomFont color='black' font='0.9rem'>
-                                인증 준비물:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem' fontWeight='bold'>
-                                임신확인서
-                            </CustomFont>
-                            <CustomFont color='black' font='0.9rem'>
-                                상태 지속 기간:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem'>
-                                임신 확인 일자로부터 10개월
-                            </CustomFont>
+                            <WhiteBox>
+                                <CustomFont color='black' font='0.8rem'>
+                                    인증 준비물:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    임신확인서
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem'>
+                                    상태 지속 기간:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    1년
+                                </CustomFont>
+                            </WhiteBox>
                         </CustomColumn>
                     </CustomColumn>
                 </CertificationCard>
 
                 <CertificationCard color="#A1887F" onClick={handleCertificationClick('oldest')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='0.9rem' fontWeight='bold'>노약자 인증하기</CustomFont>
+                        <CustomFont color='white' font='1rem' fontWeight='bold'>노약자 인증</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                            <CustomFont color='black' font='0.9rem'>
-                                인증 준비물:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem' fontWeight='bold'>
-                                75세 이상의 신분증
-                            </CustomFont>
-                            <CustomFont color='black' font='0.9rem'>
-                                상태 지속 기간:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem'>
-                                인증 날짜로부터 평생
-                            </CustomFont>
+                            <WhiteBox>
+                                <CustomFont color='black' font='0.8rem'>
+                                    인증 준비물:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    신분증
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem'>
+                                    상태 지속 기간:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    인증 후 평생
+                                </CustomFont>
+                            </WhiteBox>
                         </CustomColumn>
                     </CustomColumn>
                 </CertificationCard>
 
                 <CertificationCard color="#4DB6AC" onClick={handleCertificationClick('wounded')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='0.9rem' fontWeight='bold'>부상자 인증하기</CustomFont>
+                        <CustomFont color='white' font='1rem' fontWeight='bold'>부상자 인증</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                            <CustomFont color='black' font='0.9rem'>
-                                인증 준비물:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem' fontWeight='bold'>
-                                3일이 지나지 않은 진단서
-                            </CustomFont>
-                            <CustomFont color='black' font='0.9rem'>
-                                상태 지속 기간:
-                            </CustomFont>
-                            <CustomFont color='black' font='0.8rem'>
-                                진단 일자로부터 3일
-                            </CustomFont>
+                            <WhiteBox>
+                                <CustomFont color='black' font='0.8rem'>
+                                    인증 준비물:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    진단서
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem'>
+                                    상태 지속 기간:
+                                </CustomFont>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    진단일 후 3일 내
+                                </CustomFont>
+                            </WhiteBox>
                         </CustomColumn>
                     </CustomColumn>
                 </CertificationCard>
 
                 <CertificationCard color="#4FC3F7" onClick={handleCertificationClick()}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomFont color='white' font='0.8rem' fontWeight='bold'>일반인</CustomFont>
+                        <CustomFont color='white' font='1rem' fontWeight='bold'>일반인</CustomFont>
+
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                            <CustomFont color='black' font='0.9rem'>
-                                회원가입 시 기본 상태입니다.
-                            </CustomFont>
+                            <WhiteBox>
+                                <CustomFont color='black' font='0.8rem' fontWeight='bold'>
+                                    기본 상태입니다.
+                                </CustomFont>
+                            </WhiteBox>
                         </CustomColumn>
                     </CustomColumn>
                 </CertificationCard>
