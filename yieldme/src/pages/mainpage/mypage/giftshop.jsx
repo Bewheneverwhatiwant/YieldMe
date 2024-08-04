@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Barcode from 'react-barcode';
+import { toPng } from 'html-to-image';
 
 const Container = styled.div`
   display: flex;
@@ -104,10 +106,18 @@ const LoadingIndicator = styled.div`
   margin: 20px auto;
 `;
 
+const CouponContainer = styled.div`
+  border: 2px solid yellow;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+`;
+
 const GiftShop = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isPurchased, setIsPurchased] = useState(false);
+    const [isDownloaded, setIsDownloaded] = useState(false);
 
     const products = [
         { id: 1, name: '이어플러그', price: '300원', img: 'gift1.png' },
@@ -136,10 +146,32 @@ const GiftShop = () => {
         }, 3000);
     };
 
+    const handleDownloadClick = () => {
+        console.log('기프티콘 다운로드 시작');
+        const modal = document.querySelector('.modal-container');
+        //setIsLoading(true);
+        toPng(modal)
+            .then((dataUrl) => {
+                const link = document.createElement('a');
+                link.download = 'coupon.png';
+                link.href = dataUrl;
+                link.click();
+                setIsPurchased(false);
+                //setIsLoading(false);
+                setIsDownloaded(true);
+                console.log('기프티콘 다운로드가 완료됨');
+            })
+            .catch((error) => {
+                console.error('oops, something went wrong!', error);
+                setIsLoading(false);
+            });
+    };
+
     const handleCloseModal = () => {
         setSelectedProduct(null);
         setIsLoading(false);
         setIsPurchased(false);
+        setIsDownloaded(false);
     };
 
     return (
@@ -164,6 +196,21 @@ const GiftShop = () => {
                             <>
                                 <ProductInfo>
                                     <ProductName>구매가 완료되었습니다!</ProductName>
+                                </ProductInfo>
+                                <CouponContainer className="modal-container">
+                                    <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
+                                    <ProductName>{selectedProduct.name}</ProductName>
+                                    <ProductPrice>{selectedProduct.price}</ProductPrice>
+                                    <Barcode value="123456789012" />
+                                    <div>교환처: storyway</div>
+                                    <div>유효기간: 2025.7.15</div>
+                                </CouponContainer>
+                                <Button onClick={handleDownloadClick}>기프티콘 다운로드</Button>
+                            </>
+                        ) : isDownloaded ? (
+                            <>
+                                <ProductInfo>
+                                    <ProductName>기프티콘 저장이 완료되었습니다.</ProductName>
                                 </ProductInfo>
                                 <Button onClick={handleCloseModal}>확인</Button>
                             </>

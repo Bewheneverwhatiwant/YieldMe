@@ -1393,6 +1393,11 @@ hasown@^2.0.0, hasown@^2.0.1, hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+html-to-image@^1.11.11:
+  version "1.11.11"
+  resolved "https://registry.npmjs.org/html-to-image/-/html-to-image-1.11.11.tgz"
+  integrity sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==
+
 humanize-ms@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/humanize-ms/-/humanize-ms-1.2.1.tgz"
@@ -1652,6 +1657,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsbarcode@^3.8.0:
+  version "3.11.6"
+  resolved "https://registry.npmjs.org/jsbarcode/-/jsbarcode-3.11.6.tgz"
+  integrity sha512-G5TKGyKY1zJo0ZQKFM1IIMfy0nF2rs92BLlCz+cU4/TazIc4ZH+X1GYeDRt7TKjrYqmPfTjwTBkU/QnQlsYiuA==
 
 jsesc@^2.5.1:
   version "2.5.2"
@@ -1958,7 +1968,7 @@ prelude-ls@^1.2.1:
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -1993,6 +2003,14 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+
+react-barcode@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.npmjs.org/react-barcode/-/react-barcode-1.5.3.tgz"
+  integrity sha512-EJPUwuERKpApcQ9qXzdVZzddFYRT7+3R/jJ3OrTfW6m2iq+WT+CBaVB7DsQazhPRXDfMcx9+dmMmzjsmveOViQ==
+  dependencies:
+    jsbarcode "^3.8.0"
+    prop-types "^15.6.2"
 
 react-dom@^18.2.0:
   version "18.3.1"
