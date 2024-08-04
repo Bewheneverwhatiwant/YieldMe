@@ -30,6 +30,21 @@ const PageContainer = styled(ContainerCenter)`
   padding-bottom: 10vh;
 `;
 
+const Spinner = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const LoadingIndicator = styled.div`
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 30px;
+  height: 30px;
+  animation: ${Spinner} 2s linear infinite;
+  margin: 10px 0;
+`;
+
 const CameraScreen = styled.div`
   width: 90%;
   height: 300px;
@@ -40,6 +55,7 @@ const CameraScreen = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  position: relative;
 `;
 
 const Button = styled.button`
@@ -199,16 +215,26 @@ const PregnantCert = () => {
                         </Warn>
 
                         <CameraScreen>
-                            <Webcam
-                                audio={false}
-                                ref={webcamRef}
-                                screenshotFormat="image/jpeg"
-                                width={300}
-                                height={400}
-                            />
-                            <Button onClick={handleCapture}>
-                                <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
-                            </Button>
+                            {loading ? (
+                                <>
+                                    <LoadingIndicator />
+                                    <CustomFont color='black' fontWeight='bold'>로딩 중...</CustomFont>
+                                </>
+                            ) : (
+                                <>
+                                    <Webcam
+                                        audio={false}
+                                        ref={webcamRef}
+                                        screenshotFormat="image/jpeg"
+                                        width={300}
+                                        height={400}
+                                    />
+                                    <Button onClick={handleCapture}>
+                                        <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
+                                    </Button>
+                                </>
+                            )}
+
                         </CameraScreen>
 
                     </CustomColumn>
