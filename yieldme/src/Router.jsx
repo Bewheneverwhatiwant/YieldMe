@@ -49,7 +49,7 @@ const AppRouter = () => {
                     <Route path="/certificate" element={<Certificate />} />
                     <Route path="/pregnantcert" element={<PregnantCert />} />
                     <Route path="/oldestcert" element={<OldestCert />} />
-                    <Route path="/woundedcert" element={<WoundedCert />} />
+                    <Route path="/woundcert" element={<WoundedCert />} />
                     <Route path="/giftshop" element={<GiftShop />} />
                 </Route>
             </Routes>

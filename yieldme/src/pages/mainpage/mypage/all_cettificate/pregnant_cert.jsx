@@ -85,6 +85,20 @@ padding: 10px;
   cursor: pointer;
 `;
 
+const Button3 = styled.button`
+width: 70%;
+padding: 10px;
+  margin: 10px;
+ background-color: #FEE187;
+ border: none;
+ border-radius:10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
 const Modal = styled.div`
   position: fixed;
   top: 50%;
@@ -92,7 +106,8 @@ const Modal = styled.div`
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
-  border: 1px solid black;
+  border: none;
+  border-radius: 10px;
   z-index: 1000;
   ${(props) => props.show && css`
     display: block;
@@ -154,7 +169,11 @@ const PregnantCert = () => {
                     {
                         role: "user",
                         content: `다음의 텍스트를 분석하라. 텍스트에 '임신확인서'라는 텍스트가 존재하면 true를,
-                        존재하지 않는다면 false를 반환하라 : ${extractedText}`
+                        존재하지 않는다면 false를 반환하라.
+                        너는 항상 true 또는 false로만 대답해야 한다.
+                        만약 텍스트가 없다면, false를 대답하라.
+                        텍스트는 다음과 같다: ${extractedText}`
+
                     }
                 ],
                 max_tokens: 300
@@ -162,6 +181,26 @@ const PregnantCert = () => {
 
             const content = response.choices[0].message.content;
             console.log(content);
+
+            if (content === "true") {
+                setModalContent(
+                    <>
+                        <CustomFont color='black' fontWeight='bold'>인증되었습니다!</CustomFont>
+                        <Button2 onClick={() => navigate('/mypage')}>
+                            <CustomFont color='black' fontWeight='bold'>확인</CustomFont>
+                        </Button2>
+                    </>
+                );
+            } else {
+                setModalContent(
+                    <CustomColumn width='80%' alignItems='center' justifyContent='center'>
+                        <CustomFont color='black' fontWeight='bold'>인증에 실패하였습니다.</CustomFont>
+                        <Button3 onClick={() => navigate('/pregnantcert')}>
+                            <CustomFont color='black' fontWeight='bold'>다시하기</CustomFont>
+                        </Button3>
+                    </CustomColumn>
+                );
+            }
 
         } catch (error) {
             setModalContent('오류가 발생했습니다.');
@@ -284,8 +323,8 @@ const PregnantCert = () => {
                     </>
                 )}
 
-                <Modal show={loading}>
-                    {modalContent}
+                <Modal show={loading || modalContent}>
+                    {loading ? '응답 대기 중...' : modalContent}
                 </Modal>
             </PageContainer>
         </ContainerCenter>

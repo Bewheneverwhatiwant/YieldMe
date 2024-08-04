@@ -76,7 +76,7 @@ const Changemode = () => {
                     navigate('/oldestcert');
                     break;
                 case 'wounded':
-                    navigate('/woundedcert');
+                    navigate('/woundcert');
                     break;
                 default:
                     break;
