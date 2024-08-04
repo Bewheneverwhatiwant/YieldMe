@@ -93,7 +93,8 @@ const Input = styled.input`
 `;
 
 const ModalButton = styled.button`
-  background-color: #FFEB3B;
+  width: 100%;
+  background-color: #FEE187;
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -107,13 +108,26 @@ const CardModal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 `;
 
 const CardLogo = styled.img`
-  width: 50px;
+  width: 100px;
   height: 50px;
   margin: 10px;
   cursor: pointer;
+`;
+
+const CardDiv = styled.div`
+border: 1px solid #D9D9D9;
+background-color: white;
+border-radius: 10px;
+padding: 10px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+width: 100%;
 `;
 
 const MyPay = () => {
@@ -122,6 +136,7 @@ const MyPay = () => {
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
     const [accountInput, setAccountInput] = useState('');
     const [cardNumber, setCardNumber] = useState('');
+    const [cardPw, setCardPw] = useState('');
     const [expiryMonth, setExpiryMonth] = useState('');
     const [expiryYear, setExpiryYear] = useState('');
     const [cvc, setCvc] = useState('');
@@ -143,6 +158,10 @@ const MyPay = () => {
         setCardNumber(e.target.value);
     };
 
+    const handleCardPwChange = (e) => {
+        setCardPw(e.target.value);
+    };
+
     const handleExpiryMonthChange = (e) => {
         setExpiryMonth(e.target.value);
     };
@@ -156,8 +175,8 @@ const MyPay = () => {
     };
 
     const handleConfirmChange = () => {
-        if (accountInput === '') {
-            alert('변경할 계좌를 입력해주세요.');
+        if (accountInput === '' || cardPw === '') {
+            alert('모든 정보를 입력해주세요.');
         } else {
             alert('성공적으로 계좌가 변경되었습니다.');
             setIsModalOpen(false);
@@ -218,9 +237,11 @@ const MyPay = () => {
                     <Backdrop onClick={handleCloseModal} />
                     <Modal>
                         <CardModal>
-                            <CustomFont color='black' font='1.2rem' fontWeight='bold'>은행사를 선택해주세요.</CustomFont>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                {Array.from({ length: 11 }, (_, index) => (
+                            <CustomRow width='100%' alignItems='center' justifyContent='start'>
+                                <CustomFont color='black' font='1rem'>은행사를 선택해주세요.</CustomFont>
+                            </CustomRow>
+                            <CardDiv>
+                                {Array.from({ length: 10 }, (_, index) => (
                                     <CardLogo
                                         key={index}
                                         src={`card${index + 1}.png`}
@@ -228,15 +249,23 @@ const MyPay = () => {
                                         onClick={() => { }}
                                     />
                                 ))}
-                            </div>
-                            <Input
-                                type="text"
-                                placeholder="계좌번호를 입력해주세요."
-                                value={cardNumber}
-                                onChange={handleCardNumberChange}
-                            />
+                            </CardDiv>
 
-                            <ModalButton onClick={handleRegisterCard}>등록하기</ModalButton>
+                            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                                <Input
+                                    type="text"
+                                    placeholder="계좌번호를 입력해주세요."
+                                    value={cardNumber}
+                                    onChange={handleCardNumberChange}
+                                />
+                                <Input
+                                    type="text"
+                                    placeholder="비밀번호를 입력해주세요."
+                                    value={cardPw}
+                                    onChange={handleCardPwChange}
+                                />
+                            </CustomColumn>
+                            <ModalButton onClick={handleConfirmChange}>계좌 등록하기</ModalButton>
                         </CardModal>
                     </Modal>
                 </>
