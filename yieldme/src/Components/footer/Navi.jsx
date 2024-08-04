@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import StyledImg from '../Container/StyledImg';
 import CustomColumn from '../Container/CustomColumn';
 import CustomFont from '../Container/CustomFont';
+import { AuthContext } from '../../pages/subpage/AuthContext';
 
 const NaviContainer = styled.footer`
   display: flex;
@@ -29,8 +30,60 @@ const NaviButton = styled.button`
   width: 33%;
 `;
 
+const Modal = styled.div`
+width: 60%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const Button = styled.button`
+  background-color: ${props => (props.primary ? '#FEE187' : '#E0E0E0')};
+  font-size: 12px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 30px;
+  width: 90px;
+  padding: 0.3rem;
+  cursor: pointer;
+  border: none;
+  margin: 5px;
+`;
+
 const Navi = () => {
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleMyPageClick = () => {
+    if (auth.accessToken) {
+      navigate('/mypage');
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleLogin = () => {
+    setShowModal(false);
+    navigate('/login');
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+    navigate('/');
+  };
 
   return (
     <NaviContainer>
@@ -46,12 +99,20 @@ const Navi = () => {
           <CustomFont color='black' font='0.7rem' fontWeight='bold'>인기</CustomFont>
         </CustomColumn>
       </NaviButton>
-      <NaviButton onClick={() => navigate('/mypage')}>
+      <NaviButton onClick={handleMyPageClick}>
         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
           <StyledImg src={'icon_my.png'} width='1.7rem' height='1.7rem' />
           <CustomFont color='black' font='0.7rem' fontWeight='bold'>마이</CustomFont>
         </CustomColumn>
       </NaviButton>
+
+      <Modal show={showModal}>
+        <CustomFont color='black' font='1.2rem' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
+        <div>
+          <Button primary onClick={handleLogin}>확인</Button>
+          <Button onClick={handleCancel}>취소</Button>
+        </div>
+      </Modal>
     </NaviContainer>
   );
 };
