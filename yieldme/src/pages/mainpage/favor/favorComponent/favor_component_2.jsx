@@ -15,6 +15,7 @@ const Alldiv = styled.div`
   overflow-x: auto;
   white-space: nowrap;
   max-width: 100%;
+  padding: 1rem;
 `;
 
 
@@ -44,13 +45,13 @@ const BookImage = styled.div`
     margin: 15px 28px 12px 28px;
 `;
 
-const BoxDiv=styled.div`
+const BoxDiv = styled.div`
     display:flex;
     flex-direction :column;
     flex-wrap: wrap;
 `;
 
-const Shopbutton=styled.button`
+const Shopbutton = styled.button`
     width : 86px;
     height : 22px;
     background: linear-gradient(90deg, #848484 0%, #616161 34.5%);
@@ -69,7 +70,7 @@ const Shopbutton=styled.button`
 
 const FavorComponent2 = () => {
 
-    
+
 
     return (
         <Wrapper>
@@ -110,7 +111,7 @@ const FavorComponent2 = () => {
                 </Projectdiv>
 
             </Alldiv>
-            
+
         </Wrapper>
     );
 };
