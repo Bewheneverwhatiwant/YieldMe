@@ -118,6 +118,7 @@ const GiftShop = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isPurchased, setIsPurchased] = useState(false);
     const [isDownloaded, setIsDownloaded] = useState(false);
+    const [barcodeValue, setBarcodeValue] = useState('');
 
     const products = [
         { id: 1, name: '이어플러그', price: '300원', img: 'gift1.png' },
@@ -140,6 +141,7 @@ const GiftShop = () => {
 
     const handlePurchaseClick = () => {
         setIsLoading(true);
+        setBarcodeValue(generateRandomBarcode());
         setTimeout(() => {
             setIsLoading(false);
             setIsPurchased(true);
@@ -174,6 +176,11 @@ const GiftShop = () => {
         setIsDownloaded(false);
     };
 
+    const generateRandomBarcode = () => {
+        return Math.floor(Math.random() * 1000000000000).toString().padStart(12, '0');
+    };
+
+
     return (
         <Container>
             <Title>쇼핑</Title>
@@ -201,7 +208,7 @@ const GiftShop = () => {
                                     <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
                                     <ProductName>{selectedProduct.name}</ProductName>
                                     <ProductPrice>{selectedProduct.price}</ProductPrice>
-                                    <Barcode value="123456789012" />
+                                    <Barcode value={barcodeValue} />
                                     <div>교환처: storyway</div>
                                     <div>유효기간: 2025.7.15</div>
                                 </CouponContainer>
