@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Barcode from 'react-barcode';
 import { toPng } from 'html-to-image';
+import CustomFont from '../../../Components/Container/CustomFont';
+import CustomRow from '../../../Components/Container/CustomRow';
+import CustomColumn from '../../../Components/Container/CustomColumn';
+import StyledImg from '../../../Components/Container/StyledImg';
 
-const Container = styled.div`
+const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
+`;
+
+const PageContainer = styled(ContainerCenter)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 8vh;
+  padding-bottom: 5vh;
+  gap: 3rem;
+  position: relative;
   background-color: white;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 10px;
-`;
-
-const Description = styled.p`
-  margin-bottom: 20px;
+  padding-bottom: 10vh;
 `;
 
 const ProductsGrid = styled.div`
@@ -80,7 +89,7 @@ const ProductPrice = styled.p`
 `;
 
 const Button = styled.button`
-  background-color: #FFEB3B;
+  background-color: #FEE187;
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -111,6 +120,16 @@ const CouponContainer = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   background-color: white;
+`;
+
+const YelowBox = styled.div`
+width: 100%;
+background-color: #FEE187;
+border-radius: 10px;
+padding: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
 `;
 
 const GiftShop = () => {
@@ -182,59 +201,108 @@ const GiftShop = () => {
 
 
     return (
-        <Container>
-            <Title>쇼핑</Title>
-            <Description>구매하신 품목은 지하철 역 내 storyway 기프트콘으로 제공됩니다.</Description>
-            <ProductsGrid>
-                {products.map((product) => (
-                    <ProductCard key={product.id} onClick={() => handleProductClick(product)}>
-                        <ProductImage src={product.img} alt={product.name} />
-                    </ProductCard>
-                ))}
-            </ProductsGrid>
+        <ContainerCenter>
+            <PageContainer>
+                <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='4rem'>
 
-            {selectedProduct && (
-                <>
-                    <Backdrop onClick={handleCloseModal} />
-                    <Modal>
-                        {isLoading ? (
-                            <LoadingIndicator />
-                        ) : isPurchased ? (
-                            <>
-                                <ProductInfo>
-                                    <ProductName>구매가 완료되었습니다!</ProductName>
-                                </ProductInfo>
-                                <CouponContainer className="modal-container">
-                                    <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
-                                    <ProductName>{selectedProduct.name}</ProductName>
-                                    <ProductPrice>{selectedProduct.price}</ProductPrice>
-                                    <Barcode value={barcodeValue} />
-                                    <div>교환처: storyway</div>
-                                    <div>유효기간: 2025.7.15</div>
-                                </CouponContainer>
-                                <Button onClick={handleDownloadClick}>기프티콘 다운로드</Button>
-                            </>
-                        ) : isDownloaded ? (
-                            <>
-                                <ProductInfo>
-                                    <ProductName>기프티콘 저장이 완료되었습니다.</ProductName>
-                                </ProductInfo>
-                                <Button onClick={handleCloseModal}>확인</Button>
-                            </>
-                        ) : (
-                            <>
-                                <ProductInfo>
-                                    <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
-                                    <ProductName>{selectedProduct.name}</ProductName>
-                                    <ProductPrice>{selectedProduct.price}</ProductPrice>
-                                </ProductInfo>
-                                <Button onClick={handlePurchaseClick}>양보 점수로 구매하기</Button>
-                            </>
-                        )}
-                    </Modal>
-                </>
-            )}
-        </Container>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='1rem'>
+                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='0.5rem'>
+
+                            <StyledImg src={'storyway.png'} width='150px' height='100px' />
+                            <CustomColumn height='90px' alignItems='center' justifyContent='end'>
+                                <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>with</CustomFont>
+                            </CustomColumn>
+                            <CustomColumn height='90px' alignItems='center' justifyContent='end'>
+                                <CustomFont color='#FFCD38' font='1.5rem' fontWeight='bold'>YELLO</CustomFont>
+                            </CustomColumn>
+
+                        </CustomRow>
+
+                        <YelowBox>
+                            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.5rem'>
+                                <CustomRow width='100%' alignItems='center' justifyContent='start' gap='1rem'>
+                                    <CustomFont color='black' font='1rem' fontWeight='bold'>소중하고 지속적인 자리양보, 감사드립니다!</CustomFont>
+                                </CustomRow>
+
+                                <CustomColumn width='100%' alignItems='center' justofyContent='center' gap='1.3rem'>
+                                    <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='1rem'>
+                                            <CustomFont color='black' font='0.85rem' fontWeight='bold'>양보를 통해 얻은 점수로</CustomFont>
+                                        </CustomRow>
+                                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='1rem'>
+                                            <CustomFont color='black' font='0.85rem' fontWeight='bold'>아래 품목을 구매하실 수 있습니다.</CustomFont>
+                                        </CustomRow>
+                                    </CustomColumn>
+
+                                    <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='1rem'>
+                                            <CustomFont color='black' font='0.7rem'>구매하신 품목은 storyway 기프트콘으로 제공됩니다</CustomFont>
+                                        </CustomRow>
+
+                                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='1rem'>
+                                            <CustomFont color='red' font='0.7rem'>* 일부 품목을 지원하지 않는 지점이 있을 수 있습니다.</CustomFont>
+                                        </CustomRow>
+                                    </CustomColumn>
+                                </CustomColumn>
+                            </CustomColumn>
+                        </YelowBox>
+                    </CustomColumn>
+
+                    <ProductsGrid>
+                        {products.map((product) => (
+                            <ProductCard key={product.id} onClick={() => handleProductClick(product)}>
+                                <ProductImage src={product.img} alt={product.name} />
+                            </ProductCard>
+                        ))}
+                    </ProductsGrid>
+
+                    {selectedProduct && (
+                        <>
+                            <Backdrop onClick={handleCloseModal} />
+                            <Modal>
+                                {isLoading ? (
+                                    <CustomColumn width='100%' alignItems='center' justifyContent='center'>
+                                        <LoadingIndicator />
+                                        <CustomFont color='black' fontWeight='bold'>양보점수를 사용하고 있어요...</CustomFont>
+                                    </CustomColumn>
+                                ) : isPurchased ? (
+                                    <>
+                                        <ProductInfo>
+                                            <ProductName>구매가 완료되었습니다!</ProductName>
+                                        </ProductInfo>
+                                        <CouponContainer className="modal-container">
+                                            <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
+                                            <ProductName>{selectedProduct.name}</ProductName>
+                                            <ProductPrice>{selectedProduct.price}</ProductPrice>
+                                            <Barcode value={barcodeValue} />
+                                            <div>교환처: storyway</div>
+                                            <div>유효기간: 2025.08.07</div>
+                                        </CouponContainer>
+                                        <Button onClick={handleDownloadClick}>기프티콘 다운로드</Button>
+                                    </>
+                                ) : isDownloaded ? (
+                                    <>
+                                        <ProductInfo>
+                                            <ProductName>기프티콘 저장이 완료되었습니다.</ProductName>
+                                        </ProductInfo>
+                                        <Button onClick={handleCloseModal}>확인</Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <ProductInfo>
+                                            <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
+                                            <ProductName>{selectedProduct.name}</ProductName>
+                                            <ProductPrice>{selectedProduct.price}</ProductPrice>
+                                        </ProductInfo>
+                                        <Button onClick={handlePurchaseClick}>양보 점수로 구매하기</Button>
+                                    </>
+                                )}
+                            </Modal>
+                        </>
+                    )}
+                </CustomColumn>
+            </PageContainer>
+        </ContainerCenter>
     );
 };
 
