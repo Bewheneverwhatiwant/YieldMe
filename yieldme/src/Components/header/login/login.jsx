@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CustomFont from '../../Container/CustomFont';
 import CustomColumn from '../../Container/CustomColumn';
 import CustomRow from '../../Container/CustomRow';
 import StyledImg from '../../Container/StyledImg';
+import { AuthContext } from '../../../pages/subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -54,30 +56,82 @@ const Button = styled.button`
 `;
 
 const GoSignup = styled.button`
-background-color: transparent;
-border: none;
-display: flex;
-align-items: center;
-justofy-content: center;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  display: ${props => (props.show ? 'block' : 'none')};
 `;
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setAuthInfo } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const isFormValid = username !== '' && password !== '';
 
-  const handleLogin = (e) => {
-    alert('로그인되었습니다!');
-    navigate('/');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      login_id: username,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER}/login/`, data);
+      console.log(response.data);
+
+      if (response && response.status === 200) {
+        const { login_id, username } = response.data.user;
+        const accessToken = response.data.token.access;
+
+        setAuthInfo(login_id, username, accessToken);
+
+        setModalMessage('로그인되었습니다!');
+        setShowModal(true);
+        setTimeout(() => {
+          setShowModal(false);
+          navigate('/');
+        }, 2000);
+      } else {
+        setModalMessage('로그인에 실패하였습니다.');
+        setShowModal(true);
+        setTimeout(() => {
+          setShowModal(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error.response ? error.response.data : error.message);
+      setModalMessage('로그인에 실패하였습니다.');
+      setShowModal(true);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 2000);
+    }
   };
 
   return (
     <ContainerCenter>
       <PageContainer>
         <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='5rem'>
-
           <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
             <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
               <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
@@ -85,7 +139,6 @@ const LoginPage = () => {
                 <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
               </CustomColumn>
               <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
-
                 <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
                   <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
                   <StyledImg src={'icon_world.png'} width='100px' height='100px' />
@@ -126,9 +179,12 @@ const LoginPage = () => {
               <CustomFont color='white' font='1.1rem' fontWeight='bold'>로그인 하기</CustomFont>
             </Button>
           </CustomColumn>
-
         </CustomColumn>
       </PageContainer>
+
+      <Modal show={showModal}>
+        <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
+      </Modal>
     </ContainerCenter>
   );
 };

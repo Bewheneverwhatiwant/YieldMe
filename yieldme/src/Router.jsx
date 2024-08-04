@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout';
+import { AuthProvider } from './pages/subpage/AuthContext';
 import HomePage from './pages/mainpage/homepage/homepage';
 import CameraPage from './pages/mainpage/homepage/camerapage/camerapage';
 import MyPage from './pages/mainpage/mypage/mypage';
@@ -26,34 +27,36 @@ import GiftShop from './pages/mainpage/mypage/giftshop';
 
 const AppRouter = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="/camera" element={<CameraPage />} />
-                    <Route path="/favor" element={<Favor />} />
-                    <Route path="/mypage" element={<MyPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignUpPage />} />
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<HomePage />} />
+                        <Route path="/camera" element={<CameraPage />} />
+                        <Route path="/favor" element={<Favor />} />
+                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignUpPage />} />
 
-                    <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
-                    <Route path="/iwanttoyield" element={<IWantoYield />} />
-                    <Route path="/yieldhistory" element={<YieldHistory />} />
-                    <Route path="/writereview" element={<WriteReview />} />
+                        <Route path="/iwanttobeyielded" element={<IWantoBeYielded />} />
+                        <Route path="/iwanttoyield" element={<IWantoYield />} />
+                        <Route path="/yieldhistory" element={<YieldHistory />} />
+                        <Route path="/writereview" element={<WriteReview />} />
 
-                    <Route path="/cashback" element={<Cashback />} />
-                    <Route path="/findnearyield" element={<FindNearYield />} />
-                    <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
-                    <Route path="/waitingyield" element={<WaitingYield />} />
-                    <Route path="/allreview" element={<AllReview />} />
-                    <Route path="/certificate" element={<Certificate />} />
-                    <Route path="/pregnantcert" element={<PregnantCert />} />
-                    <Route path="/oldestcert" element={<OldestCert />} />
-                    <Route path="/woundcert" element={<WoundedCert />} />
-                    <Route path="/giftshop" element={<GiftShop />} />
-                </Route>
-            </Routes>
-        </Router>
+                        <Route path="/cashback" element={<Cashback />} />
+                        <Route path="/findnearyield" element={<FindNearYield />} />
+                        <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
+                        <Route path="/waitingyield" element={<WaitingYield />} />
+                        <Route path="/allreview" element={<AllReview />} />
+                        <Route path="/certificate" element={<Certificate />} />
+                        <Route path="/pregnantcert" element={<PregnantCert />} />
+                        <Route path="/oldestcert" element={<OldestCert />} />
+                        <Route path="/woundcert" element={<WoundedCert />} />
+                        <Route path="/giftshop" element={<GiftShop />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 };
 
