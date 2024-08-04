@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomFont from '../../../Components/Container/CustomFont';
+import StyledImg from '../../../Components/Container/StyledImg';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -27,15 +28,42 @@ const PageContainer = styled(ContainerCenter)`
 `;
 
 const PointsDisplay = styled.div`
-display: flex;
-align-itmes: center;
-justify-content: center;
-width: 90%;
-  background-color: #FEE187;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100px;
+  background-color: white;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* 가상 요소가 둥근 모서리에 맞춰지도록 */
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    padding: 2px;
+    background: linear-gradient(to right, #FFB700, #FFE177);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+  }
+
+  /* 콘텐츠가 가상 요소 위로 오도록 */
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
 `;
+
 
 const FormGroup = styled.div`
   display: flex;
@@ -146,6 +174,23 @@ const Cashback = () => {
                         <AccountInfo>
                             <CustomFont color='black' font='1rem' fontWeight='bold'>NH 농협 | 123-****-****-**</CustomFont>
                         </AccountInfo>
+                    </CustomColumn>
+
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                        <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+                        <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
+                    </CustomColumn>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                            <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+                            <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+                            <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+                        </CustomRow>
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                            <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+                            <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
+                        </CustomRow>
                     </CustomColumn>
 
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>

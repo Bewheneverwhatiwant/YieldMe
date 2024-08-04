@@ -8,6 +8,7 @@ import CustomRow from '../../../Components/Container/CustomRow';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import './review_carousel';
 import ReviewCarousel from './review_carousel';
+import StyledImg from '../../../Components/Container/StyledImg';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -168,6 +169,25 @@ const HomePage = () => {
                   </CustomColumn>
                 </ScannerButton>
               </AniRow>
+            </CustomColumn>
+          </CustomColumn>
+
+          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
+            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+              <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+              <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
+            </CustomColumn>
+            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+
+              <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+                <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+                <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+              </CustomRow>
+              <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+                <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
+              </CustomRow>
             </CustomColumn>
           </CustomColumn>
 

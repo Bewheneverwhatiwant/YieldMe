@@ -6,14 +6,24 @@ import CustomFont from '../../../../../Components/Container/CustomFont';
 import StyledImg from '../../../../../Components/Container/StyledImg';
 import CustomColumn from '../../../../../Components/Container/CustomColumn';
 
-const Container = styled.div`
+const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  gap: 20px;
-  background-color: #fff;
+  width: 100%;
   min-height: 100vh;
+`;
+
+const PageContainer = styled(ContainerCenter)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+ padding: 20px;
+  gap: 20px;
+  position: relative;
+  background-color: white;
+  padding-bottom: 15vh;
 `;
 
 const Title = styled.h1`
@@ -80,28 +90,47 @@ const IWantoYield = () => {
   };
 
   return (
-    <Container>
-      <Title>'양보할래요' 요청을 띄웁니다.</Title>
-      <Section>
-        <SectionTitle>서비스 정책 안내</SectionTitle>
-        <Text>양보받는 분과 직접 만나 QR코드를 보여드려고, 인식되어야 양보 점수가 적립됩니다.</Text>
-        <Text>'양보할래요' 요청을 띄운 후 5분 간 수락되지 않으면 자동으로 양보 요청이 사라집니다.</Text>
-        <Text>임산부, 노약자, 부상자는 QR코드를 인식하여 양보가 완료되면 양보 점수가 차감되지 않습니다.</Text>
-        <Text>아래의 '위치 정보 띄우기'를 클릭하여 이동하는 화면에서, 양보 요청이 발생하는 5분 간 뒤로가기 하지 마세요.</Text>
-        <Text>양보 요청을 띄운 후 '근처 양보 조회' 화면에서 벗어나면, 양보가 수락되어도 알림이 전달되지 않을 수 있습니다.</Text>
-      </Section>
-      <CustomRow width='100%' alignItems='center' justifyContent='flex-end' gap='0.1rem'>
-        <Checkbox type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-        <CustomFont color='red' font='0.8rem'>확인했습니다.</CustomFont>
-      </CustomRow>
+    <ContainerCenter>
+      <PageContainer>
+        <Title>'양보할래요' 요청을 띄웁니다.</Title>
+        <Section>
+          <SectionTitle>서비스 정책 안내</SectionTitle>
+          <Text>양보받는 분과 직접 만나 QR코드를 보여드려고, 인식되어야 양보 점수가 적립됩니다.</Text>
+          <Text>'양보할래요' 요청을 띄운 후 5분 간 수락되지 않으면 자동으로 양보 요청이 사라집니다.</Text>
+          <Text>임산부, 노약자, 부상자는 QR코드를 인식하여 양보가 완료되면 양보 점수가 차감되지 않습니다.</Text>
+          <Text>아래의 '위치 정보 띄우기'를 클릭하여 이동하는 화면에서, 양보 요청이 발생하는 5분 간 뒤로가기 하지 마세요.</Text>
+          <Text>양보 요청을 띄운 후 '근처 양보 조회' 화면에서 벗어나면, 양보가 수락되어도 알림이 전달되지 않을 수 있습니다.</Text>
+        </Section>
+        <CustomRow width='100%' alignItems='center' justifyContent='flex-end' gap='0.1rem'>
+          <Checkbox type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+          <CustomFont color='red' font='0.8rem'>확인했습니다.</CustomFont>
+        </CustomRow>
 
-      <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='3rem'>
+        <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+          <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+          <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
+        </CustomColumn>
+        <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
 
-        <Button2 onClick={handleRequestClick}>
-          <CustomFont color='black' font='1rem' fontWeight='bold'>'양보할래요' 요청 띄우기</CustomFont>
-        </Button2>
-      </CustomColumn>
-    </Container>
+          <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+            <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+            <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+            <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+          </CustomRow>
+          <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+            <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+            <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
+          </CustomRow>
+        </CustomColumn>
+
+        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='3rem'>
+
+          <Button2 onClick={handleRequestClick}>
+            <CustomFont color='black' font='1rem' fontWeight='bold'>'양보할래요' 요청 띄우기</CustomFont>
+          </Button2>
+        </CustomColumn>
+      </PageContainer>
+    </ContainerCenter>
   );
 };
 
