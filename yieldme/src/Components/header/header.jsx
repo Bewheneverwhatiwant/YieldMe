@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CustomRow from '../Container/CustomRow';
 import StyledImg from '../Container/StyledImg';
 import CustomFont from '../Container/CustomFont';
+import { AuthContext } from '../../pages/subpage/AuthContext';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -46,9 +47,26 @@ const BackButton = styled.button`
   justify-content: center;
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { auth, setAuthInfo } = useContext(AuthContext);
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleBack = () => {
     if (isRootPath) {
@@ -56,6 +74,16 @@ export default function Header() {
     } else {
       navigate(-1);
     }
+  };
+
+  const handleLogout = () => {
+    setAuthInfo('', '', ''); // 로그인 상태 초기화
+    setModalMessage('로그아웃되었습니다.');
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+      navigate('/login'); // 로그아웃 후 로그인 페이지로 이동
+    }, 2000);
   };
 
   const isRootPath = location.pathname === '/' || location.pathname === '/mypage' || location.pathname === '/favor';
@@ -75,11 +103,21 @@ export default function Header() {
           </BackButton>
         )}
         <CustomRow width='100%' justifyContent='flex-end'>
-          <HeaderButton onClick={() => navigate('/login')}>
-            <CustomFont color='#FFCD38' fontWeight='bold' font='1rem'>로그인</CustomFont>
-          </HeaderButton>
+          {auth.accessToken ? (
+            <HeaderButton onClick={handleLogout}>
+              <CustomFont color='#FFCD38' fontWeight='bold' font='1rem'>로그아웃</CustomFont>
+            </HeaderButton>
+          ) : (
+            <HeaderButton onClick={() => navigate('/login')}>
+              <CustomFont color='#FFCD38' fontWeight='bold' font='1rem'>로그인</CustomFont>
+            </HeaderButton>
+          )}
         </CustomRow>
       </CustomRow>
+
+      <Modal show={showModal}>
+        <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
+      </Modal>
     </HeaderContainer>
   );
 }
