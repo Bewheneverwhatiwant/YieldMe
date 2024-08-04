@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Tesseract from 'tesseract.js';
 import OpenAI from "openai";
 
-// ocr 및 gpt 응답 테스트를 위한 테스트 파일입니다.
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,7 +50,7 @@ const Modal = styled.div`
   `}
 `;
 
-const Certificate = () => {
+const WoundedCert = () => {
     const webcamRef = useRef(null);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -92,7 +90,7 @@ const Certificate = () => {
                 messages: [
                     {
                         role: "user",
-                        content: `다음의 텍스트를 분석하라. 텍스트에 '임신확인서'라는 텍스트가 존재하면 true를,
+                        content: `다음의 텍스트를 분석하라. 텍스트에 '진단서'라는 텍스트가 존재하면 true를,
                         존재하지 않는다면 false를 반환하라 : ${extractedText}`
                     }
                 ],
@@ -120,7 +118,7 @@ const Certificate = () => {
         <Container>
             {!image ? (
                 <>
-                    <h2>임산부 인증을 위해, 임신확인서를 촬영해주세요.</h2>
+                    <h2>부상자 인증을 위해, 진단서를 촬영해주세요.</h2>
                     <CameraScreen>
                         <Webcam
                             audio={false}
@@ -134,7 +132,7 @@ const Certificate = () => {
                 </>
             ) : (
                 <>
-                    <h2>임산부 인증을 위해, 임신확인서를 촬영해주세요.</h2>
+                    <h2>부상자 인증을 위해, 진단서를 촬영해주세요.</h2>
                     <CameraScreen>
                         <img src={image} alt="촬영된 사진" style={{ width: '100%', height: '100%' }} />
                     </CameraScreen>
@@ -152,4 +150,4 @@ const Certificate = () => {
     );
 };
 
-export default Certificate;
+export default WoundedCert;

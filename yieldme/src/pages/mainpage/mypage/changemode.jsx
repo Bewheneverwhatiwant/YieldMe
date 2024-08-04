@@ -52,9 +52,22 @@ const CertificationCard = styled.div`
 const Changemode = () => {
     const navigate = useNavigate();
 
-    const handleCertificationClick = () => {
-        navigate('/certificate');
+    const handleCertificationClick = (certType) => {
+        switch (certType) {
+            case 'pregnant':
+                navigate('/pregnantcert');
+                break;
+            case 'oldest':
+                navigate('/oldestcert');
+                break;
+            case 'wounded':
+                navigate('/woundedcert');
+                break;
+            default:
+                break;
+        }
     };
+
 
     return (
         <CustomColumn width='80%' alignItems='center' justifyContent='center' gap='1rem'>
@@ -81,7 +94,7 @@ const Changemode = () => {
                 <CustomFont color='black' font='1.3rem' fontWeight='bold'>상태 변경</CustomFont>
             </CustomRow>
             <CertificationContainer>
-                <CertificationCard color="#BA68C8" onClick={handleCertificationClick}>
+                <CertificationCard color="#BA68C8" onClick={handleCertificationClick('pregnant')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
                         <CustomFont color='white' font='0.9rem' fontWeight='bold'>임산부 인증하기</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
@@ -101,7 +114,7 @@ const Changemode = () => {
                     </CustomColumn>
                 </CertificationCard>
 
-                <CertificationCard color="#A1887F" onClick={handleCertificationClick}>
+                <CertificationCard color="#A1887F" onClick={handleCertificationClick('oldest')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
                         <CustomFont color='white' font='0.9rem' fontWeight='bold'>노약자 인증하기</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
@@ -121,7 +134,7 @@ const Changemode = () => {
                     </CustomColumn>
                 </CertificationCard>
 
-                <CertificationCard color="#4DB6AC" onClick={handleCertificationClick}>
+                <CertificationCard color="#4DB6AC" onClick={handleCertificationClick('wounded')}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
                         <CustomFont color='white' font='0.9rem' fontWeight='bold'>부상자 인증하기</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>

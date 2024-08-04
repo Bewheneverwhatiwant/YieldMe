@@ -19,6 +19,9 @@ import WaitingYield from './pages/mainpage/homepage/yield/wanttoyield/waiting_yi
 
 import AllReview from './pages/mainpage/homepage/allreview';
 import Certificate from './pages/mainpage/mypage/certificate';
+import PregnantCert from './pages/mainpage/mypage/all_cettificate/pregnant_cert';
+import OldestCert from './pages/mainpage/mypage/all_cettificate/oldest_cert';
+import WoundedCert from './pages/mainpage/mypage/all_cettificate/wounded_cert';
 
 const AppRouter = () => {
     return (
@@ -43,6 +46,9 @@ const AppRouter = () => {
                     <Route path="/waitingyield" element={<WaitingYield />} />
                     <Route path="/allreview" element={<AllReview />} />
                     <Route path="/certificate" element={<Certificate />} />
+                    <Route path="/pregnantcert" element={<PregnantCert />} />
+                    <Route path="/oldestcert" element={<OldestCert />} />
+                    <Route path="/woundedcert" element={<WoundedCert />} />
                 </Route>
             </Routes>
         </Router>

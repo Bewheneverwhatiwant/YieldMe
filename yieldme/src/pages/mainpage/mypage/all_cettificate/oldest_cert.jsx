@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Tesseract from 'tesseract.js';
 import OpenAI from "openai";
 
-// ocr 및 gpt 응답 테스트를 위한 테스트 파일입니다.
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,7 +50,7 @@ const Modal = styled.div`
   `}
 `;
 
-const Certificate = () => {
+const OldestCert = () => {
     const webcamRef = useRef(null);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -92,8 +90,13 @@ const Certificate = () => {
                 messages: [
                     {
                         role: "user",
-                        content: `다음의 텍스트를 분석하라. 텍스트에 '임신확인서'라는 텍스트가 존재하면 true를,
-                        존재하지 않는다면 false를 반환하라 : ${extractedText}`
+                        content: `다음의 텍스트를 분석하라. 다음의 조건을 만족하면 true를, 만족하지 않는다면 false를 반환하라.
+                        - '주민등록증' 또는 '운전면허증' 이라는 텍스트를 포함하고 있는가?
+                        - '주민등록증' 텍스트를 포함하고 잇는 경우, '000000-0000000' 형색의 숫자가 있을 것이다.
+                        이 숫자의 맨 앞 두 숫자를 확인하여, 65보다 큰 수인지 작은 수인자 판단하라.
+                        만약 큰 수라면 false를, 작은 수라면 true를 반환하면 된다.
+                        - '운전면허증' 이라는 텍스트를 포함하고 있는 경우, 바로 true를 반환시켜라.
+                        텍스트는 이러하다 : ${extractedText}`
                     }
                 ],
                 max_tokens: 300
@@ -120,7 +123,7 @@ const Certificate = () => {
         <Container>
             {!image ? (
                 <>
-                    <h2>임산부 인증을 위해, 임신확인서를 촬영해주세요.</h2>
+                    <h2>노약자 인증을 위해, 신분증을 촬영해주세요.</h2>
                     <CameraScreen>
                         <Webcam
                             audio={false}
@@ -134,7 +137,7 @@ const Certificate = () => {
                 </>
             ) : (
                 <>
-                    <h2>임산부 인증을 위해, 임신확인서를 촬영해주세요.</h2>
+                    <h2>임산부 인증을 위해, 신분증을 촬영해주세요.</h2>
                     <CameraScreen>
                         <img src={image} alt="촬영된 사진" style={{ width: '100%', height: '100%' }} />
                     </CameraScreen>
@@ -152,4 +155,4 @@ const Certificate = () => {
     );
 };
 
-export default Certificate;
+export default OldestCert;

@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Tesseract from 'tesseract.js';
 import OpenAI from "openai";
 
-// ocr 및 gpt 응답 테스트를 위한 테스트 파일입니다.
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,7 +50,7 @@ const Modal = styled.div`
   `}
 `;
 
-const Certificate = () => {
+const PregnantCert = () => {
     const webcamRef = useRef(null);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -152,4 +150,4 @@ const Certificate = () => {
     );
 };
 
-export default Certificate;
+export default PregnantCert;
