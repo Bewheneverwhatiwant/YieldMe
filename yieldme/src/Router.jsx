@@ -18,6 +18,7 @@ import WaitingBeYielded from './pages/mainpage/homepage/yield/beyielded/waiting_
 import WaitingYield from './pages/mainpage/homepage/yield/wanttoyield/waiting_yield';
 
 import AllReview from './pages/mainpage/homepage/allreview';
+import Certificate from './pages/mainpage/mypage/certificate';
 
 const AppRouter = () => {
     return (
@@ -41,6 +42,7 @@ const AppRouter = () => {
                     <Route path="/waitingbeyielded" element={<WaitingBeYielded />} />
                     <Route path="/waitingyield" element={<WaitingYield />} />
                     <Route path="/allreview" element={<AllReview />} />
+                    <Route path="/certificate" element={<Certificate />} />
                 </Route>
             </Routes>
         </Router>
