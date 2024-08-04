@@ -4,11 +4,12 @@ import QrScanner from 'qr-scanner';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import CustomRow from '../../../../Components/Container/CustomRow';
 import CustomColumn from '../../../../Components/Container/CustomColumn';
+import StyledImg from '../../../../Components/Container/StyledImg';
 
 const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   gap: 10px;
   width: 100%;
   min-height: 100vh;
@@ -19,18 +20,18 @@ const PageContainer = styled(ContainerCenter)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 8vh;
+  padding-top: 2vh;
   padding-bottom: 5vh;
   gap: 5rem;
   position: relative;
   background-color: white;
-  padding-bottom: 10vh;
 `;
 
 const CameraContainer = styled.div`
   width: 80%;
   height: 240px;
-  border: 1px solid black;
+  border: none;
+  background-color: #FEE187;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +85,23 @@ const CameraPage = () => {
         <ContainerCenter>
             <PageContainer>
                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='2rem'>
-                    <CustomFont color='black' font='1.3rem' fontWeight='bold'>소중한 자리 양보 감사드립니다.</CustomFont>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                        <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+                        <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
+                    </CustomColumn>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                            <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+                            <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+                            <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+                        </CustomRow>
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                            <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+                            <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
+                        </CustomRow>
+                    </CustomColumn>
+                    <CustomFont color='black' font='1rem' fontWeight='bold'>소중한 자리 양보, 감사드립니다.</CustomFont>
                     <CameraContainer>
                         {!isVideoLoaded && <LoadingText>QR스캐너 준비 중...</LoadingText>}
                         <video ref={videoRef} style={{ width: '100%' }} />
