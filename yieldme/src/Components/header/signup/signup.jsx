@@ -93,7 +93,7 @@ const SignUpPage = () => {
 
           <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
             <StyledImg src={'logo.png'} width='130px' height='130px' />
-            <CustomFont color='#FFD15B' font='1rem' fontWeight='bold'>Yello : Yield 路</CustomFont>
+            <CustomFont color='#FFD15B' font='1rem' fontWeight='bold'>Yello , Yield 路!</CustomFont>
             <CustomFont color='#FFD15B' font='1.5rem' fontWeight='bold'>SignUp</CustomFont>
           </CustomColumn>
 

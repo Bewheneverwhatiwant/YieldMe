@@ -205,18 +205,26 @@ const GiftShop = () => {
             <PageContainer>
                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='4rem'>
 
-                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='1rem'>
-                        <CustomRow width='100%' alignItems='center' justifyContent='start' gap='0.5rem'>
+                    <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='2rem'>
 
-                            <StyledImg src={'storyway.png'} width='150px' height='100px' />
-                            <CustomColumn height='90px' alignItems='center' justifyContent='end'>
-                                <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>with</CustomFont>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
+                            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                                <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+                                <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
                             </CustomColumn>
-                            <CustomColumn height='90px' alignItems='center' justifyContent='end'>
-                                <CustomFont color='#FFCD38' font='1.5rem' fontWeight='bold'>YELLO</CustomFont>
-                            </CustomColumn>
+                            <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
 
-                        </CustomRow>
+                                <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                                    <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+                                    <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+                                    <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+                                </CustomRow>
+                                <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                                    <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+                                    <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
+                                </CustomRow>
+                            </CustomColumn>
+                        </CustomColumn>
 
                         <YelowBox>
                             <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.5rem'>
@@ -246,6 +254,7 @@ const GiftShop = () => {
                                 </CustomColumn>
                             </CustomColumn>
                         </YelowBox>
+
                     </CustomColumn>
 
                     <ProductsGrid>
@@ -255,6 +264,18 @@ const GiftShop = () => {
                             </ProductCard>
                         ))}
                     </ProductsGrid>
+
+                    <CustomRow width='80%' alignItems='center' justifyContent='start' gap='0.5rem'>
+
+                        <StyledImg src={'storyway.png'} width='90px' height='60px' />
+                        <CustomColumn height='60px' alignItems='center' justifyContent='end'>
+                            <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>with</CustomFont>
+                        </CustomColumn>
+                        <CustomColumn height='60px' alignItems='center' justifyContent='end'>
+                            <CustomFont color='#FFCD38' font='1.5rem' fontWeight='bold'>YELLO</CustomFont>
+                        </CustomColumn>
+
+                    </CustomRow>
 
                     {selectedProduct && (
                         <>
