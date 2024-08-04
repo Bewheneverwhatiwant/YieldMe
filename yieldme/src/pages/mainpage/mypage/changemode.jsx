@@ -53,21 +53,22 @@ const Changemode = () => {
     const navigate = useNavigate();
 
     const handleCertificationClick = (certType) => {
-        switch (certType) {
-            case 'pregnant':
-                navigate('/pregnantcert');
-                break;
-            case 'oldest':
-                navigate('/oldestcert');
-                break;
-            case 'wounded':
-                navigate('/woundedcert');
-                break;
-            default:
-                break;
-        }
+        return () => {
+            switch (certType) {
+                case 'pregnant':
+                    navigate('/pregnantcert');
+                    break;
+                case 'oldest':
+                    navigate('/oldestcert');
+                    break;
+                case 'wounded':
+                    navigate('/woundedcert');
+                    break;
+                default:
+                    break;
+            }
+        };
     };
-
 
     return (
         <CustomColumn width='80%' alignItems='center' justifyContent='center' gap='1rem'>
@@ -154,7 +155,7 @@ const Changemode = () => {
                     </CustomColumn>
                 </CertificationCard>
 
-                <CertificationCard color="#4FC3F7" onClick={handleCertificationClick}>
+                <CertificationCard color="#4FC3F7" onClick={handleCertificationClick()}>
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
                         <CustomFont color='white' font='0.8rem' fontWeight='bold'>일반인</CustomFont>
                         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
