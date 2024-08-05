@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import QrScanner from 'qr-scanner';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import CustomRow from '../../../../Components/Container/CustomRow';
 import CustomColumn from '../../../../Components/Container/CustomColumn';
 import StyledImg from '../../../../Components/Container/StyledImg';
+import axios from 'axios';
+import { AuthContext } from '../../../subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -46,9 +48,37 @@ const LoadingText = styled.div`
   font-weight: bold;
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const Button = styled.button`
+  background-color: #FEE187;
+  color: black;
+  border: none;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 5px;
+`;
+
 const CameraPage = () => {
+    const { auth } = useContext(AuthContext);
     const videoRef = useRef(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,10 +90,22 @@ const CameraPage = () => {
             qrScanner = new QrScanner(
                 videoRef.current,
                 (result) => {
-                    if (window.confirm(`양보해준 사용자 id: ${result}\n자리를 양보 받으시겠습니까?`)) {
-                        window.alert('자리를 양보받았습니다! 감사 인사를 전하세요');
+                    let yieldingUserId;
+                    try {
+                        const parsedResult = JSON.parse(result.data);
+                        yieldingUserId = parsedResult.yielding_user_id;
+                    } catch (e) {
+                        yieldingUserId = result.data;  // Assuming result.data is the yielding_user_id directly
                     }
-                    //qrScanner.stop();
+                    setShowModal(true);
+                    setModalMessage(
+                        <>
+                            <CustomFont color='black' fontWeight='bold'>자리를 양보해준 사람 ID: {yieldingUserId}</CustomFont>
+                            <CustomFont color='black' fontWeight='bold'>자리를 양보받은 사람 ID: {auth?.login_id}</CustomFont>
+                            <Button onClick={() => handleConfirm(yieldingUserId)}>확인</Button>
+                            <Button onClick={handleCancel}>취소</Button>
+                        </>
+                    );
                 },
                 { onDecodeError: (error) => console.error(error) }
             );
@@ -79,7 +121,65 @@ const CameraPage = () => {
                 qrScanner.stop();
             }
         };
-    }, []);
+    }, [auth]);
+
+
+    // 요청 권한을 yield user id의 accessToken이 아니라, receiving user id로 바꿔달라고 하기
+    // (자리를 양보받는 사람이 QR코드 스캐너로 인식 후 최종 양보 완료 버튼을 눌르기 때문)
+    // 노션에 없는 score value 필드 명시해달라고 하기 
+    const handleConfirm = async (yieldingUserId) => {
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_SERVER}/edit_score/`,
+                {
+                    yielding_user_id: auth.login_id,
+                    receiving_user_id: yieldingUserId // 이쪽으로 accessToken 권한이 수정되어야 함 , score value 필드 추가하기 
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                setModalMessage(
+                    <>
+                        <CustomFont color='black' fontWeight='bold'>성공적으로 자리가 양보되었습니다!</CustomFont>
+                        <Button onClick={handleModalClose}>확인</Button>
+                    </>
+                );
+            } else {
+                console.log(response.data);
+                console.log(auth.login_id);
+                console.log(yieldingUserId);
+                setModalMessage(
+                    <>
+                        <CustomFont color='black' fontWeight='bold'>자리 양보에 오류가 발생했습니다.</CustomFont>
+                        <Button onClick={handleModalClose}>확인</Button>
+                    </>
+                );
+            }
+        } catch (error) {
+
+            console.log(auth.login_id);
+            console.log(yieldingUserId);
+            setModalMessage(
+                <>
+                    <CustomFont color='black' fontWeight='bold'>자리 양보에 오류가 발생했습니다.</CustomFont>
+                    <Button onClick={handleModalClose}>확인</Button>
+                </>
+            );
+        }
+    };
+
+    const handleCancel = () => {
+        setShowModal(false);
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    };
 
     return (
         <ContainerCenter>
@@ -90,13 +190,12 @@ const CameraPage = () => {
                         <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
                     </CustomColumn>
                     <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
-
-                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
                             <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
                             <StyledImg src={'icon_world.png'} width='100px' height='100px' />
                             <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
                         </CustomRow>
-                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
                             <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
                             <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
                         </CustomRow>
@@ -109,6 +208,10 @@ const CameraPage = () => {
                     <CustomFont color='black' font='0.8rem' fontWeight='bold'>자리를 양보해주신 분의 QR코드를 인식해주세요.</CustomFont>
                 </CustomColumn>
             </PageContainer>
+
+            <Modal show={showModal}>
+                {modalMessage}
+            </Modal>
         </ContainerCenter>
     );
 };

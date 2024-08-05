@@ -8,6 +8,7 @@ import CustomColumn from '../../../Components/Container/CustomColumn';
 import ReviewCarousel from './review_carousel';
 import StyledImg from '../../../Components/Container/StyledImg';
 import { AuthContext } from '../../subpage/AuthContext';
+import QRCodeSection from './qrcode';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -159,76 +160,17 @@ const HomePage = () => {
         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='5.5rem'>
           <CustomColumn width='100%' alignItems='center' justifyContent='center'>
 
-            {auth.accessToken ? (
-              <>
-                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                  <CustomFont color='black' font='0.9rem' fontWeight='bold'>내 자리를 양보받는 분께 QR코드를 보여드리세요.</CustomFont>
-                </CustomRow>
-
-                <QRcircle>
-                  <QRCodeCanvas value={auth.login_id} size={150} />
-                </QRcircle>
-              </>
-            ) : (
-              <>
-                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                  <CustomFont color='black' font='0.9rem' fontWeight='bold'>
-                    회원가입 후 로그인하시면 나만의 QR코드가 보여요!
-                  </CustomFont>
-                </CustomRow>
-
-                <QRcircle>
-                  <StyledImg src={'icon_before_login_qr.png'} width='150px' height='150px' />
-                </QRcircle>
-              </>
-            )}
-
-            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.5rem'>
-              <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                  <CustomFont color='black' font='1rem' fontWeight='bold'>
-                    {auth.accessToken ? auth.login_id : '예비 yello'}
-                  </CustomFont>
-                  <CustomFont color='black' font='1rem'>
-                    님
-                  </CustomFont>
-                </CustomRow>
-
-                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                  {auth.point ? (
-                    <>
-                      <CustomFont color='black' font='1rem'>
-                        양보 누적 금액:
-                      </CustomFont>
-                      <CustomFont color='black' font='1rem'>
-                        {auth.point}
-                      </CustomFont>
-                    </>
-                  ) : (
-                    <CustomFont color='black' font='1rem' fontWeight='bold'>
-                      로그인 후 나의 양보금액을 확인하세요!
-                    </CustomFont>
-                  )}
-
-                  {auth.accessToken && (
-                    <CashBackButton onClick={() => navigate('/cashback')}>
-                      <CustomFont fontWeight='bold' color='black'>캐시백</CustomFont>
-                    </CashBackButton>
-                  )}
-                </CustomRow>
-              </CustomColumn>
-
-              <AniRow>
-                {auth.accessToken && (
-                  <ScannerButton onClick={() => navigate('/camera')}>
-                    <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
-                      <CustomFont fontWeight='bold' font='1rem' color='black'>QR스캐너 열기</CustomFont>
-                      <CustomFont color='#434343' fontWeight='bold' font='0.7rem'>나에게 자리를 양보해주신 분의 QR코드를 스캔해주세요.</CustomFont>
-                    </CustomColumn>
-                  </ScannerButton>
-                )}
-              </AniRow>
-            </CustomColumn>
+            <QRCodeSection auth={auth} />
+            <AniRow>
+              {auth.accessToken && (
+                <ScannerButton onClick={() => navigate('/camera')}>
+                  <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
+                    <CustomFont fontWeight='bold' font='1rem' color='black'>QR스캐너 열기</CustomFont>
+                    <CustomFont color='#434343' fontWeight='bold' font='0.7rem'>나에게 자리를 양보해주신 분의 QR코드를 스캔해주세요.</CustomFont>
+                  </CustomColumn>
+                </ScannerButton>
+              )}
+            </AniRow>
           </CustomColumn>
 
           <CustomColumn width='100%' alignItems='center' justifyContent='center'>
