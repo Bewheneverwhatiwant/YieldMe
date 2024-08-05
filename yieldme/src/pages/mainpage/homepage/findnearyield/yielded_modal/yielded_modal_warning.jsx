@@ -101,7 +101,7 @@ background-color: grey;
 color: white;
 padding: 20px;
 display: flex;
-align-irems: center;
+align-items: center;
 justify-content: center;
 line-height: 7px;
 `;

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import CustomFont from '../../../../Components/Container/CustomFont';
+import StyledImg from '../../../../Components/Container/StyledImg';
 
 const Wrapper = styled.div`
   width: 100% ;
@@ -31,19 +32,10 @@ const Projectdiv = styled.div`
     align-items: center; 
     justify-content: center;
     margin-top: 30px;
+
+    flex-shrink:0;
 `;
 
-const BookImage = styled.div`
-    width: 65px;
-    height: 99px;
-    background-image: url('https://cdn.crowdpic.net/detail-thumb/thumb_d_4D24F988C28882891AB7778F32CF1285.jpg');
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    //position: relative;
-    box-sizing: border-box;
-    margin: 15px 28px 12px 28px;
-`;
 
 const BoxDiv = styled.div`
     display:flex;
@@ -56,6 +48,7 @@ const Shopbutton = styled.button`
     height : 22px;
     background: linear-gradient(90deg, #848484 0%, #616161 34.5%);
     margin-bottom: 15px;
+    margin-top:12px;
     border-radius:5px;
     font-family: 'Inter';
     font-style: normal;
@@ -68,6 +61,11 @@ const Shopbutton = styled.button`
     color: #FFFFFF;
 `;
 
+
+const handleButtonClick = (url) => {
+    window.location.href = url;
+};
+
 const FavorComponent2 = () => {
 
 
@@ -77,36 +75,66 @@ const FavorComponent2 = () => {
             <CustomFont color='black'>대중교통에서 도파민을 줄여요: e-book 추천</CustomFont>
             <Alldiv>
                 <Projectdiv>
-                    <BookImage></BookImage>
+                <StyledImg 
+                    src={'favor_com2_book1.png'} 
+                    width='65px' 
+                    height='99px' 
+                    style={{ margin:'0 auto', marginTop: '15px'}} 
+                
+                    />
                     <BoxDiv>
-                        <Shopbutton>클릭하여 쇼핑하기</Shopbutton>
+                        <Shopbutton onClick={() => handleButtonClick('https://product.kyobobook.co.kr/detail/S000000548744')}>클릭하여 쇼핑하기</Shopbutton>
                     </BoxDiv>
                 </Projectdiv>
 
                 <Projectdiv>
-                    <BookImage></BookImage>
+                    <StyledImg 
+                        src={'favor_com2_book2.png'} 
+                        width='65px' 
+                        height='99px' 
+                        style={{ margin:'0 auto', marginTop: '15px'}} 
+                
+                    />
                     <BoxDiv>
-                        <Shopbutton>클릭하여 쇼핑하기</Shopbutton>
+                        <Shopbutton onClick={() => handleButtonClick('https://product.kyobobook.co.kr/detail/S000001461127')}>클릭하여 쇼핑하기</Shopbutton>
                     </BoxDiv>
                 </Projectdiv>
 
                 <Projectdiv>
-                    <BookImage></BookImage>
+                    <StyledImg 
+                        src={'favor_com2_book3.png'} 
+                        width='65px' 
+                        height='99px' 
+                        style={{ margin:'0 auto', marginTop: '15px'}} 
+                
+                    />
                     <BoxDiv>
-                        <Shopbutton>클릭하여 쇼핑하기</Shopbutton>
+                        <Shopbutton onClick={() => handleButtonClick('https://product.kyobobook.co.kr/detail/S000202972044')}>클릭하여 쇼핑하기</Shopbutton>
                     </BoxDiv>
                 </Projectdiv>
                 <Projectdiv>
-                    <BookImage></BookImage>
+                    <StyledImg 
+                        src={'favor_com2_book4.png'} 
+                        width='65px' 
+                        height='99px' 
+                        style={{ margin:'0 auto', marginTop: '15px'}} 
+                
+                    />
                     <BoxDiv>
-                        <Shopbutton>클릭하여 쇼핑하기</Shopbutton>
+                        <Shopbutton onClick={() => handleButtonClick('https://product.kyobobook.co.kr/detail/S000200555616')}>클릭하여 쇼핑하기</Shopbutton>
                     </BoxDiv>
                 </Projectdiv>
 
                 <Projectdiv>
-                    <BookImage></BookImage>
+                    <StyledImg 
+                        src={'favor_com2_book5.png'} 
+                        width='65px' 
+                        height='99px' 
+                        style={{ margin:'0 auto', marginTop: '15px'}} 
+                
+                    />
                     <BoxDiv>
-                        <Shopbutton>클릭하여 쇼핑하기</Shopbutton>
+                        <Shopbutton onClick={() => handleButtonClick('https://product.kyobobook.co.kr/detail/S000001686934')}>클릭하여 쇼핑하기</Shopbutton>
                     </BoxDiv>
                 </Projectdiv>
 
