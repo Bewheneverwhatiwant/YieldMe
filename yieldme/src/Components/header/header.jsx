@@ -48,6 +48,8 @@ const BackButton = styled.button`
 `;
 
 const Modal = styled.div`
+width: 250px;
+height: 70px;
   position: fixed;
   top: 50%;
   left: 50%;

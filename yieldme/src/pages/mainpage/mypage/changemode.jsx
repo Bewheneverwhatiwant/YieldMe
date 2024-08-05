@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import StyledImg from '../../../Components/Container/StyledImg';
+import { AuthContext } from '../../subpage/AuthContext';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -66,6 +67,26 @@ height: 6rem;
 const Changemode = () => {
     const navigate = useNavigate();
 
+    const { auth } = useContext(AuthContext);
+    const [priorityType, setPriorityType] = useState(null);
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER}/getInfo/`, {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`,
+                    },
+                });
+                setPriorityType(response.data.priority_type);
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, [auth.accessToken]);
+
     const handleCertificationClick = (certType) => {
         return () => {
             switch (certType) {
@@ -82,6 +103,17 @@ const Changemode = () => {
                     break;
             }
         };
+    };
+
+    const renderPriorityStatus = () => {
+        switch (priorityType) {
+            case 1:
+                return <CustomFont color='pink' font='1rem' fontWeight='bold'>임산부</CustomFont>;
+            case 2:
+                return <CustomFont color='brown' font='1rem' fontWeight='bold'>부상자</CustomFont>;
+            default:
+                return <CustomFont color='black' font='1rem' fontWeight='bold'>일반인</CustomFont>;
+        }
     };
 
     return (
@@ -101,7 +133,7 @@ const Changemode = () => {
                 </InfoItem>
                 <InfoItem>
                     <InfoLabel>상태</InfoLabel>
-                    <InfoValue>일반인</InfoValue>
+                    <InfoValue>{renderPriorityStatus()}</InfoValue>
                 </InfoItem>
             </InfoContainer>
 

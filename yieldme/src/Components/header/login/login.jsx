@@ -64,6 +64,8 @@ const GoSignup = styled.button`
 `;
 
 const Modal = styled.div`
+width: 250px;
+height: 70px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -108,6 +110,7 @@ const LoginPage = () => {
         setAuthInfo(login_id, username, accessToken, point);
 
         setModalMessage('로그인되었습니다!');
+        console.log(accessToken);
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
