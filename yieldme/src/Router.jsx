@@ -24,6 +24,7 @@ import PregnantCert from './pages/mainpage/mypage/all_cettificate/pregnant_cert'
 import OldestCert from './pages/mainpage/mypage/all_cettificate/oldest_cert';
 import WoundedCert from './pages/mainpage/mypage/all_cettificate/wounded_cert';
 import GiftShop from './pages/mainpage/mypage/giftshop';
+import AdPage from './pages/mainpage/favor/adpage';
 
 const AppRouter = () => {
     return (
@@ -53,6 +54,7 @@ const AppRouter = () => {
                         <Route path="/oldestcert" element={<OldestCert />} />
                         <Route path="/woundcert" element={<WoundedCert />} />
                         <Route path="/giftshop" element={<GiftShop />} />
+                        <Route path="/adpage" element={<AdPage />} />
                     </Route>
                 </Routes>
             </Router>
