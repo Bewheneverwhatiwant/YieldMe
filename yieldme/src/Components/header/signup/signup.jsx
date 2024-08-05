@@ -11,18 +11,20 @@ const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: white;
+  gap: 10px;
+  width: 100%;
+  min-height: 100vh;
 `;
 
 const PageContainer = styled(ContainerCenter)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 8vh 0 5vh;
-  gap: 2rem;
+  justify-content: flex-start;
+  padding-top: 12vh;
+  padding-bottom: 5vh;
+  gap: 3rem;
+  position: relative;
   background-color: white;
   padding-bottom: 10vh;
 `;
