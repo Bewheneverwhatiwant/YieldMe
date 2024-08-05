@@ -24,6 +24,7 @@ const PageContainer = styled(ContainerCenter)`
   position: relative;
   background-color: white;
   padding-bottom: 15vh;
+  padding-top: 12vh;
 `;
 
 const Title = styled.h1`
@@ -92,7 +93,9 @@ const IWantoYield = () => {
   return (
     <ContainerCenter>
       <PageContainer>
-        <Title>'양보할래요' 요청을 띄웁니다.</Title>
+        <CustomRow width='100%' alignItems='center' justifyContent='flex-start'>
+          <CustomFont color='black' font='1rem' fontWeight='bold'>'양보할래요' 요청을 띄웁니다.</CustomFont>
+        </CustomRow>
         <Section>
           <SectionTitle>서비스 정책 안내</SectionTitle>
           <Text>양보받는 분과 직접 만나 QR코드를 보여드려고, 인식되어야 양보 점수가 적립됩니다.</Text>
