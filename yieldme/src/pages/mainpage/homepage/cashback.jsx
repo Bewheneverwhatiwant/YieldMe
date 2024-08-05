@@ -6,6 +6,7 @@ import CustomFont from '../../../Components/Container/CustomFont';
 import StyledImg from '../../../Components/Container/StyledImg';
 import { AuthContext } from '../../subpage/AuthContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -131,6 +132,8 @@ const Cashback = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -184,6 +187,11 @@ const Cashback = () => {
 
                 if (response.status === 200) {
                     setModalMessage('성공적으로 캐시백되었습니다!');
+                    setShowModal(true);
+                    setTimeout(() => {
+                        setShowModal(false);
+                        navigate('/');
+                    }, 2000);
                 } else {
                     setModalMessage('캐시백에 오류가 발생했습니다.');
                 }

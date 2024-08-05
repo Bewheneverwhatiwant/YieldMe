@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import styled from 'styled-components';
 import CustomFont from '../../../Components/Container/CustomFont';
@@ -6,6 +6,8 @@ import CustomRow from '../../../Components/Container/CustomRow';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import StyledImg from '../../../Components/Container/StyledImg';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../../../pages/subpage/AuthContext'; // AuthContext import 추가
 
 const QRcircle = styled.div`
   width: 60%;
@@ -59,6 +61,24 @@ const QRCodeSection = ({ auth }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [point, setPoint] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER}/getInfo/`, {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                });
+                setPoint(response.data.point);
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+
+        fetchData();
+    }, [auth.accessToken]);
 
     const handleQRScan = () => {
         setShowModal(true);
@@ -118,13 +138,13 @@ const QRCodeSection = ({ auth }) => {
                     </CustomRow>
 
                     <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                        {auth.point ? (
+                        {point !== null ? (
                             <>
                                 <CustomFont color='black' font='1rem'>
                                     양보 누적 금액:
                                 </CustomFont>
                                 <CustomFont color='black' font='1rem'>
-                                    {auth.point}
+                                    {point}
                                 </CustomFont>
                             </>
                         ) : (
