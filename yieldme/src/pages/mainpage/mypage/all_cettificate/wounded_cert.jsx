@@ -8,6 +8,8 @@ import CustomColumn from '../../../../Components/Container/CustomColumn';
 import CustomRow from '../../../../Components/Container/CustomRow';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import StyledImg from '../../../../Components/Container/StyledImg';
+import axios from 'axios';
+import { AuthContext } from '../../../subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -133,12 +135,19 @@ const WoundedCert = () => {
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalContent, setModalContent] = useState('');
+    const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImage(imageSrc);
     }, [webcamRef]);
+
+    const back = () => {
+        navigate('/pregnantcert');
+        setModalContent(null);
+
+    }
 
     const performOCR = async (imageSrc) => {
         const { data: { text } } = await Tesseract.recognize(
@@ -149,6 +158,48 @@ const WoundedCert = () => {
             }
         );
         return text;
+    };
+
+    const handleChangeMode = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_SERVER}/changeMode/`,
+                { priority_type: "1" },
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                console.log('change mode API가 성공적');
+                setModalContent(
+                    <>
+                        <CustomFont color='black' fontWeight='bold'>인증되었습니다!</CustomFont>
+                        <Button2 onClick={() => navigate('/mypage')}>
+                            <CustomFont color='black' fontWeight='bold'>확인</CustomFont>
+                        </Button2>
+                    </>
+                );
+            } else {
+                console.log('change mode API가 실패');
+                setModalContent(
+                    <CustomColumn width='80%' alignItems='center' justifyContent='center'>
+                        <CustomFont color='black' fontWeight='bold'>인증에 실패하였습니다.</CustomFont>
+                        <Button3 onClick={back}>
+                            <CustomFont color='black' fontWeight='bold'>다시하기</CustomFont>
+                        </Button3>
+                    </CustomColumn>
+                );
+            }
+        } catch (error) {
+            setModalContent('오류가 발생했습니다.');
+            console.error("Error calling changeMode API:", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleSubmit = async () => {
@@ -182,25 +233,19 @@ const WoundedCert = () => {
             console.log(content);
 
             if (content === "true") {
-                setModalContent(
-                    <>
-                        <CustomFont color='black' fontWeight='bold'>인증되었습니다!</CustomFont>
-                        <Button2 onClick={() => navigate('/mypage')}>
-                            <CustomFont color='black' fontWeight='bold'>확인</CustomFont>
-                        </Button2>
-                    </>
-                );
+                console.log('gpt가 true라고 대답함');
+                await handleChangeMode();
             } else {
+                console.log('gpt가 false라고 대답함');
                 setModalContent(
                     <CustomColumn width='80%' alignItems='center' justifyContent='center'>
                         <CustomFont color='black' fontWeight='bold'>인증에 실패하였습니다.</CustomFont>
-                        <Button3 onClick={() => navigate('/woundcert')}>
+                        <Button3 onClick={back}>
                             <CustomFont color='black' fontWeight='bold'>다시하기</CustomFont>
                         </Button3>
                     </CustomColumn>
                 );
             }
-
         } catch (error) {
             setModalContent('오류가 발생했습니다.');
             console.error("Error calling OpenAI API:", error);
