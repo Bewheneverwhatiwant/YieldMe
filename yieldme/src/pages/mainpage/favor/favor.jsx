@@ -26,12 +26,11 @@ const PageContainer = styled(ContainerCenter)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 8vh;
-  padding-bottom: 5vh;
+  padding-top: 12vh;
+  padding-bottom: 10vh;
   gap: 6rem;
   position: relative;
   background-color: white;
-  padding-bottom: 10vh;
 `;
 
 const Favor = () => {

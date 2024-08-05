@@ -71,7 +71,7 @@ const FavorComponent4 = () => {
 
     return (
         <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-            <CustomFont color='black' font='1rem'>30초 광고를 시청하고 100원을 얻어요.</CustomFont>
+            <CustomFont color='black' fontWeight='bold' font='1rem' >30초 광고를 시청하고 100원을 얻어요.</CustomFont>
             <BannerContainer onClick={handleBannerClick}>
                 <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
                     <StyledImg src={'adBannerImg1.png'} width='60px' height='60px' />

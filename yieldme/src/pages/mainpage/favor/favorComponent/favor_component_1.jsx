@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import StyledImg from '../../../../Components/Container/StyledImg';
 import { useNavigate } from 'react-router-dom';
+import CustomColumn from '../../../../Components/Container/CustomColumn';
+import CustomRow from '../../../../Components/Container/CustomRow';
 
 const Alldiv = styled.div`
     display : flex;
     flex-direction :row;
     align-items: center;
     gap:12px;
+    width: 95%;
 `;
 
-const Mainbox=styled.div`
+const Mainbox = styled.div`
     width: 121px;
     height: 163px;
     border-radius:20px;
@@ -28,7 +31,7 @@ const Mainbox=styled.div`
 `;
 
 
-const TextBelowImage=styled.p`
+const TextBelowImage = styled.p`
     width: 88px;
     height: 28px;
     font-family: 'Inter';
@@ -44,30 +47,27 @@ const TextBelowImage=styled.p`
 const BoxDiv = styled.div`
     display:flex;
     flex-direction :column;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 0.5rem;
 `;
 
-const Shopbutton=styled.button`
-    width: 86px;
-    height: 22px;
-    background: #FFCD38;
-    border-radius: 5px;
+const Shopbutton = styled.button`
+    width : 86px;
+    height : 22px;
+    background-color: #FFCD38;
+    border-radius:5px;
+    border: none;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 7px;
-    color: #000000;
-    margin: 0 auto;
+    font-size:7px;
 
     text-align: center;
     align-items: center;
-`;
 
-const NavigationCircles = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 50px;
-  margin: 20px auto;
+    color: black;
 `;
 
 const Circle = styled.div`
@@ -85,54 +85,71 @@ const Circle = styled.div`
 
 
 const FavorComponent1 = () => {
-    
+
     const navigate = useNavigate();
 
     return (
-        <>
-       
-        <CustomFont color='black' style={{margin:'0 auto'}} >서서 가는 당신, 하지정맥류 예방하세요.</CustomFont>
-        
-        <Alldiv>
-        <Circle></Circle>
-            <Mainbox>
-            <BoxDiv>
-                <StyledImg 
-                    src={'favor_com1_img2.png'} 
-                    width='51px' 
-                    height='51px' 
-                    style={{ display: 'block', margin:'0 auto', marginTop: '31px'}} 
-                
-                />
-                
-                <TextBelowImage>냉수 샤워하기</TextBelowImage>
-                <Shopbutton onClick={() => navigate('/giftshop')}>클릭하여 쇼핑하기</Shopbutton>
-            </BoxDiv>
-            </Mainbox>
-        
-       
-            <Mainbox>
-            <BoxDiv>
-                <StyledImg src={'favor_com1_img1.png'} width='83px' height='83px' style={{ display: 'block', margin: '0 auto'}}  />
-                <TextBelowImage>장시간 서있거나<br></br>앉아있는 자세 피하기</TextBelowImage>
-                
-                <Shopbutton onClick={() => navigate('/iwanttobeyielded')}>클릭하여 양보받기</Shopbutton>
-            </BoxDiv>
-            </Mainbox>
-       
-        
-            <Mainbox>
-                <StyledImg src={'favor_com1_img3.png'} width='65px' height='65px' style={{ display: 'block', margin: '0 auto', marginTop: '19px'}}  />
-                <TextBelowImage>의료용 압박스타킹<br></br>착용하기</TextBelowImage>
-                <BoxDiv>
-                    <Shopbutton onClick={() => navigate('/giftshop')}>클릭하여 쇼핑하기</Shopbutton>
-                </BoxDiv>
-            </Mainbox>
-            <Circle></Circle>
-        </Alldiv> 
-              
-        </>
-    
+        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.5rem'>
+
+            <CustomFont color='black' fontWeight='bold' font='1rem' >서서 가는 당신, 하지정맥류 예방하세요.</CustomFont>
+
+            <Alldiv>
+                <Circle></Circle>
+                <Mainbox>
+                    <BoxDiv>
+                        <StyledImg
+                            src={'favor_com1_img2.png'}
+                            width='51px'
+                            height='51px'
+                            style={{ display: 'block', margin: '0 auto', marginTop: '31px' }}
+
+                        />
+
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>귀가 후 냉수로</CustomFont>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>샤워하기</CustomFont>
+                        </CustomColumn>
+                        <Shopbutton onClick={() => navigate('/giftshop')}>
+                            <CustomFont color='black' fontWeight='bold' font='0.5rem'>클릭하여 쇼핑하기</CustomFont>
+                        </Shopbutton>
+                    </BoxDiv>
+                </Mainbox>
+
+
+                <Mainbox>
+                    <BoxDiv>
+                        <StyledImg src={'favor_com1_img1.png'} width='83px' height='76px' style={{ display: 'block', margin: '0 auto' }} />
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>앉아있는 자세</CustomFont>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>피하기</CustomFont>
+                        </CustomColumn>
+
+                        <Shopbutton onClick={() => navigate('/iwanttobeyielded')}>
+                            <CustomFont color='black' fontWeight='bold' font='0.5rem'>클릭하여 양보받기</CustomFont>
+                        </Shopbutton>
+                    </BoxDiv>
+                </Mainbox>
+
+
+                <Mainbox>
+
+                    <BoxDiv>
+                        <StyledImg src={'favor_com1_img3.png'} width='65px' height='65px' style={{ display: 'block', margin: '0 auto', marginTop: '19px' }} />
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>의료용 압박스타킹</CustomFont>
+                            <CustomFont color='black' fontWeight='bold' font='0.7rem'>착용하기</CustomFont>
+                        </CustomColumn>
+
+                        <Shopbutton onClick={() => navigate('/햐giftshop')}>
+                            <CustomFont color='black' fontWeight='bold' font='0.5rem'>클릭하여 쇼핑하기</CustomFont>
+                        </Shopbutton>
+                    </BoxDiv>
+                </Mainbox>
+                <Circle></Circle>
+            </Alldiv>
+
+        </CustomColumn>
+
     );
 };
 
