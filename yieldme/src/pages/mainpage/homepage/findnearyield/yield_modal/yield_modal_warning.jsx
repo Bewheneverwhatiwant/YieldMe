@@ -122,7 +122,7 @@ const YieldModalWarning = ({ onClose, circleData }) => {
                 );
 
                 if (response.status === 201) {
-                    // console.log(response.data);
+
                     setStep(3);
                 } else {
                     setModalMessage("요청 중 오류가 발생했습니다.");
