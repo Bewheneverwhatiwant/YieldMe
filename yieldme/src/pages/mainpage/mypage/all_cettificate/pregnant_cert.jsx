@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useContext } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,8 @@ import CustomColumn from '../../../../Components/Container/CustomColumn';
 import CustomRow from '../../../../Components/Container/CustomRow';
 import CustomFont from '../../../../Components/Container/CustomFont';
 import StyledImg from '../../../../Components/Container/StyledImg';
+import axios from 'axios';
+import { AuthContext } from '../../../subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -133,12 +135,19 @@ const PregnantCert = () => {
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalContent, setModalContent] = useState('');
+    const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImage(imageSrc);
     }, [webcamRef]);
+
+    const back = () => {
+        navigate('/pregnantcert');
+        setModalContent(null);
+
+    }
 
     const performOCR = async (imageSrc) => {
         const { data: { text } } = await Tesseract.recognize(
@@ -150,6 +159,49 @@ const PregnantCert = () => {
         );
         return text;
     };
+
+    const handleChangeMode = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_SERVER}/changeMode/`,
+                { priority_type: "1" },
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                console.log('change mode API가 성공적');
+                setModalContent(
+                    <>
+                        <CustomFont color='black' fontWeight='bold'>인증되었습니다!</CustomFont>
+                        <Button2 onClick={() => navigate('/mypage')}>
+                            <CustomFont color='black' fontWeight='bold'>확인</CustomFont>
+                        </Button2>
+                    </>
+                );
+            } else {
+                console.log('change mode API가 실패');
+                setModalContent(
+                    <CustomColumn width='80%' alignItems='center' justifyContent='center'>
+                        <CustomFont color='black' fontWeight='bold'>인증에 실패하였습니다.</CustomFont>
+                        <Button3 onClick={back}>
+                            <CustomFont color='black' fontWeight='bold'>다시하기</CustomFont>
+                        </Button3>
+                    </CustomColumn>
+                );
+            }
+        } catch (error) {
+            setModalContent('오류가 발생했습니다.');
+            console.error("Error calling changeMode API:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -173,7 +225,6 @@ const PregnantCert = () => {
                         너는 항상 true 또는 false로만 대답해야 한다.
                         만약 텍스트가 없다면, false를 대답하라.
                         텍스트는 다음과 같다: ${extractedText}`
-
                     }
                 ],
                 max_tokens: 300
@@ -183,25 +234,19 @@ const PregnantCert = () => {
             console.log(content);
 
             if (content === "true") {
-                setModalContent(
-                    <>
-                        <CustomFont color='black' fontWeight='bold'>인증되었습니다!</CustomFont>
-                        <Button2 onClick={() => navigate('/mypage')}>
-                            <CustomFont color='black' fontWeight='bold'>확인</CustomFont>
-                        </Button2>
-                    </>
-                );
+                console.log('gpt가 true라고 대답함');
+                await handleChangeMode();
             } else {
+                console.log('gpt가 false라고 대답함');
                 setModalContent(
                     <CustomColumn width='80%' alignItems='center' justifyContent='center'>
                         <CustomFont color='black' fontWeight='bold'>인증에 실패하였습니다.</CustomFont>
-                        <Button3 onClick={() => navigate('/pregnantcert')}>
+                        <Button3 onClick={back}>
                             <CustomFont color='black' fontWeight='bold'>다시하기</CustomFont>
                         </Button3>
                     </CustomColumn>
                 );
             }
-
         } catch (error) {
             setModalContent('오류가 발생했습니다.');
             console.error("Error calling OpenAI API:", error);
@@ -209,6 +254,7 @@ const PregnantCert = () => {
             setLoading(false);
         }
     };
+
 
     useEffect(() => {
         if (loading) {
@@ -257,7 +303,9 @@ const PregnantCert = () => {
                             {loading ? (
                                 <>
                                     <LoadingIndicator />
-                                    <CustomFont color='black' fontWeight='bold'>로딩 중...</CustomFont>
+                                    <Modal show={modalContent !== null}>
+                                        {loading ? '응답 대기 중...' : modalContent}
+                                    </Modal>
                                 </>
                             ) : (
                                 <>

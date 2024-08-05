@@ -6,6 +6,7 @@ import CustomFont from '../../../Components/Container/CustomFont';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import StyledImg from '../../../Components/Container/StyledImg';
 import { AuthContext } from '../../subpage/AuthContext';
+import axios from 'axios';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -78,7 +79,9 @@ const Changemode = () => {
                         Authorization: `Bearer ${auth.accessToken}`,
                     },
                 });
-                setPriorityType(response.data.priority_type);
+                const fetchedPriorityType = response.data.priority_type;
+                setPriorityType(fetchedPriorityType);
+                console.log(`Fetched priority type: ${fetchedPriorityType}`);
             } catch (error) {
                 console.error('Error fetching user info:', error);
             }
@@ -106,15 +109,19 @@ const Changemode = () => {
     };
 
     const renderPriorityStatus = () => {
-        switch (priorityType) {
-            case 1:
-                return <CustomFont color='pink' font='1rem' fontWeight='bold'>임산부</CustomFont>;
-            case 2:
-                return <CustomFont color='brown' font='1rem' fontWeight='bold'>부상자</CustomFont>;
-            default:
-                return <CustomFont color='black' font='1rem' fontWeight='bold'>일반인</CustomFont>;
+        const priority = parseInt(priorityType, 10);
+        if (priority === 1) {
+            return <CustomFont color='pink' font='1rem' fontWeight='bold'>임산부</CustomFont>;
+        } else if (priority === 2) {
+            return <CustomFont color='brown' font='1rem' fontWeight='bold'>부상자</CustomFont>;
+        } else if (priority === 3) {
+            return <CustomFont color='blue' font='1rem' fontWeight='bold'>노약자</CustomFont>;
+        } else {
+            return <CustomFont color='black' font='1rem' fontWeight='bold'>일반인</CustomFont>;
         }
     };
+
+
 
     return (
         <CustomColumn width='80%' alignItems='center' justifyContent='center' gap='1rem'>
