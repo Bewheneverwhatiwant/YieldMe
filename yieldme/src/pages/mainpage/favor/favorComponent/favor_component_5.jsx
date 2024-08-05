@@ -53,6 +53,19 @@ const Backdrop = styled.div`
   z-index: 999;
 `;
 
+const Button = styled.button`
+  background-color: #FEE187;
+  font-size: 12px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 30px;
+  width: 90px;
+  padding: 0.3rem;
+  cursor: pointer;
+  border: none;
+  margin: 5px;
+`;
+
 const FavorComponent5 = () => {
     const { auth } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
@@ -88,7 +101,7 @@ const FavorComponent5 = () => {
                     <Backdrop onClick={handleCloseModal} />
                     <Modal>
                         <CustomFont color='black' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
-                        <button onClick={handleCloseModal}>확인</button>
+                        <Button onClick={handleCloseModal}>확인</Button>
                     </Modal>
                 </>
             )}
