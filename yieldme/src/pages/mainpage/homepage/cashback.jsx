@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomFont from '../../../Components/Container/CustomFont';
 import StyledImg from '../../../Components/Container/StyledImg';
+import { AuthContext } from '../../subpage/AuthContext';
+import axios from 'axios';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -38,7 +40,7 @@ const PointsDisplay = styled.div`
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* 가상 요소가 둥근 모서리에 맞춰지도록 */
+  overflow: hidden;
 
   &:before {
     content: '';
@@ -57,13 +59,11 @@ const PointsDisplay = styled.div`
             mask-composite: exclude; 
   }
 
-  /* 콘텐츠가 가상 요소 위로 오도록 */
   & > * {
     position: relative;
     z-index: 1;
   }
 `;
-
 
 const FormGroup = styled.div`
   display: flex;
@@ -95,23 +95,59 @@ const AccountInfo = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justofy-content: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
-  background-color: #FEE187;
+  background-color: ${props => (props.disabled ? '#E0E0E0' : '#FEE187')};
   padding: 10px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
 const Cashback = () => {
-    const [points, setPoints] = useState(2500);
+    const { auth } = useContext(AuthContext);
+    const [points, setPoints] = useState(0);
     const [amount, setAmount] = useState('');
     const [useAllPoints, setUseAllPoints] = useState(false);
+    const [bankNumber, setBankNumber] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER}/getInfo/`, {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                });
+                setPoints(response.data.point);
+                setBankNumber(response.data.bank_number);
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, [auth.accessToken]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -130,13 +166,38 @@ const Cashback = () => {
         setAmount(e.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (amount === '') {
-            alert('전환할 금액을 먼저 입력해주세요.');
+            setShowModal(true);
+            setModalMessage('전환할 금액을 먼저 입력해주세요.');
         } else {
-            // 전환 로직 추가
-            alert(`${amount}원이 전환되었습니다.`);
+            try {
+                const response = await axios.post(
+                    `${import.meta.env.VITE_SERVER}/cash_back/`,
+                    { cash_amount: amount },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${auth.accessToken}`
+                        }
+                    }
+                );
+
+                if (response.status === 200) {
+                    setModalMessage('성공적으로 캐시백되었습니다!');
+                } else {
+                    setModalMessage('캐시백에 오류가 발생했습니다.');
+                }
+            } catch (error) {
+                setModalMessage('캐시백에 오류가 발생했습니다.');
+                console.error('Error during cashback:', error);
+            } finally {
+                setShowModal(true);
+            }
         }
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
     };
 
     return (
@@ -172,7 +233,9 @@ const Cashback = () => {
                             <CustomFont color='black' font='1rem'>등록된 계좌</CustomFont>
                         </CustomRow>
                         <AccountInfo>
-                            <CustomFont color='black' font='1rem' fontWeight='bold'>NH 농협 | 123-****-****-**</CustomFont>
+                            <CustomFont color='black' font='1rem' fontWeight='bold'>
+                                {bankNumber ? `계좌번호: ${bankNumber}` : '아직 등록된 계좌가 없어요.'}
+                            </CustomFont>
                         </AccountInfo>
                     </CustomColumn>
 
@@ -181,13 +244,12 @@ const Cashback = () => {
                         <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
                     </CustomColumn>
                     <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
-
-                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
                             <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
                             <StyledImg src={'icon_world.png'} width='100px' height='100px' />
                             <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
                         </CustomRow>
-                        <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                        <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
                             <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
                             <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
                         </CustomRow>
@@ -195,14 +257,19 @@ const Cashback = () => {
 
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
                         <CustomFont color='black' font='1rem' fontWeight='bold'>따뜻한 양보를 실천해주셔서 감사합니다.</CustomFont>
-                        <Button onClick={handleSubmit}>
+                        <Button onClick={handleSubmit} disabled={!amount || !bankNumber}>
                             <CustomFont color='black' font='1rem' fontWeight='bold'>전환하기</CustomFont>
                         </Button>
                     </CustomColumn>
-
                 </CustomColumn>
             </PageContainer>
-        </ContainerCenter >
+            <Modal show={showModal}>
+                <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
+                <Button onClick={handleModalClose}>
+                    <CustomFont color='black' font='1rem' fontWeight='bold'>확인</CustomFont>
+                </Button>
+            </Modal>
+        </ContainerCenter>
     );
 };
 
