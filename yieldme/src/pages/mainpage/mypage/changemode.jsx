@@ -70,6 +70,8 @@ const Changemode = () => {
 
     const { auth } = useContext(AuthContext);
     const [priorityType, setPriorityType] = useState(null);
+    const [name, setName] = useState('');
+    const [id, setId] = useState('');
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -81,6 +83,8 @@ const Changemode = () => {
                 });
                 const fetchedPriorityType = response.data.priority_type;
                 setPriorityType(fetchedPriorityType);
+                setId(response.data.login_id);
+                setName(response.data.username);
                 console.log(`Fetched priority type: ${fetchedPriorityType}`);
             } catch (error) {
                 console.error('Error fetching user info:', error);
@@ -132,11 +136,11 @@ const Changemode = () => {
             <InfoContainer>
                 <InfoItem>
                     <InfoLabel>아이디</InfoLabel>
-                    <InfoValue>lny021102</InfoValue>
+                    <InfoValue>{id}</InfoValue>
                 </InfoItem>
                 <InfoItem>
                     <InfoLabel>이름</InfoLabel>
-                    <InfoValue>이나영</InfoValue>
+                    <InfoValue>{name}</InfoValue>
                 </InfoItem>
                 <InfoItem>
                     <InfoLabel>상태</InfoLabel>
