@@ -87,8 +87,12 @@ const FavorComponent4 = () => {
                 <>
                     <Backdrop onClick={handleCloseModal} />
                     <Modal>
-                        <CustomFont color='black' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다!</CustomFont>
-                        <Button onClick={handleCloseModal}>확인</Button>
+                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+                            <CustomFont color='black' fontWeight='bold' font='1rem'>로그인 후 이용하실 수 있는 기능입니다!</CustomFont>
+                            <Button onClick={handleCloseModal}>
+                                <CustomFont color='black' font='1rem'>확인</CustomFont>
+                            </Button>
+                        </CustomColumn>
                     </Modal>
                 </>
             )}

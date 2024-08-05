@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import StyledImg from '../Container/StyledImg';
 import CustomColumn from '../Container/CustomColumn';
 import CustomFont from '../Container/CustomFont';
+import CustomRow from '../Container/CustomRow';
 import { AuthContext } from '../../pages/subpage/AuthContext';
 
 const NaviContainer = styled.footer`
@@ -58,6 +59,16 @@ const Button = styled.button`
   margin: 5px;
 `;
 
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+`;
+
 const Navi = () => {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
@@ -106,12 +117,15 @@ const Navi = () => {
         </CustomColumn>
       </NaviButton>
 
+      {showModal && <Backdrop />}
       <Modal show={showModal}>
-        <CustomFont color='black' font='1.2rem' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
-        <div>
-          <Button primary onClick={handleLogin}>확인</Button>
-          <Button onClick={handleCancel}>취소</Button>
-        </div>
+        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+          <CustomFont color='black' font='1rem' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
+          <CustomRow width='100%' alignItems='center' justifyContent='space-between'>
+            <Button primary onClick={handleLogin}>확인</Button>
+            <Button onClick={handleCancel}>취소</Button>
+          </CustomRow>
+        </CustomColumn>
       </Modal>
     </NaviContainer>
   );

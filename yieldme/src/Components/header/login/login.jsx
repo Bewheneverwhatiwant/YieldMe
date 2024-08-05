@@ -79,6 +79,16 @@ height: 70px;
   display: ${props => (props.show ? 'block' : 'none')};
 `;
 
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+`;
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const { setAuthInfo } = useContext(AuthContext);
@@ -187,6 +197,7 @@ const LoginPage = () => {
         </CustomColumn>
       </PageContainer>
 
+      {showModal && <Backdrop />}
       <Modal show={showModal}>
         <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
       </Modal>

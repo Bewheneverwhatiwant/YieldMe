@@ -83,17 +83,6 @@ const NearButton = styled.button`
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const QRcircle = styled.div`
-  width: 60%;
-  height: 15rem;
-  padding: 1rem;
-  border-radius: 50%;
-  box-shadow: 0px 4px 6px rgba(0, 0.1, 0.1, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const scrollAnimation = keyframes`
   0% {
     transform: translateY(0);
@@ -115,6 +104,8 @@ const AniRow = styled.div`
 `;
 
 const Modal = styled.div`
+width: 300px;
+height: 100px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -126,6 +117,16 @@ const Modal = styled.div`
   z-index: 1000;
   text-align: center;
   display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 const HomePage = () => {
@@ -227,8 +228,9 @@ const HomePage = () => {
 
       </PageContainer>
 
+      {showModal && <Backdrop />}
       <Modal show={showModal}>
-        <CustomFont color='black' font='1.2rem' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
+        <CustomFont color='black' font='1rem' fontWeight='bold'>로그인 후 이용하실 수 있는 기능입니다.</CustomFont>
       </Modal>
     </ContainerCenter>
   );
