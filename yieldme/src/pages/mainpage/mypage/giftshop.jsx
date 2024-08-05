@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Barcode from 'react-barcode';
 import { toPng } from 'html-to-image';
+import axios from 'axios';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import StyledImg from '../../../Components/Container/StyledImg';
+import { AuthContext } from '../../subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -133,38 +135,60 @@ justify-content: center;
 `;
 
 const GiftShop = () => {
+    const { auth } = useContext(AuthContext);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isPurchased, setIsPurchased] = useState(false);
     const [isDownloaded, setIsDownloaded] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const [barcodeValue, setBarcodeValue] = useState('');
 
     const products = [
-        { id: 1, name: '이어플러그', price: '300원', img: 'gift1.png' },
-        { id: 2, name: '일회용 충전기', price: '300원', img: 'gift2.png' },
-        { id: 3, name: '안대', price: '300원', img: 'gift3.png' },
-        { id: 4, name: '양치세트', price: '300원', img: 'gift4.png' },
-        { id: 5, name: '일회용 면도기', price: '300원', img: 'gift5.png' },
-        { id: 6, name: '생리대', price: '300원', img: 'gift6.png' },
-        { id: 7, name: '머리끈', price: '300원', img: 'gift7.png' },
-        { id: 8, name: '입닦개린', price: '300원', img: 'gift8.png' },
-        { id: 9, name: '목베개', price: '300원', img: 'gift9.png' },
-        { id: 10, name: '이어폰', price: '300원', img: 'gift10.png' },
-        { id: 11, name: '삼다수', price: '300원', img: 'gift11.png' },
-        { id: 12, name: '커피(팩)', price: '300원', img: 'gift12.png' },
+        { id: 1, name: '이어플러그', price: '10', img: 'gift1.png' },
+        { id: 2, name: '일회용 충전기', price: '30', img: 'gift2.png' },
+        { id: 3, name: '안대', price: '30', img: 'gift3.png' },
+        { id: 4, name: '양치세트', price: '20', img: 'gift4.png' },
+        { id: 5, name: '일회용 면도기', price: '10', img: 'gift5.png' },
+        { id: 6, name: '생리대', price: '30', img: 'gift6.png' },
+        { id: 7, name: '머리끈', price: '5', img: 'gift7.png' },
+        { id: 8, name: '입덧사탕', price: '20', img: 'gift8.png' },
+        { id: 9, name: '목베개', price: '50', img: 'gift9.png' },
+        { id: 10, name: '이어폰', price: '50', img: 'gift10.png' },
+        { id: 11, name: '삼다수', price: '10', img: 'gift11.png' },
+        { id: 12, name: '커피(팩)', price: '10', img: 'gift12.png' },
     ];
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
     };
 
-    const handlePurchaseClick = () => {
+    const handlePurchaseClick = async () => {
         setIsLoading(true);
-        setBarcodeValue(generateRandomBarcode());
-        setTimeout(() => {
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_SERVER}/buy_gifticon/`,
+                {
+                    point: parseInt(selectedProduct.price),
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                setBarcodeValue(generateRandomBarcode());
+                setIsLoading(false);
+                setIsPurchased(true);
+            } else {
+                setIsLoading(false);
+                setModalMessage('상품 구매에 오류가 발생했습니다.');
+            }
+        } catch (error) {
             setIsLoading(false);
-            setIsPurchased(true);
-        }, 3000);
+            setModalMessage('상품 구매에 오류가 발생했습니다.');
+        }
     };
 
     const handleDownloadClick = () => {
@@ -193,12 +217,12 @@ const GiftShop = () => {
         setIsLoading(false);
         setIsPurchased(false);
         setIsDownloaded(false);
+        setModalMessage('');
     };
 
     const generateRandomBarcode = () => {
         return Math.floor(Math.random() * 1000000000000).toString().padStart(12, '0');
     };
-
 
     return (
         <ContainerCenter>
@@ -313,10 +337,16 @@ const GiftShop = () => {
                                         <ProductInfo>
                                             <ProductImage src={selectedProduct.img} alt={selectedProduct.name} />
                                             <ProductName>{selectedProduct.name}</ProductName>
-                                            <ProductPrice>{selectedProduct.price}</ProductPrice>
+                                            <ProductPrice>{selectedProduct.price}원</ProductPrice>
                                         </ProductInfo>
                                         <Button onClick={handlePurchaseClick}>양보 점수로 구매하기</Button>
                                     </>
+                                )}
+                                {modalMessage && (
+                                    <CustomColumn width='100%' alignItems='center' justifyContent='center'>
+                                        <CustomFont color='red' fontWeight='bold'>{modalMessage}</CustomFont>
+                                        <Button onClick={handleCloseModal}>확인</Button>
+                                    </CustomColumn>
                                 )}
                             </Modal>
                         </>
