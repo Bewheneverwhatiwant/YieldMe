@@ -139,7 +139,7 @@ const FindNearYield = () => {
     };
 
     const handleAlertFirstClick = () => {
-        navigate('/myalertfirst');
+        navigate('/buycoupon');
     };
 
     const handleYieldButtonClick = () => {
