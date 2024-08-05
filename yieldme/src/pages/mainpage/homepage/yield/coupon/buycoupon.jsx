@@ -249,7 +249,7 @@ const BuyCoupon = () => {
                             </Button2>
                         </CustomColumn>
                     ) : (
-                        <CustomFont color='gray'>등록된 결제수단이 없어요.</CustomFont>
+                        <CustomFont color='gray'>결제수단 등록 후 이용하실 수 있는 기능이에요.</CustomFont>
                     )}
                 </CustomColumn>
             </PageContainer>
