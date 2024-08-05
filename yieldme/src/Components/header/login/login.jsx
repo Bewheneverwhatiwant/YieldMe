@@ -82,6 +82,7 @@ const LoginPage = () => {
   const { setAuthInfo } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [point, setPoint] = useState('');
   const [modalMessage, setModalMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -93,6 +94,7 @@ const LoginPage = () => {
     const data = {
       login_id: username,
       password: password,
+      point: point,
     };
 
     try {
@@ -100,10 +102,10 @@ const LoginPage = () => {
       console.log(response.data);
 
       if (response && response.status === 200) {
-        const { login_id, username } = response.data.user;
+        const { login_id, username, point } = response.data.user;
         const accessToken = response.data.token.access;
 
-        setAuthInfo(login_id, username, accessToken);
+        setAuthInfo(login_id, username, accessToken, point);
 
         setModalMessage('로그인되었습니다!');
         setShowModal(true);

@@ -195,13 +195,13 @@ const HomePage = () => {
                 </CustomRow>
 
                 <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.3rem'>
-                  {auth.accessToken ? (
+                  {auth.point ? (
                     <>
                       <CustomFont color='black' font='1rem'>
                         양보 누적 금액:
                       </CustomFont>
                       <CustomFont color='black' font='1rem'>
-                        2500원
+                        {auth.point}
                       </CustomFont>
                     </>
                   ) : (

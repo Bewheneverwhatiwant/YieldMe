@@ -61,7 +61,7 @@ justify-content: center;
 cursor: pointer;
 width: 95%;
 height: 6rem;
-`;
+;`
 
 const Changemode = () => {
     const navigate = useNavigate();

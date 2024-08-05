@@ -8,10 +8,11 @@ const AuthProvider = ({ children }) => {
         login_id: '',
         username: '',
         accessToken: '',
+        point: '',
     });
 
-    const setAuthInfo = (login_id, username, accessToken) => {
-        setAuth({ login_id, username, accessToken });
+    const setAuthInfo = (login_id, username, accessToken, point) => {
+        setAuth({ login_id, username, accessToken, point });
     };
 
     return (
