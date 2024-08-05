@@ -96,9 +96,7 @@ const FavorComponent1 = () => {
         <Alldiv>
         <Circle></Circle>
             <Mainbox>
-            
             <BoxDiv>
-            
                 <StyledImg 
                     src={'favor_com1_img2.png'} 
                     width='51px' 
@@ -108,9 +106,8 @@ const FavorComponent1 = () => {
                 />
                 
                 <TextBelowImage>냉수 샤워하기</TextBelowImage>
-                
-                    <Shopbutton onClick={() => navigate('/shopping')}>클릭하여 쇼핑하기</Shopbutton>
-                </BoxDiv>
+                <Shopbutton onClick={() => navigate('/giftshop')}>클릭하여 쇼핑하기</Shopbutton>
+            </BoxDiv>
             </Mainbox>
         
        
@@ -119,8 +116,8 @@ const FavorComponent1 = () => {
                 <StyledImg src={'favor_com1_img1.png'} width='83px' height='83px' style={{ display: 'block', margin: '0 auto'}}  />
                 <TextBelowImage>장시간 서있거나<br></br>앉아있는 자세 피하기</TextBelowImage>
                 
-                    <Shopbutton onClick={() => navigate('/iwanttobeyielded')}>클릭하여 양보받기</Shopbutton>
-                </BoxDiv>
+                <Shopbutton onClick={() => navigate('/iwanttobeyielded')}>클릭하여 양보받기</Shopbutton>
+            </BoxDiv>
             </Mainbox>
        
         
@@ -128,16 +125,13 @@ const FavorComponent1 = () => {
                 <StyledImg src={'favor_com1_img3.png'} width='65px' height='65px' style={{ display: 'block', margin: '0 auto', marginTop: '19px'}}  />
                 <TextBelowImage>의료용 압박스타킹<br></br>착용하기</TextBelowImage>
                 <BoxDiv>
-                    <Shopbutton onClick={() => navigate('/shopping')}>클릭하여 쇼핑하기</Shopbutton>
+                    <Shopbutton onClick={() => navigate('/giftshop')}>클릭하여 쇼핑하기</Shopbutton>
                 </BoxDiv>
             </Mainbox>
             <Circle></Circle>
         </Alldiv> 
               
         </>
-    
-    
-    
     
     );
 };
