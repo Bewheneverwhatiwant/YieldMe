@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomColumn from '../../../Components/Container/CustomColumn';
+import { AuthContext } from '../../subpage/AuthContext';
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -17,6 +19,7 @@ const ContainerCenter = styled.div`
 
 const AccountContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
@@ -41,7 +44,7 @@ const ChangeButton = styled.button`
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  width: 20%;
+  width: 30%;
 `;
 
 const CardContainer = styled.div`
@@ -54,10 +57,6 @@ const CardContainer = styled.div`
   border-radius: 10px;
   padding: 20px;
   width: 100%;
-`;
-
-const CardImage = styled.img`
-  width: 80%;
 `;
 
 const Modal = styled.div`
@@ -119,28 +118,50 @@ const CardLogo = styled.img`
 `;
 
 const CardDiv = styled.div`
-border: 1px solid #D9D9D9;
-background-color: white;
-border-radius: 10px;
-padding: 10px;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-width: 100%;
+  border: 1px solid #D9D9D9;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
 
 const MyPay = () => {
+    const { auth } = useContext(AuthContext);
+    const [bankNumber, setBankNumber] = useState(null);
+    const [cardNumber, setCardNumber] = useState(null);
+    const [bankName, setBankName] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
     const [accountInput, setAccountInput] = useState('');
-    const [cardNumber, setCardNumber] = useState('');
     const [cardPw, setCardPw] = useState('');
     const [expiryMonth, setExpiryMonth] = useState('');
     const [expiryYear, setExpiryYear] = useState('');
     const [cvc, setCvc] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER}/getInfo/`, {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`,
+                    },
+                });
+                setBankNumber(response.data.bank_number);
+                setCardNumber(response.data.card_number);
+                setBankName(response.data.bank_name);
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, [auth.accessToken]);
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -211,10 +232,14 @@ const MyPay = () => {
                 <CustomFont color='black' font='1.3rem' fontWeight='bold'>내 계좌</CustomFont>
             </CustomRow>
             <AccountContainer>
-                <AccountInfo>NH 농협 | 123-****-****-**</AccountInfo>
-                <ChangeButton onClick={handleOpenModal}>
-                    <CustomFont color='black' font='0.8rem' fontWeight='bold'>변경</CustomFont>
-                </ChangeButton>
+                <AccountInfo>
+                    {bankNumber ? `${bankName} | ${bankNumber}` : '아직 등록된 계좌가 없습니다'}
+                </AccountInfo>
+                <CustomRow width='100%' alignItems='center' justifyContent='end'>
+                    <ChangeButton onClick={handleOpenModal}>
+                        <CustomFont color='black' font='0.8rem' fontWeight='bold'>추가/변경</CustomFont>
+                    </ChangeButton>
+                </CustomRow>
             </AccountContainer>
 
             <CustomRow width='90%' alignItems='center' justifyContent='flex-start' gap='1rem'>
@@ -222,118 +247,130 @@ const MyPay = () => {
             </CustomRow>
             <CardContainer>
                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.7rem'>
-                    <CardImage src="ex_card_img.png" alt="결제수단 이미지" />
-                    <div>NH 체크카드 | 352-****-****-**</div>
+
+                    {cardNumber ? (
+                        <>
+                            <div>{`${bankName} 체크카드 | ${cardNumber}`}</div>
+                        </>
+                    ) : (
+                        '아직 등록된 결제수단이 없습니다'
+                    )}
                     <CustomRow width='100%' alignItems='center' justifyContent='flex-end'>
                         <ChangeButton onClick={handleChangePayMethod}>
-                            <CustomFont color='black' font='0.8rem' fontWeight='bold'>변경</CustomFont>
+                            <CustomFont color='black' font='0.8rem' fontWeight='bold'>추가/변경</CustomFont>
                         </ChangeButton>
                     </CustomRow>
                 </CustomColumn>
             </CardContainer>
 
-            {isModalOpen && (
-                <>
-                    <Backdrop onClick={handleCloseModal} />
-                    <Modal>
-                        <CardModal>
-                            <CustomRow width='100%' alignItems='center' justifyContent='start'>
-                                <CustomFont color='black' font='1rem'>은행사를 선택해주세요.</CustomFont>
-                            </CustomRow>
-                            <CardDiv>
-                                {Array.from({ length: 10 }, (_, index) => (
-                                    <CardLogo
-                                        key={index}
-                                        src={`card${index + 1}.png`}
-                                        alt={`카드사 로고 ${index + 1}`}
-                                        onClick={() => { }}
-                                    />
-                                ))}
-                            </CardDiv>
+            {
+                isModalOpen && (
+                    <>
+                        <Backdrop onClick={handleCloseModal} />
+                        <Modal>
+                            <CardModal>
+                                <CustomRow width='100%' alignItems='center' justifyContent='start'>
+                                    <CustomFont color='black' font='1rem'>은행사를 선택해주세요.</CustomFont>
+                                </CustomRow>
+                                <CardDiv>
+                                    {Array.from({ length: 10 }, (_, index) => (
+                                        <CardLogo
+                                            key={index}
+                                            src={`card${index + 1}.png`}
+                                            alt={`카드사 로고 ${index + 1}`}
+                                            onClick={() => { }}
+                                        />
+                                    ))}
+                                </CardDiv>
 
-                            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                                <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.1rem'>
+                                    <Input
+                                        type="text"
+                                        placeholder="계좌번호를 입력해주세요."
+                                        value={cardNumber}
+                                        onChange={handleCardNumberChange}
+                                    />
+                                    <Input
+                                        type="text"
+                                        placeholder="비밀번호를 입력해주세요."
+                                        value={cardPw}
+                                        onChange={handleCardPwChange}
+                                    />
+                                </CustomColumn>
+                                <ModalButton onClick={handleConfirmChange}>계좌 등록하기</ModalButton>
+                            </CardModal>
+                        </Modal>
+                    </>
+                )
+            }
+
+            {
+                isCardModalOpen && (
+                    <>
+                        <Backdrop onClick={() => setIsCardModalOpen(false)} />
+                        <Modal>
+                            <CardModal>
+                                <CustomRow width='100%' alignItems='center' justifyContent='start'>
+                                    <CustomFont color='black' font='1rem'>카드사를 선택해주세요.</CustomFont>
+                                </CustomRow>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                    {Array.from({ length: 10 }, (_, index) => (
+                                        <CardLogo
+                                            key={index}
+                                            src={`card${index + 1}.png`}
+                                            alt={`카드사 로고 ${index + 1}`}
+                                            onClick={() => { }}
+                                        />
+                                    ))}
+                                </div>
                                 <Input
                                     type="text"
-                                    placeholder="계좌번호를 입력해주세요."
+                                    placeholder="카드 번호를 입력해주세요."
                                     value={cardNumber}
                                     onChange={handleCardNumberChange}
                                 />
-                                <Input
-                                    type="text"
-                                    placeholder="비밀번호를 입력해주세요."
-                                    value={cardPw}
-                                    onChange={handleCardPwChange}
-                                />
-                            </CustomColumn>
-                            <ModalButton onClick={handleConfirmChange}>계좌 등록하기</ModalButton>
-                        </CardModal>
-                    </Modal>
-                </>
-            )}
-
-            {isCardModalOpen && (
-                <>
-                    <Backdrop onClick={() => setIsCardModalOpen(false)} />
-                    <Modal>
-                        <CardModal>
-                            <CustomRow width='100%' alignItems='center' justifyContent='start'>
-                                <CustomFont color='black' font='1rem'>카드사를 선택해주세요.</CustomFont>
-                            </CustomRow>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                {Array.from({ length: 10 }, (_, index) => (
-                                    <CardLogo
-                                        key={index}
-                                        src={`card${index + 1}.png`}
-                                        alt={`카드사 로고 ${index + 1}`}
-                                        onClick={() => { }}
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Input
+                                        type="text"
+                                        placeholder="MM"
+                                        value={expiryMonth}
+                                        onChange={handleExpiryMonthChange}
+                                        style={{ width: '30%' }}
                                     />
-                                ))}
-                            </div>
-                            <Input
-                                type="text"
-                                placeholder="카드 번호를 입력해주세요."
-                                value={cardNumber}
-                                onChange={handleCardNumberChange}
-                            />
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Input
-                                    type="text"
-                                    placeholder="MM"
-                                    value={expiryMonth}
-                                    onChange={handleExpiryMonthChange}
-                                    style={{ width: '30%' }}
-                                />
-                                <Input
-                                    type="text"
-                                    placeholder="YY"
-                                    value={expiryYear}
-                                    onChange={handleExpiryYearChange}
-                                    style={{ width: '30%' }}
-                                />
-                                <Input
-                                    type="text"
-                                    placeholder="CVC"
-                                    value={cvc}
-                                    onChange={handleCvcChange}
-                                    style={{ width: '30%' }}
-                                />
-                            </div>
-                            <ModalButton onClick={handleRegisterCard}>등록하기</ModalButton>
-                        </CardModal>
-                    </Modal>
-                </>
-            )}
+                                    <Input
+                                        type="text"
+                                        placeholder="YY"
+                                        value={expiryYear}
+                                        onChange={handleExpiryYearChange}
+                                        style={{ width: '30%' }}
+                                    />
+                                    <Input
+                                        type="text"
+                                        placeholder="CVC"
+                                        value={cvc}
+                                        onChange={handleCvcChange}
+                                        style={{ width: '30%' }}
+                                    />
+                                </div>
+                                <ModalButton onClick={handleRegisterCard}>등록하기</ModalButton>
+                            </CardModal>
+                        </Modal>
+                    </>
+                )
+            }
 
-            {isSuccessModalOpen && (
-                <>
-                    <Backdrop onClick={handleSuccessModalClose} />
-                    <Modal>
-                        <CustomFont color='black' font='1.2rem' fontWeight='bold'>성공적으로 결제수단이 등록/변경되었습니다!</CustomFont>
-                        <ModalButton onClick={handleSuccessModalClose}>확인</ModalButton>
-                    </Modal>
-                </>
-            )}
-        </ContainerCenter>
+            {
+                isSuccessModalOpen && (
+                    <>
+                        <Backdrop onClick={handleSuccessModalClose} />
+                        <Modal>
+                            <CustomFont color='black' font='1.2rem' fontWeight='bold'>성공적으로 결제수단이 등록/변경되었습니다!</CustomFont>
+                            <ModalButton onClick={handleSuccessModalClose}>확인</ModalButton>
+                        </Modal>
+                    </>
+                )
+            }
+        </ContainerCenter >
     );
 };
 
