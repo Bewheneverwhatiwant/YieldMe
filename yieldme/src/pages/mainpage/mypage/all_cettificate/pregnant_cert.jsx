@@ -102,6 +102,7 @@ padding: 10px;
 `;
 
 const Modal = styled.div`
+width: 60%;
   position: fixed;
   top: 50%;
   left: 50%;
