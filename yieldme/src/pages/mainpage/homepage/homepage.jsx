@@ -18,7 +18,6 @@ const ContainerCenter = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-bottom: 5vh;
-  min-height: 100vh;
 `;
 
 const PageContainer = styled(ContainerCenter)`
@@ -31,6 +30,7 @@ const PageContainer = styled(ContainerCenter)`
   position: relative;
   background-color: white;
   padding-bottom: 10vh;
+  min-height: 100vh;
 `;
 
 const Button = styled.button`
