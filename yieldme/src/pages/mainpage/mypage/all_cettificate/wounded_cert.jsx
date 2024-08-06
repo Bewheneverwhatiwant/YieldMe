@@ -138,6 +138,22 @@ const WoundedCert = () => {
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const videoConstraints = {
+        facingMode: { exact: "environment" }
+    };
+
+    useEffect(() => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                // 카메라 접근 성공
+                console.log("Camera access granted");
+            })
+            .catch(error => {
+                // 카메라 접근 실패
+                console.error("Error accessing media devices.", error);
+            });
+    }, []);
+
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImage(imageSrc);
@@ -310,7 +326,8 @@ const WoundedCert = () => {
                                         ref={webcamRef}
                                         screenshotFormat="image/jpeg"
                                         width={300}
-                                        height={400}
+                                        height={300}
+                                        videoConstraints={videoConstraints}
                                     />
                                     <Button onClick={handleCapture}>
                                         <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
