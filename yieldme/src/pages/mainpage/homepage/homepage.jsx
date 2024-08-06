@@ -18,6 +18,7 @@ const ContainerCenter = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-bottom: 5vh;
+  min-height: 100vh;
 `;
 
 const PageContainer = styled(ContainerCenter)`
