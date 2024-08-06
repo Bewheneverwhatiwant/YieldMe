@@ -32,7 +32,7 @@ const Splash = () => {
     return (
         <SplashContainer>
 
-            <StyledImg src={'splash_top2.png'} width='100%' height='25vh' />
+            <StyledImg src={'splash_top2.png'} width='100%' height='60px' />
 
             <CustomColumn width='100%' alignItems='center' justifyContent='center'>
                 <CustomColumn width='70%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
@@ -49,7 +49,7 @@ const Splash = () => {
                 </CustomRow>
             </CustomColumn>
 
-            <StyledImg src={'splash_bottom.png'} width='100%' height='20vh' />
+            <StyledImg src={'splash_bottom.png'} width='100%' height='60px' />
 
         </SplashContainer>
     );
