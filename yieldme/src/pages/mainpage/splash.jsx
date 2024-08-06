@@ -9,6 +9,8 @@ import CustomColumn from '../../Components/Container/CustomColumn';
 const SplashContainer = styled.div`
 width: 100%;
 gap: 1rem;
+padding-top: 60px;
+padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
