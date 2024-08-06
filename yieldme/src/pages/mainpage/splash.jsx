@@ -13,7 +13,7 @@ gap: 1rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: space-between;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #ffffff;
   overflow: hidden;
 `;
