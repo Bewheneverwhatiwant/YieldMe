@@ -47,6 +47,7 @@ const ReviewContainer = styled.div`
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  min-height: 40vh;
 `;
 
 const ReviewWrapper = styled.div`

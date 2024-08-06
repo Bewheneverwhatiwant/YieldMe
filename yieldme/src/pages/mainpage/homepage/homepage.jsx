@@ -26,7 +26,6 @@ const PageContainer = styled(ContainerCenter)`
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 8vh;
-  padding-bottom: 5vh;
   gap: 6rem;
   position: relative;
   background-color: white;
