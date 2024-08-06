@@ -32,7 +32,7 @@ const PageContainer = styled(ContainerCenter)`
 const CameraContainer = styled.div`
   width: 80%;
   height: 240px;
-  border: qpx solid black;
+  border: 1px solid black;
   background-color: transparent;
   display: flex;
   justify-content: center;
