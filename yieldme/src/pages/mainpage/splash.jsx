@@ -24,7 +24,7 @@ const Splash = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/');
-        }, 10000); // 나중에 3초로 바꾸기
+        }, 3000); // 나중에 3초로 바꾸기
 
         return () => clearTimeout(timer);
     }, [navigate]);
