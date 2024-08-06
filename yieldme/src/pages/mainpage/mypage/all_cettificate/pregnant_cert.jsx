@@ -147,7 +147,19 @@ const PregnantCert = () => {
         navigate('/pregnantcert');
         setModalContent(null);
 
-    }
+    };
+
+    useEffect(() => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                // 카메라 접근 성공
+                console.log("Camera access granted");
+            })
+            .catch(error => {
+                // 카메라 접근 실패
+                console.error("Error accessing media devices.", error);
+            });
+    }, []);
 
     const performOCR = async (imageSrc) => {
         const { data: { text } } = await Tesseract.recognize(
