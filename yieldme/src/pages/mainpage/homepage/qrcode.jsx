@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomRow from '../../../Components/Container/CustomRow';
 import CustomColumn from '../../../Components/Container/CustomColumn';
-import StyledImg from '../../../Components/Container/StyledImg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../../pages/subpage/AuthContext'; // AuthContext import 추가
@@ -55,6 +54,26 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 8px;
   margin: 5px;
+`;
+
+// 반짝이는 애니메이션
+const shine = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+// StyledImg에 애니메이션 스타일 추가
+const StyledImgWithAnimation = styled.img`
+  width: 150px;
+  height: 150px;
+  animation: ${shine} 1s infinite;
 `;
 
 const QRCodeSection = ({ auth }) => {
@@ -121,7 +140,7 @@ const QRCodeSection = ({ auth }) => {
                     </CustomRow>
 
                     <QRcircle>
-                        <StyledImg src={'icon_before_login_qr.png'} width='150px' height='150px' />
+                        <StyledImgWithAnimation src={'icon_before_login_qr.png'} />
                     </QRcircle>
                 </>
             )}
