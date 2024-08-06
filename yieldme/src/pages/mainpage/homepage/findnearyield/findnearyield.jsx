@@ -49,12 +49,24 @@ const CircleWrapper = styled.div`
 const Circle = styled.div`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  background-color: ${(props) => props.color};
+  background-color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-image: ${(props) =>
+        props.label === '양보할게요' ? "url('icon_seat.png')" :
+            props.label === '양보원해요' ? "url('icon_standing.png')" : 'none'};
+    background-size: cover;
+    position: absolute;
+  }
 `;
 
 const Modal = styled.div`
@@ -199,6 +211,7 @@ const FindNearYield = () => {
                                                     width={circle[0]}
                                                     height={circle[1]}
                                                     color={circle[2]}
+                                                    label={circle[3]}
                                                     onClick={() => handleCircleClick(circle)}
                                                 />
                                                 <CustomFont color={circle[2]} font='0.8rem' fontWeight='bold'>{circle[3]}</CustomFont>
@@ -236,6 +249,7 @@ const FindNearYield = () => {
                                                         width={modalData[0]}
                                                         height={modalData[1]}
                                                         color={modalData[2]}
+                                                        label={modalData[3]}
                                                     />
                                                     <CustomFont color={modalData[2]} font='0.8rem' fontWeight='bold'>{modalData[3]}</CustomFont>
                                                 </CustomColumn>
