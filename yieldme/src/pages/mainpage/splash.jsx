@@ -9,8 +9,8 @@ import CustomColumn from '../../Components/Container/CustomColumn';
 const SplashContainer = styled.div`
 width: 100%;
 gap: 1rem;
-padding-top: 60px;
-padding-bottom: 60px;
+padding-top: 30px;
+padding-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,7 @@ const Splash = () => {
     return (
         <SplashContainer>
 
-            <StyledImg src={'splash_top2.png'} width='100%' height='60px' />
+            <StyledImg src={'splash_top2.png'} width='100%' height='90px' />
 
             <CustomColumn width='100%' alignItems='center' justifyContent='center'>
                 <CustomColumn width='70%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
@@ -51,7 +51,7 @@ const Splash = () => {
                 </CustomRow>
             </CustomColumn>
 
-            <StyledImg src={'splash_bottom.png'} width='100%' height='60px' />
+            <StyledImg src={'splash_bottom.png'} width='100%' height='90px' />
 
         </SplashContainer>
     );
