@@ -27,7 +27,7 @@ const PageContainer = styled(ContainerCenter)`
   justify-content: flex-start;
   padding-top: 8vh;
   gap: 6rem;
-  
+  position: relative;
   background-color: white;
   padding-bottom: 10vh;
   min-height: 100vh;

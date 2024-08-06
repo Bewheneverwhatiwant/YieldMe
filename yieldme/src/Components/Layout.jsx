@@ -8,6 +8,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: 10vh; /* Header 높이에 따라 조정 */
+  padding-bottom: 10vh; /* Navi 높이에 따라 조정 */
 `;
 
 const Main = styled.main`
