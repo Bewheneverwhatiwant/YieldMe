@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../Components/header/header';
 import Navi from '../Components/footer/Navi';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -29,6 +29,7 @@ const FixedNavi = styled(Navi)`
 `;
 
 const Layout = () => {
+
   return (
     <Container>
       <Header />
