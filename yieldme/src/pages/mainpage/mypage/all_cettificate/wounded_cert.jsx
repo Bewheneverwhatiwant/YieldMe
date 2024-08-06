@@ -327,7 +327,7 @@ const WoundedCert = () => {
                                         screenshotFormat="image/jpeg"
                                         width={300}
                                         height={300}
-                                    // videoConstraints={videoConstraints}
+                                        videoConstraints={videoConstraints}
                                     />
                                     <Button onClick={handleCapture}>
                                         <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
