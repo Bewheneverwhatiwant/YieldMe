@@ -56,7 +56,7 @@ const YieldCoupon = () => {
     const navigate = useNavigate();
 
     const buy = () => {
-        navigate('/buycoupone');
+        navigate('/buycoupon');
     }
 
     useEffect(() => {
