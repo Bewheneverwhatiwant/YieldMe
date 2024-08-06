@@ -203,7 +203,7 @@ const CameraPage = () => {
                     <CustomFont color='black' font='1rem' fontWeight='bold'>소중한 자리 양보, 감사드립니다.</CustomFont>
                     <CameraContainer>
                         {!isVideoLoaded && <LoadingText>QR스캐너 준비 중...</LoadingText>}
-                        <video ref={videoRef} style={{ width: '100%' }} />
+                        <video ref={videoRef} style={{ width: '100%', height: '5vh' }} />
                     </CameraContainer>
                     <CustomFont color='black' font='0.8rem' fontWeight='bold'>자리를 양보해주신 분의 QR코드를 인식해주세요.</CustomFont>
                 </CustomColumn>
