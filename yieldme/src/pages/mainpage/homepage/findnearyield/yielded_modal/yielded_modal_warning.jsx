@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-
+import axios from 'axios';
+import { AuthContext } from '../../../../subpage/AuthContext';
 import CustomColumn from '../../../../../Components/Container/CustomColumn';
 import CustomFont from '../../../../../Components/Container/CustomFont';
 import CustomRow from '../../../../../Components/Container/CustomRow';
@@ -94,22 +95,24 @@ const LoadingSpinner = styled.div`
 `;
 
 const Content = styled.div`
-width: 100%;
-border: none;
-border-radius: 20px;
-background-color: grey;
-color: white;
-padding: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-line-height: 7px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: grey;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 7px;
 `;
 
 const YieldModalWarning = ({ onClose, circleData }) => {
+    const { auth } = useContext(AuthContext);
     const [step, setStep] = useState(1);
     const [description, setDescription] = useState("");
     const [timeLeft, setTimeLeft] = useState(120); // 2분 = 120초
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         if (step === 2 && timeLeft > 0) {
@@ -136,6 +139,38 @@ const YieldModalWarning = ({ onClose, circleData }) => {
         }
     }, [step]);
 
+    useEffect(() => {
+        if (step === 2) {
+            const fetchData = async () => {
+                try {
+                    const response = await axios.post(
+                        `${import.meta.env.VITE_SERVER}/get_describe/`,
+                        {
+                            yielding_user_id: auth.login_id,
+                            receiving_user_id: 'lny021102'
+                        },
+                        {
+                            headers: {
+                                Authorization: `Bearer ${auth.accessToken}`
+                            }
+                        }
+                    );
+
+                    if (response.status === 200) {
+                        setDescription(response.data.describe);
+                    } else {
+                        setError(true);
+                    }
+                } catch (error) {
+                    console.error('Error fetching description:', error);
+                    setError(true);
+                }
+            };
+
+            fetchData();
+        }
+    }, [step, auth.login_id, auth.accessToken]);
+
     const handleNextStep = () => {
         setStep(2);
     };
@@ -158,8 +193,6 @@ const YieldModalWarning = ({ onClose, circleData }) => {
                             <Button onClick={handleNextStep}>네, 이해했어요</Button>
                         </CustomRow>
                     </CustomColumn>
-
-
                 )}
                 {step === 2 && (
                     <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.2rem'>
@@ -182,7 +215,7 @@ const YieldModalWarning = ({ onClose, circleData }) => {
                         </CustomRow>
 
                         <Content>
-                            여기 내용
+                            {error ? '응답을 받는 중 오류가 발생했습니다.' : description}
                         </Content>
 
                         <CustomFont color='black' font='0.8rem'>양보해주시는 분의 자리로 이동하여 QR코드를 인식해주세요.</CustomFont>
