@@ -44,18 +44,6 @@ const Button = styled.button`
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const CashBackButton = styled.button`
-  width: 20%;
-  background-color: #FEE187;
-  color: black;
-  border: none;
-  padding: 0.2rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
 const ScannerButton = styled.button`
   width: 80%;
   background-color: #FFCD38;
@@ -126,7 +114,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 2000;
 `;
 
 const HomePage = () => {

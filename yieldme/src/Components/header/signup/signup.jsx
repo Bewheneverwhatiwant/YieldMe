@@ -67,14 +67,6 @@ const Button2 = styled.button`
   cursor: pointer;
 `;
 
-const GoSignup = styled.button`
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Modal = styled.div`
   position: fixed;
   top: 50%;
@@ -87,6 +79,16 @@ const Modal = styled.div`
   z-index: 1000;
   text-align: center;
   display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
 `;
 
 const SignUpPage = () => {
@@ -193,6 +195,7 @@ const SignUpPage = () => {
         </CustomColumn>
       </PageContainer>
 
+      {showModal && <Backdrop />}
       <Modal show={showModal}>
         <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
       </Modal>
