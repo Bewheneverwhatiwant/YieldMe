@@ -74,11 +74,11 @@ const RequireSplash = ({ children }) => {
 
     useEffect(() => {
         const redirected = sessionStorage.getItem('redirected');
-        if (!redirected) {
+        if (!redirected && location.pathname === '/') {
             sessionStorage.setItem('redirected', 'true');
             navigate('/splash', { replace: true });
         }
-    }, [location]);
+    }, [location, navigate]);
 
     return children;
 };
