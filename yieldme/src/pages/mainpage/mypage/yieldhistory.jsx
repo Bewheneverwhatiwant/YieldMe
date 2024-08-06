@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomFont from '../../../Components/Container/CustomFont';
 import CustomColumn from '../../../Components/Container/CustomColumn';
 import CustomRow from '../../../Components/Container/CustomRow';
-import { AuthContext } from '../../subpage/AuthContext';
+import { AuthContext } from '../../../pages/subpage/AuthContext'; // AuthContext import 추가
 
 const ContainerCenter = styled.div`
   display: flex;
@@ -96,8 +96,8 @@ const YieldHistory = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const handleReviewClick = () => {
-        navigate('/writereview');
+    const handleReviewClick = (matchId) => {
+        navigate('/writereview', { state: { matchId } });
     };
 
     return (
@@ -110,7 +110,7 @@ const YieldHistory = () => {
 
                     <HistoryContainer>
                         {historyData.length === 0 ? (
-                            <NoHistoryMessage>아직 양보 내역이 없어요.</NoHistoryMessage>
+                            <TotalPointText>아직 양보 내역이 없어요.</TotalPointText>
                         ) : (
                             historyData.map((history, index) => (
                                 <React.Fragment key={index}>
@@ -124,14 +124,15 @@ const YieldHistory = () => {
                                     </HistoryItem>
                                     <CustomRow width='100%' alignItems='center' justifyContent='flex-end'>
                                         <ReviewButton
-                                            onClick={handleReviewClick}
+                                            onClick={() => handleReviewClick(history.match_id)}
                                             disabled={history.review !== null}
                                         >
                                             {history.review !== null ? '작성했어요' : '후기 작성'}
                                         </ReviewButton>
                                     </CustomRow>
                                 </React.Fragment>
-                            )))}
+                            ))
+                        )}
                     </HistoryContainer>
                 </CustomColumn>
             </PageContainer>
