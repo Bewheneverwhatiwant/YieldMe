@@ -15,8 +15,8 @@ const Container = styled.div`
 const Main = styled.main`
   flex: 1;
   overflow-y: auto;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
+  padding-top: 6vh;
+  padding-bottom: 100px;
   min-height: 100vh;
 `;
 

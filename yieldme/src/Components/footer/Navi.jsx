@@ -14,7 +14,7 @@ const NaviContainer = styled.footer`
   width: 100%;
   height: 60px;
   background-color: #FEE187;
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
   border-top: 2px solid #FFCD38;
