@@ -17,6 +17,7 @@ const ContainerCenter = styled.div`
   gap: 10px;
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 5vh;
 `;
 
 const PageContainer = styled(ContainerCenter)`
@@ -114,7 +115,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
+  z-index: 999;
 `;
 
 const HomePage = () => {

@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  min-height: 6vh;
+  min-height: 4vh;
   z-index: 99;
   display: flex;
   flex-direction: row;
@@ -70,7 +70,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
+  z-index: 999;
 `;
 
 export default function Header() {
