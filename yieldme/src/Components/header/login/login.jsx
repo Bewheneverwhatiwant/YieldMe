@@ -7,7 +7,7 @@ import CustomColumn from '../../Container/CustomColumn';
 import CustomRow from '../../Container/CustomRow';
 import StyledImg from '../../Container/StyledImg';
 import { AuthContext } from '../../../pages/subpage/AuthContext';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const ContainerCenter = styled.div`
   display: flex;
