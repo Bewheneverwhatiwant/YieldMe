@@ -8,6 +8,8 @@ import StyledImg from '../../../../Components/Container/StyledImg';
 import axios from 'axios';
 import { AuthContext } from '../../../subpage/AuthContext';
 
+// 현재 오류없음, 정상작동 !
+
 const ContainerCenter = styled.div`
   display: flex;
   flex-direction: column;
