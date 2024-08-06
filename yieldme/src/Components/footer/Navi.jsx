@@ -20,6 +20,8 @@ const NaviContainer = styled.footer`
   border-top: 2px solid #FFCD38;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+  z-index: 1000; /* 추가 */
+  pointer-events: auto; /* 추가 */
 `;
 
 const NaviButton = styled.button`
