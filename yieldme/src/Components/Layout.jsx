@@ -13,6 +13,8 @@ const Container = styled.div`
 const Main = styled.main`
   flex: 1;
   overflow-y: auto;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
 `;
 
 const FixedNavi = styled(Navi)`
