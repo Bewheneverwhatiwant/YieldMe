@@ -137,6 +137,9 @@ const PregnantCert = () => {
     const [modalContent, setModalContent] = useState('');
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
+    const videoConstraints = {
+        facingMode: { exact: "environment" }
+    };
 
     const handleCapture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -327,6 +330,7 @@ const PregnantCert = () => {
                                         screenshotFormat="image/jpeg"
                                         width={300}
                                         height={400}
+                                        videoConstraints={videoConstraints}
                                     />
                                     <Button onClick={handleCapture}>
                                         <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
