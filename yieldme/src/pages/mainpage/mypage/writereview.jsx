@@ -40,6 +40,7 @@ const SubmitButton = styled.button`
 `;
 
 const Modal = styled.div`
+width: 60%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -61,6 +62,16 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 8px;
   margin: 5px;
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 const WriteReview = () => {
@@ -114,6 +125,7 @@ const WriteReview = () => {
                 </CustomRow>
             </CustomColumn>
 
+            {showModal && <Backdrop />}
             {showModal && (
                 <Modal>
                     <CustomFont color='black' font='1rem' fontWeight='bold'>{modalMessage}</CustomFont>
