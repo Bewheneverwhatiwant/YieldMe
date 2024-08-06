@@ -176,6 +176,8 @@ const WoundedCert = () => {
         return text;
     };
 
+
+    // 모바일에서 오류 확인 중 
     const handleChangeMode = async () => {
         setLoading(true);
         try {
