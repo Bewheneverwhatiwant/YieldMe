@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import StyledImg from '../../Components/Container/StyledImg';
+import CustomRow from '../../Components/Container/CustomRow';
+import CustomFont from '../../Components/Container/CustomFont';
+import CustomColumn from '../../Components/Container/CustomColumn';
 
 const SplashContainer = styled.div`
+width: 100%;
+gap: 1rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
   height: 100vh;
-  background-color: #ffffff; /* 스플래시 화면 배경색 */
+  background-color: #ffffff;
+  overflow: hidden;
 `;
 
 const Splash = () => {
@@ -17,14 +24,33 @@ const Splash = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/');
-        }, 3000); // 3초 후에 '/'로 이동
+        }, 10000); // 나중에 3초로 바꾸기
 
-        return () => clearTimeout(timer); // 컴포넌트가 언마운트될 때 타이머를 정리
+        return () => clearTimeout(timer);
     }, [navigate]);
 
     return (
         <SplashContainer>
-            <h1>Loading...</h1> {/* 스플래시 화면에 표시될 내용 */}
+
+            <StyledImg src={'splash_top2.png'} width='100%' height='25vh' />
+
+            <CustomColumn width='100%' alignItems='center' justifyContent='center'>
+                <CustomColumn width='70%' alignItems='flex-start' justifyContent='center' gap='0.5rem'>
+                    <CustomFont color='black' font='1rem' fontWeight='bold'>아플 때,</CustomFont>
+                    <CustomFont color='black' font='1rem' fontWeight='bold'>힘들 때,</CustomFont>
+                    <CustomFont color='black' font='1rem' fontWeight='bold'>그리고 혼자가 아닐 때</CustomFont>
+                </CustomColumn>
+                <StyledImg src={'splashLogo.png'} width='95%' />
+                <CustomRow width='70%' alignItems='center' justifyContent='flex-end'>
+                    <CustomFont color='black' fontWeight='bold' font='1rem'>언제든지 하세요,</CustomFont>
+                </CustomRow>
+                <CustomRow width='70%' alignItems='center' justifyContent='flex-end'>
+                    <CustomFont color='#FFCD38' fontWeight='bold' font='1.7rem'>YELLO</CustomFont>
+                </CustomRow>
+            </CustomColumn>
+
+            <StyledImg src={'splash_bottom.png'} width='100%' height='20vh' />
+
         </SplashContainer>
     );
 };
