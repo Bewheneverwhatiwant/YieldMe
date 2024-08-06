@@ -50,12 +50,24 @@ const CircleWrapper = styled.div`
 const Circle = styled.div`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  background-color: ${(props) => props.color};
+  background-color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-image: ${(props) =>
+        props.label === '양보할게요' ? "url('icon_seat.png')" :
+            props.label === '양보원해요' ? "url('icon_standing.png')" : 'none'};
+    background-size: cover;
+    position: absolute;
+  }
 `;
 
 const Modal = styled.div`
@@ -113,15 +125,15 @@ const LoadingSpinner = styled.div`
 `;
 
 const AnswerDiv = styled.div`
-border: 1px solid black;
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-gap: 1.5rem;
-align-items: center;
-justify-content: center;
-padding: 10px;
-width: 100%;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
 `;
 
 const getRandomPosition = (size, avoidCenter = false) => {
@@ -234,7 +246,7 @@ const WaitingBeYielded = () => {
                                 <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1.2rem'>
                                     <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
                                         <CustomColumn width='30%' alignItems='center' justifyContent='center' gap='0.2rem'>
-                                            <Circle width='50' height='50' color='#8e44ad' />
+                                            <Circle width='50' height='50' color='#8e44ad' label='양보할래요' />
                                             <CustomFont color='#8e44ad' font='0.8rem' fontWeight='bold'>양보할래요</CustomFont>
                                         </CustomColumn>
                                         <CustomFont font='0.8rem' fontWeight='bold' color='black'>일반인, 내 근처 약 50m</CustomFont>
@@ -270,6 +282,7 @@ const WaitingBeYielded = () => {
                                                     width={circle[0]}
                                                     height={circle[1]}
                                                     color={circle[2]}
+                                                    label={circle[3]}
                                                 />
                                                 <CustomFont color={circle[2]} font='0.8rem' fontWeight='bold'>{circle[3]}</CustomFont>
                                             </CircleWrapper>
