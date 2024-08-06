@@ -147,70 +147,66 @@ const LoginPage = () => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      enableOnAndroid={true}
-      extraHeight={50}
-    >
-      <ContainerCenter>
-        <PageContainer>
-          <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='5rem'>
-            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
-              <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
-                <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
-                  <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
-                  <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
-                </CustomColumn>
-                <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
-                  <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
-                    <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
-                    <StyledImg src={'icon_world.png'} width='100px' height='100px' />
-                    <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
-                  </CustomRow>
-                  <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
-                    <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
-                    <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
-                  </CustomRow>
-                </CustomColumn>
-              </CustomColumn>
-              <CustomFont color='#FFD15B' font='1.5rem' fontWeight='bold'>LOG IN</CustomFont>
-            </CustomColumn>
 
-            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='3rem'>
-              <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
-                <Input
-                  type="text"
-                  placeholder="아이디"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <Input
-                  type="password"
-                  placeholder="비밀번호"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
-                  <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>아직 계정이 없다면</CustomFont>
-                  <GoSignup onClick={() => navigate('/signup')}>
-                    <CustomFont color='black' font='1rem' fontWeight='bold'>회원가입하기</CustomFont>
-                  </GoSignup>
+    <ContainerCenter>
+      <PageContainer>
+        <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='5rem'>
+          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.8rem'>
+              <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                <CustomFont color='#FFD15B' font='1.6rem' fontWeight='bold'>Yello, Yield 路!</CustomFont>
+                <CustomFont color='#FFD15B' font='0.8rem' fontWeight='bold'>여러분의 Yello로 세상이 따뜻해져요.</CustomFont>
+              </CustomColumn>
+              <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='0.2rem'>
+                <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                  <StyledImg src={'icon_wound.png'} width='50px' height='50px' />
+                  <StyledImg src={'icon_world.png'} width='100px' height='100px' />
+                  <StyledImg src={'icon_oldest.png'} width='50px' height='50px' />
+                </CustomRow>
+                <CustomRow width='100%' alignItems='center' justifyContent='space-around' >
+                  <StyledImg src={'icon_normal.png'} width='50px' height='50px' />
+                  <StyledImg src={'icon_preg.png'} width='50px' height='50px' />
                 </CustomRow>
               </CustomColumn>
-
-              <Button type="submit" disabled={!isFormValid} onClick={handleLogin}>
-                <CustomFont color='white' font='1.1rem' fontWeight='bold'>로그인 하기</CustomFont>
-              </Button>
             </CustomColumn>
+            <CustomFont color='#FFD15B' font='1.5rem' fontWeight='bold'>LOG IN</CustomFont>
           </CustomColumn>
-        </PageContainer>
 
-        {showModal && <Backdrop />}
-        <Modal show={showModal}>
-          <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
-        </Modal>
-      </ContainerCenter>
-    </KeyboardAwareScrollView>
+          <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='3rem'>
+            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='1rem'>
+              <Input
+                type="text"
+                placeholder="아이디"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <Input
+                type="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <CustomRow width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                <CustomFont color='#FFCD38' font='1rem' fontWeight='bold'>아직 계정이 없다면</CustomFont>
+                <GoSignup onClick={() => navigate('/signup')}>
+                  <CustomFont color='black' font='1rem' fontWeight='bold'>회원가입하기</CustomFont>
+                </GoSignup>
+              </CustomRow>
+            </CustomColumn>
+
+            <Button type="submit" disabled={!isFormValid} onClick={handleLogin}>
+              <CustomFont color='white' font='1.1rem' fontWeight='bold'>로그인 하기</CustomFont>
+            </Button>
+          </CustomColumn>
+        </CustomColumn>
+      </PageContainer>
+
+      {showModal && <Backdrop />}
+      <Modal show={showModal}>
+        <CustomFont color='black' font='1.2rem' fontWeight='bold'>{modalMessage}</CustomFont>
+      </Modal>
+    </ContainerCenter>
+
   );
 };
 
