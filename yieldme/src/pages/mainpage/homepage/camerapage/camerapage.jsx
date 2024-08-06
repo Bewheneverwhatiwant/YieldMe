@@ -101,15 +101,17 @@ const CameraPage = () => {
                         yieldingUserId = result.data;
                     }
                     setShowModal(true);
-                    setModalMessage(
-                        <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
-                            <CustomFont color='black' fontWeight='bold'>자리를 양보해준 사람 ID: {yieldingUserId}</CustomFont>
-                            <CustomFont color='black' fontWeight='bold'>자리를 양보받은 사람 ID: {auth?.login_id}</CustomFont>
-                            <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
-                                <Button onClick={() => handleConfirm(yieldingUserId)}>확인</Button>
-                                <Button onClick={handleCancel}>취소</Button>
-                            </CustomRow>
-                        </CustomColumn>
+                    setModalMessage( // 메시지 전환이 안되는 오류 발생 중 
+                        <>
+                            <CustomColumn width='100%' alignItems='center' justifyContent='center' gap='0.5rem'>
+                                <CustomFont color='black' fontWeight='bold'>자리를 양보해준 사람 ID: {yieldingUserId}</CustomFont>
+                                <CustomFont color='black' fontWeight='bold'>자리를 양보받은 사람 ID: {auth?.login_id}</CustomFont>
+                                <CustomRow width='100%' alignItems='center' justifyContent='space-around'>
+                                    <Button onClick={() => handleConfirm(yieldingUserId)}>확인</Button>
+                                    <Button onClick={handleCancel}>취소</Button>
+                                </CustomRow>
+                            </CustomColumn>
+                        </>
                     );
                 },
                 { onDecodeError: (error) => console.error(error) }
