@@ -181,7 +181,7 @@ const OldestCert = () => {
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER}/changeMode/`,
-                { priority_type: "1" },
+                { priority_type: "3" }, // 노약자는 3 
                 {
                     headers: {
                         Authorization: `Bearer ${auth.accessToken}`

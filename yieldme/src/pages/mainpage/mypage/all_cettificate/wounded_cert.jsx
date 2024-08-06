@@ -181,7 +181,7 @@ const WoundedCert = () => {
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER}/changeMode/`,
-                { priority_type: "1" },
+                { priority_type: "2" }, // 부상자는 2
                 {
                     headers: {
                         Authorization: `Bearer ${auth.accessToken}`
@@ -305,7 +305,7 @@ const WoundedCert = () => {
                                 <CustomColumn width='100%' alignItems='start' justifyContent='center' gap='0.2rem'>
                                     <CustomFont color='black' font='0.8rem'>업로드된 인증서는 AI 모델에 의해 판독됩니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>인증서에 주민등록번호 뒷자리가 포함되어있다면, 반드시 가린 후 촬영해주세요.</CustomFont>
-                                    <CustomFont color='black' font='0.8rem'>인증서의 진단 날짜와 생년웡릴 정보가 잘 보이게 촬영해주세요.</CustomFont>
+                                    <CustomFont color='black' font='0.8rem'>인증서의 진단 날짜와 생년월일 정보가 잘 보이게 촬영해주세요.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>임신확인서의 경우, 임신진단일로부터 1년이 경과하지 않아야 합니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>진단서의 경우, 진단일로부터 3일이 경과하지 않아야 합니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>신분증의 경우, 만 65세 이상의 기준을 충족하는 생년월일이어야 합니다.</CustomFont>
@@ -327,7 +327,7 @@ const WoundedCert = () => {
                                         screenshotFormat="image/jpeg"
                                         width={300}
                                         height={300}
-                                        videoConstraints={videoConstraints}
+                                    // videoConstraints={videoConstraints}
                                     />
                                     <Button onClick={handleCapture}>
                                         <StyledImg src={'icon_cam.png'} width='40px' height='40px' />
@@ -341,7 +341,7 @@ const WoundedCert = () => {
                     <>
                         <CustomColumn width='90%' alignItems='start' justifyContent='center' gap='0.2rem'>
                             <CustomRow width='80%' alignItems='center' justifyContent='end'>
-                                <StyledImg src={'icon_preg.png'} width='100px' height='100px' />
+                                <StyledImg src={'icon_wound.png'} width='100px' height='100px' />
                             </CustomRow>
                             <CustomFont color='black' font='1rem' fontWeight='bold'>
                                 촬영된 진단서를 검토해주세요!
@@ -364,7 +364,7 @@ const WoundedCert = () => {
                                 <CustomColumn width='100%' alignItems='start' justifyContent='center' gap='0.2rem'>
                                     <CustomFont color='black' font='0.8rem'>업로드된 인증서는 AI 모델에 의해 판독됩니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>인증서에 주민등록번호 뒷자리가 포함되어있다면, 반드시 가린 후 촬영해주세요.</CustomFont>
-                                    <CustomFont color='black' font='0.8rem'>인증서의 진단 날짜와 생년웡릴 정보가 잘 보이게 촬영해주세요.</CustomFont>
+                                    <CustomFont color='black' font='0.8rem'>인증서의 진단 날짜와 생년월일 정보가 잘 보이게 촬영해주세요.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>임신확인서의 경우, 임신진단일로부터 1년이 경과하지 않아야 합니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>진단서의 경우, 진단일로부터 3일이 경과하지 않아야 합니다.</CustomFont>
                                     <CustomFont color='black' font='0.8rem'>신분증의 경우, 만 65세 이상의 기준을 충족하는 생년월일이어야 합니다.</CustomFont>
