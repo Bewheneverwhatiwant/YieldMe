@@ -51,6 +51,7 @@ const LoadingText = styled.div`
 `;
 
 const Modal = styled.div`
+width: 70%;
   position: fixed;
   top: 50%;
   left: 50%;
