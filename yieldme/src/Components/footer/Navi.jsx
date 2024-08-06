@@ -12,7 +12,7 @@ const NaviContainer = styled.footer`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 5vh;
   background-color: #FEE187;
   position: fixed;
   bottom: 0;
@@ -22,6 +22,7 @@ const NaviContainer = styled.footer`
   border-top-right-radius: 30px;
   z-index: 1000; /* 추가 */
   pointer-events: auto; /* 추가 */
+  margin: 2vh;
 `;
 
 const NaviButton = styled.button`
