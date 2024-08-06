@@ -147,7 +147,11 @@ const LoginPage = () => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraHeight={50}
+    >
       <ContainerCenter>
         <PageContainer>
           <CustomColumn width='90%' alignItems='center' justifyContent='center' gap='5rem'>
