@@ -123,17 +123,13 @@ const CameraPage = () => {
         };
     }, [auth]);
 
-
-    // 요청 권한을 yield user id의 accessToken이 아니라, receiving user id로 바꿔달라고 하기
-    // (자리를 양보받는 사람이 QR코드 스캐너로 인식 후 최종 양보 완료 버튼을 눌르기 때문)
-    // 노션에 없는 score value 필드 명시해달라고 하기 
     const handleConfirm = async (yieldingUserId) => {
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER}/edit_score/`,
                 {
                     yielding_user_id: auth.login_id,
-                    receiving_user_id: yieldingUserId // 이쪽으로 accessToken 권한이 수정되어야 함 , score value 필드 추가하기 
+                    receiving_user_id: yieldingUserId
                 },
                 {
                     headers: {
@@ -151,8 +147,6 @@ const CameraPage = () => {
                 );
             } else {
                 console.log(response.data);
-                console.log(auth.login_id);
-                console.log(yieldingUserId);
                 setModalMessage(
                     <>
                         <CustomFont color='black' fontWeight='bold'>자리 양보에 오류가 발생했습니다.</CustomFont>
@@ -161,9 +155,6 @@ const CameraPage = () => {
                 );
             }
         } catch (error) {
-
-            console.log(auth.login_id);
-            console.log(yieldingUserId);
             setModalMessage(
                 <>
                     <CustomFont color='black' fontWeight='bold'>자리 양보에 오류가 발생했습니다.</CustomFont>
