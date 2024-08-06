@@ -12,9 +12,9 @@ const NaviContainer = styled.footer`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 5vh;
+  height: 20vh;
   background-color: #FEE187;
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   border-top: 2px solid #FFCD38;
